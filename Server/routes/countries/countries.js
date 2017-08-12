@@ -1,9 +1,11 @@
 const router = require('express').Router()
 var data = require('./countries.json')
+const verifyAdmin = require('../../core/authentication').verifyAdmin;
+
 module.exports = router
 
 router
-    .get('/', function (req, res) {
+    .get('/', verifyAdmin, (req, res) => {
         return res.json(data)
     })
     .delete('/:id', (req, res) => {
