@@ -6,6 +6,7 @@ import { MdNativeDateModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +19,8 @@ import { HttpModule } from '@angular/http';
     MdNativeDateModule,
     ReactiveFormsModule,
     MdNativeDateModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
