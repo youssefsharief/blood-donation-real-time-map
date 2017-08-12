@@ -1,5 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+
+
+<md-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
+  <md-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+    {{season}}
+  </md-radio-button>
+</md-radio-group>
+<div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div>
+
+
+
+<!-- <div style="text-align:center">
   <h1>
     Welcome to {{title}}!!
   </h1>
@@ -16,5 +26,5 @@
   <li>
     <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
   </li>
-</ul>
+</ul> -->
 
