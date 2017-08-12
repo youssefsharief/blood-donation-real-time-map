@@ -5,7 +5,7 @@ const verifyAdmin = require('../../core/authentication').verifyAdmin;
 module.exports = router
 
 router
-    .get('/', verifyAdmin, (req, res) => {
+    .get('/', (req, res) => {
         return res.json(data)
     })
     .delete('/:id', (req, res) => {
