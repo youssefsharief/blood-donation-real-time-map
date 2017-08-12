@@ -6,11 +6,12 @@ const setViews = require('./core/setViews')
 const devOpsHelper = require('./core/devOpsHelper.js')
 const socket_io = require('./modules/socket.io.js')
 const devOps = require('./core/devOps.js')
-
+const authentication = require('./core/authentication')
 dbConnection.connectTodb()
-
 const app = express();
 const server = http.createServer(app);
+authentication.setSecrets(app)
+
 setViews(app)
 instatiateMiddleWares(app)
 const port = devOpsHelper.normalizePort(process.env.PORT || '3000');
