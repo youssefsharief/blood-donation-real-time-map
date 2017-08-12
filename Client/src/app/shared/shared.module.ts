@@ -1,6 +1,4 @@
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
   import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -38,9 +36,15 @@ import {
 } from '@angular/material';
 import {HttpModule} from '@angular/http';
 import {CdkTableModule} from '@angular/cdk';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   exports: [
+    CommonModule,
+    FormsModule,
+    HttpModule,
+    MdNativeDateModule,
+    ReactiveFormsModule,
     CdkTableModule,
     MdAutocompleteModule,
     MdButtonModule,
@@ -75,4 +79,4 @@ import {CdkTableModule} from '@angular/cdk';
     MdTooltipModule,
   ]
 })
-export class MaterialModule {}
+export class SharedModule {}
