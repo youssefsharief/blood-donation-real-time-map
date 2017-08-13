@@ -6,30 +6,30 @@ const NeighborhoodModel = require('../../models/neighborhoodModel.js')
 module.exports = router
 // Resataurants that lies in the same neighborhood as the query
 router
-    .get('/neighborhood/', (req, res) => {
+    .get('/by_neighborhood/', (req, res) => {
         const { long, lat } = req.query
         NeighborhoodModel.findOne({ geometry: { $geoIntersects: { $geometry: { type: "Point", coordinates: [long, lat] } } } })
             .lean().exec((err, neighborhood) => {
                 if (err) return res.status(422).send(err)
-                RestaurantModel.find({ location: { $geoWithin: { $geometry: neighborhood.geometry } } }).count().lean().exec((err, restaurants) => {
+                RestaurantModel.find({ location: { $geoWithin: { $geometry: neighborhood.geometry } } }).lean().exec((err, restaurants) => {
                     if (err) return res.status(422).send('An error has occured while getting the restaurants.')
                     if (!restaurants) return res.status(422).send('No restaurants found with the sent data')
-                    return res.json(restaurants)
+                    return res.status(200).json(restaurants)
                 })
             })
     })
     // Resataurants that lies in the same neighborhood as the query
-    .get('/location/', (req, res) => {
+    .get('/by_location/', (req, res) => {
         const { long, lat, distance } = req.query
         RestaurantModel.find({ location: { $nearSphere: { $geometry: { type: "Point", coordinates: [long, lat] }, $maxDistance: distance } } }).lean().exec((err, restaurants) => {
-            if (err) return res.json(err)
+            if (err) return res.status(400).json("Problematic input. Please only inpt nubers")
             if (!restaurants) return res.status(422).send('No restaurants found with the sent data')
-            return res.json(restaurants)
+            return res.status(200).json(restaurants)
         })
     })
     .delete('/:id', (req, res) => {
         data = data.filter(x => x.countryId != req.params.id)
-        return res.json(data);
+        return res.status(200).json(data);
     })
     .post('/', (req, res) => {
         const restaurant = new RestaurantModel({
