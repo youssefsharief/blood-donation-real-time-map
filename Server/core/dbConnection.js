@@ -7,6 +7,4 @@ function connectTodb(){
     // mongoose.Promise = global.Promise;
 }
 
-module.exports = {
-    connectTodb : connectTodb
-}
+module.exports  = connectTodb

@@ -11,7 +11,7 @@ const app = express();
 const server = http.createServer(app);
 const port = devOpsHelper.normalizePort(process.env.PORT || '3000');
 
-dbConnection.connectTodb()
+dbConnection()
 
 authentication.setSecrets(app)
 
