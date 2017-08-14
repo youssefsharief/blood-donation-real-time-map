@@ -40,12 +40,15 @@ import { CdkTableModule } from '@angular/cdk';
 import { CommonModule } from '@angular/common';
 
 import {
-  LayoutComponent, FooterComponent, HeaderComponent,
+  FooterComponent, HeaderComponent,
   LeftSideMenuComponent, LoaderComponent
 } from './';
 
 
 @NgModule({
+  imports: [
+    CommonModule
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -85,12 +88,12 @@ import {
     MdToolbarModule,
     MdTooltipModule,
     FlexLayoutModule,
-    LayoutComponent, FooterComponent, HeaderComponent,
+    FooterComponent, HeaderComponent,
     LeftSideMenuComponent, LoaderComponent
 
   ],
   declarations: [
-    LayoutComponent, FooterComponent, HeaderComponent,
+    FooterComponent, HeaderComponent,
     LeftSideMenuComponent, LoaderComponent
 
   ],
