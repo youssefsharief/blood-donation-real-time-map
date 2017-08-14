@@ -38,6 +38,7 @@ import {
 import { HttpModule } from '@angular/http';
 import { CdkTableModule } from '@angular/cdk';
 import { CommonModule } from '@angular/common';
+import { NavComponent } from './nav/nav.component';
 
 import {
   FooterComponent, HeaderComponent,
@@ -89,12 +90,13 @@ import {
     MdTooltipModule,
     FlexLayoutModule,
     FooterComponent, HeaderComponent,
-    LeftSideMenuComponent, LoaderComponent
+    LeftSideMenuComponent, LoaderComponent,
+    NavComponent
 
   ],
   declarations: [
     FooterComponent, HeaderComponent,
-    LeftSideMenuComponent, LoaderComponent
+    LeftSideMenuComponent, LoaderComponent, NavComponent
 
   ],
 })

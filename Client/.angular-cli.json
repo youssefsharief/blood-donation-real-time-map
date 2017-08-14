@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
        "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-        "styles/main.scss"
+        "styles/new-age.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
