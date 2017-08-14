@@ -1,1 +1,85 @@
-<md-toolbar>My App</md-toolbar>
+<header class="header">
+    <nav class="navbar user-menu">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="/assets/images/logo-stripe-white.png">
+                        </a>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#user-menu" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse " id="user-menu">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown" >
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Seller </a>
+                        <ul class="dropdown-menu">
+                            <li><a routerLink='/seller/servicewizard'>Service Wizard</a></li>
+                            <li><a routerLink='/settings'>Settings</a></li>
+                            <li><a routerLink='/seller/productaddons'>Product Add Ons</a></li>
+                            <li><a routerLink='/seller/qualifications'>Qualifications</a></li>
+                            <li><a routerLink='/seller/terms'>terms & conditions</a></li>
+                            <li><a routerLink='/seller/employees'>Employees</a></li>
+                            <li><a routerLink='/seller/feedbacks'>Feedbacks</a></li>
+                            <li><a routerLink='/seller/balance'>Balance</a></li>
+                            <li><a routerLink='/seller/entity'>Entity</a></li>
+                            <li><a routerLink='/seller/entity-wizard'>Entity Wizard</a></li>
+
+                            <!--lazy loaded pages-->
+                            <li><a routerLink='/seller/contactus'>Contact Us</a></li>
+                            <li><a routerLink='/seller/aboutus'>About Us</a></li>
+                            <li><a routerLink='/seller/aboutsmoot'>About Smoot</a></li>
+                            <li><a routerLink='/seller/blog'>Blog</a></li>
+                            <li><a routerLink='/seller/press'>Press</a></li>
+                            <li><a routerLink='/seller/privacy'>Privacy</a></li>
+                            <li><a routerLink='/seller/service-feedbacks'>Service Feedbacks</a></li>
+                            <li><a routerLink='/seller/investor'>Investor</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown" *ngIf="isAuthenticated()">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Buyer</a>
+                        <ul class="dropdown-menu">
+                            <li><a routerLink='/buyer/service'>Service</a></li>
+                            <li><a routerLink='/buyer/search-result'>Search Result</a></li>
+                            <li><a routerLink='/buyer/service'>Service</a></li>
+                            <li><a routerLink='/buyer/auctions'>Auctions</a></li>
+                            <li><a routerLink='/buyer/watched-services'>Watched Services</a></li>
+                            <li><a routerLink='/buyer/buyer-services'>Buyer Services</a></li>
+                            <li><a routerLink='/buyer/seller-provider'>Seller Provider</a></li>
+                            <li><a routerLink='/buyer/search-result'>Search Result</a></li>
+
+                            <!--lazy loaded pages-->
+                            <li><a routerLink='/buyer/contactus'>Contact Us</a></li>
+                            <li><a routerLink='/buyer/aboutus'>About Us</a></li>
+                            <li><a routerLink='/buyer/aboutsmoot'>About Smoot</a></li>
+                            <li><a routerLink='/buyer/blog'>Blog</a></li>
+                            <li><a routerLink='/buyer/book'>Book</a></li>
+                            <li><a routerLink='/buyer/press'>Press</a></li>
+                            <li><a routerLink='/buyer/privacy'>Privacy</a></li>
+                            <li><a routerLink='/buyer/services'>Services</a></li>
+                            <li><a routerLink='/buyer/service-feedbacks'>Service Feedbacks</a></li>
+                            <li><a routerLink='/buyer/investor'>Investor</a></li>
+
+                        </ul>
+                    </li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="btn btn-blue" >Logout</a></li>
+                        <li ><a class="btn btn-blue" href="/account/login">Login / Register</a></li>
+
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

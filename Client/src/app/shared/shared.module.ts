@@ -1,7 +1,7 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {NgModule} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MdAutocompleteModule,
   MdButtonModule,
@@ -35,9 +35,15 @@ import {
   MdToolbarModule,
   MdTooltipModule,
 } from '@angular/material';
-import {HttpModule} from '@angular/http';
-import {CdkTableModule} from '@angular/cdk';
+import { HttpModule } from '@angular/http';
+import { CdkTableModule } from '@angular/cdk';
 import { CommonModule } from '@angular/common';
+
+import {
+  LayoutComponent, FooterComponent, HeaderComponent,
+  LeftSideMenuComponent, LoaderComponent
+} from './';
+
 
 @NgModule({
   exports: [
@@ -78,7 +84,15 @@ import { CommonModule } from '@angular/common';
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
-    FlexLayoutModule
-  ]
+    FlexLayoutModule,
+    LayoutComponent, FooterComponent, HeaderComponent,
+    LeftSideMenuComponent, LoaderComponent
+
+  ],
+  declarations: [
+    LayoutComponent, FooterComponent, HeaderComponent,
+    LeftSideMenuComponent, LoaderComponent
+
+  ],
 })
-export class SharedModule {}
+export class SharedModule { }
