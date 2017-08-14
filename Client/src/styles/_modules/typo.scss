@@ -1,0 +1,35 @@
+.text-upper {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.text-white {
+    color: #fff;
+    a {
+        margin: 0 10px;
+        color: #fff;
+        font-style: italic;
+        font-weight: 700;
+    }
+}
+.text-light {
+    font-weight: normal !important;
+}
+.text-content__title {
+	    margin-top: 0;
+    margin-bottom: 10px;
+    color: #0085ca;
+    font-size: 1.2em;
+}
+.text-mute {
+	color:#ccc;
+}
+.text-bold {
+    font-weight: bold;
+}
+.text-sm {
+    font-size: 0.9em;
+}
+.text-center {
+    text-align: center !important;
+}

@@ -1,0 +1,50 @@
+.info-card {
+    margin-bottom: 3px;
+    padding: 10px;
+    background: #fdfcfc;
+    border: 1px solid #f7f7f7;
+}
+
+.contact-card {
+    padding: 10px;
+    margin: 15px auto;
+    position: relative;
+    overflow: hidden;
+    background: #f3f3f3;
+    border: 3px solid transparent;
+}
+
+$image-width:60px;
+.contact-card__image {
+    width: $image-width;
+    height: $image-width;
+    float: left;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.contact-card__info {
+    float: left;
+    margin-left: 10px;
+    h3 {
+        font-size: 15px;
+    }
+}
+
+.contact-card__actions {
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    transition: all 0.5s;
+}
+
+.active {
+    .contact-card__actions {
+        right: 10px;
+    }
+}
+
+.active.contact-card {
+    border: 3px solid #ccc;
+}

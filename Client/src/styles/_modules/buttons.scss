@@ -1,0 +1,161 @@
+$header-color:#0085ca;
+$buttons-colors: ("light-blue":#00c0f3, "orange":#F68D2E, "red": #d14124, "green":#6cc24a, "blue":#0770a6, "blue-light":#00c0f3, "gray":#B0B2B4, "default":#a7a8a9);
+@each $name,
+$value in $buttons-colors {
+    .btn-#{$name} {
+        background: $value;
+        border: 1px solid darken($value, 3%);
+        &:hover {
+            background: darken($value, 10%) !important;
+            color: #fff;
+        }
+    }
+}
+
+.btn {
+    color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s;
+    text-transform: capitalize;
+    @include mobile {
+        margin-bottom: 5px;
+    }
+}
+
+.btn-load {
+    margin-bottom: 25px;
+}
+
+.link-red {
+    color: red;
+}
+
+.form-search-lg__btn {
+    border: 0 !important;
+    border-radius: 0;
+    color: #fff;
+}
+
+.btn-width-100 {
+    min-width: 100px;
+}
+
+.btn-lg {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.btn-lg__icon {
+    width: 20%;
+    float: left;
+}
+
+.btn-lg__text {
+    margin-top: 15px;
+    float: left;
+    font-size: 40px;
+    @include mobile {
+        margin-top: 8px;
+        font-size: 22px;
+    }
+}
+
+.btn-inherit {
+    @include mobile {
+        float: none !important;
+    }
+}
+
+.full-width--mobile {
+    @include mobile {
+        width: 100%;
+    }
+}
+
+.btn-light {
+    position: relative;
+    padding: 10px 20px 5px 20px;
+    border: 2px solid;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.7em;
+    transition: all 0.2s;
+    &:hover {
+        padding: 0.3em 2em 0.3em 1em;
+        border: 2px solid transparent;
+        background: rgba(255, 255, 255, 0.2) !important;
+    }
+    &.btn-light--primary {
+        color: #b188c5;
+        &:hover {
+            background: rgba(177, 136, 197, 0.23) !important;
+        }
+    }
+}
+
+$inline-btn-color:#0085ca;
+.btn-inline {
+    color: $inline-btn-color;
+    cursor: pointer;
+    &:hover {
+        color: darken($inline-btn-color, 15%);
+    }
+}
+
+$btn-circle-width:60px;
+.btn-circle {
+    width: $btn-circle-width;
+    height: $btn-circle-width;
+    padding-top: 7px;
+    text-align: center;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+    outline: 0;
+    border-radius: 50%;
+    font-size: 22px;
+    &:focus {
+        outline: 0;
+    }
+}
+
+.btn-header-stuck {
+    position: relative;
+    bottom: -80px;
+    margin: 0 15px;
+}
+
+.btn-sm {
+    padding: 5px 6px;
+}
+
+.btn-sqaure-lg {
+    width: 100%;
+    padding-top: 30px;
+    font-size: 50px;
+    height: 125px;
+    background: #eae9e9;
+}
+
+.fa-lg {
+    font-size: 2em;
+    margin: 19px 0 0 20px;
+}
+
+.input-group-btn {
+    > .btn {
+        position: relative;
+        padding: 9px 12px;
+    }
+}
+
+.btn-border {
+    border:2px solid #ccc;
+    color: #ccc;
+}
+.btn-round {
+    border-radius:17px;
+}

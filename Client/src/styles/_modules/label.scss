@@ -1,0 +1,11 @@
+
+$labels-colors: ( "not-used":#6cc24a,"not-complete":#da8149,"not-available":#a4ac7d,"available":#7da69e,"in-use":#968c8b);
+@each $name,
+$value in $labels-colors {
+    .label-#{$name} {
+        background: $value;
+    }
+}
+.label {
+	padding:5px 10px;
+}

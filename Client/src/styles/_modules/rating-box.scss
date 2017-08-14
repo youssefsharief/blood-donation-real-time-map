@@ -1,0 +1,105 @@
+.box-rating .fa {
+    color: #0085ca;
+}
+
+.rating-box_md .fa {
+    color: #0085ca;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.rating-box--sm {
+    font-size: 15px;
+    float: left;
+    .fa {
+        color: green;
+    }
+}
+
+.rate-box {
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+}
+.rate-box--colored {
+    width:150px;
+    margin:0 5px;
+    background: #fff;
+    border-top:5px solid #ccc;
+    box-shadow:1px 1px 1px #ccc;
+    p {
+        // color:#fff;
+    }
+    @include mobile {
+        margin-top:20px;
+        width:100%;
+    }
+}
+.rate-box__title {
+    font-weight: bold;
+}
+
+.rate-box__number {
+    font-size: 45px;
+}
+
+.number-lg {
+    font-size: 70px;
+}
+
+//
+.rating-wrapper {
+    display: inline-block;
+    input {
+        display: none;
+    }
+    label {
+        cursor: pointer;
+        font-size: 23px;
+        color: yellow;
+        display: block;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        float: left;
+        transition: all 0.2s;
+        text-shadow: 0 1px 1px darken(#34495e, 5%);
+        &:hover {
+            font-size: 28px;
+            color: #FFF;
+            text-shadow: 0 0 2px lighten(#34495e, 50%);
+        }
+        &:before {
+            display: inline;
+            width: auto;
+            height: auto;
+            line-height: normal;
+            vertical-align: baseline;
+            margin-top: 0;
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: inherit;
+            -webkit-font-smoothing: antialiased;
+            content: "\f005";
+        }
+    }
+    input:checked + label ~label {
+        &:before {
+            content: "\f006";
+        }
+    }
+    &:hover {
+        label {
+            &:before {
+                content: "\f005";
+            }
+            &:hover {
+                &~label:before {
+                    content: "\f006";
+                }
+            }
+        }
+    }
+}

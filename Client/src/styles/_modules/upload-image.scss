@@ -1,0 +1,45 @@
+$upload-width:150px;
+.image-upload {
+    width: $upload-width;
+    height: $upload-width;
+    position: relative;
+    margin:15px auto;
+    background: rgba(204, 204, 204, .34);
+    border: 5px solid #bfb4b4;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+        height: 100%;
+    }
+}
+
+.upload_btn,
+.upload_btn input,
+.uploat_input {
+    position: absolute;
+    cursor: pointer
+}
+$upload-btn-width:30px;
+$upload-btn-height:22px;
+.upload_btn {
+    top: calc(50% - #{$upload-btn-height} / 2);
+    left: calc(50% - #{$upload-btn-width} / 2);
+    width: $upload-btn-width;
+    height: $upload-btn-height;
+}
+
+.upload_btn input {
+    opacity: 0;
+    z-index: 2;
+    height: 40px
+}
+
+.uploat_input {
+    // background: url(../assets/images/cam.png);
+    background-size:100% auto;
+    width: $upload-btn-width;
+    height: $upload-btn-height;
+    top: 0;
+    left: 0;
+    z-index: 1
+}
