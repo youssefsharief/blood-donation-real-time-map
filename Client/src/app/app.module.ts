@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AppSocketIoService } from './shared/services/socket';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,4 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private appSocketIoService: AppSocketIoService) {
+    this.appSocketIoService.emit('connection')
+  }
+}

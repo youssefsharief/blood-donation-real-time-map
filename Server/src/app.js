@@ -4,7 +4,7 @@ const dbConnection= require('./core/dbConnection.js')
 const instatiateMiddleWares = require('./core/middlewares/_instatiationMiddlewares.js')
 const http = require('http');
 const devOpsHelper = require('./core/devOpsHelper.js')
-const socket_io = require('./modules/socket.io.js')
+const socket_io = require('./modules/serverSocket.js')
 const devOps = require('./core/devOps.js')
 const authentication = require('./core/authentication')
 const app = express();
@@ -22,10 +22,10 @@ server.listen(port);
 
 devOps.instantiate(server, port)
 
-socket_io(server).instantiate()
+socket_io.instantiate(server)
 
 
-
+// global.io.emit('connection')
 module.exports = app;
 
 function setViews(app){

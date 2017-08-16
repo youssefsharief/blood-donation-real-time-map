@@ -39,6 +39,7 @@ import { HttpModule } from '@angular/http';
 import { CdkTableModule } from '@angular/cdk';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
+import { AppSocketIoService } from './services/socket';
 
 import {
   FooterComponent, HeaderComponent,
@@ -50,6 +51,7 @@ import {
   imports: [
     CommonModule
   ],
+  providers:[AppSocketIoService],
   exports: [
     CommonModule,
     FormsModule,

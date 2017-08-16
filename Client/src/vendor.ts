@@ -7,3 +7,5 @@ import '@angular/http';
 import '@angular/router';
 import '@angular/forms'
 import '@angular/material'
+import 'hammerjs'
+import 'socket.io-client';

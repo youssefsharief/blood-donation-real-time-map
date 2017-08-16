@@ -1,11 +1,12 @@
 const router = require('express').Router()
 var data = require('./countries.json')
 const verifyAdmin = require('../../core/authentication').verifyAdmin;
-
+// const serverSocket = require('../../modules/serverSocket')
 module.exports = router
 
 router
     .get('/', (req, res) => {
+        // serverSocket.emit('action fasheee5')
         return res.json(data)
     })
     .delete('/:id', (req, res) => {
