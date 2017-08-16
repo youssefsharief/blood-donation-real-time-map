@@ -24,8 +24,6 @@ devOps.instantiate(server, port)
 
 socket_io.instantiate(server)
 
-
-// global.io.emit('connection')
 module.exports = app;
 
 function setViews(app){
