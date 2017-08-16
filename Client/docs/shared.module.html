@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>shared.module.ts</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="home-routing.module.html">
+                  home-routing.module.ts
+                </a>
+              
+                
+                <a class="source" href="home.component.html">
+                  home.component.ts
+                </a>
+              
+                
+                <a class="source" href="home.module.html">
+                  home.module.ts
+                </a>
+              
+                
+                <a class="source" href="route1-routing.module.html">
+                  route1-routing.module.ts
+                </a>
+              
+                
+                <a class="source" href="route1.component.html">
+                  route1.component.ts
+                </a>
+              
+                
+                <a class="source" href="route1.module.html">
+                  route1.module.ts
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  index.ts
+                </a>
+              
+                
+                <a class="source" href="shared.module.html">
+                  shared.module.ts
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>shared.module.ts</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> { platformBrowserDynamic } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser-dynamic'</span>;
+<span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { FlexLayoutModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/flex-layout'</span>;
+<span class="hljs-keyword">import</span> { FormsModule, ReactiveFormsModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;
+<span class="hljs-keyword">import</span> {
+  MdAutocompleteModule,
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdCheckboxModule,
+  MdChipsModule,
+  MdCoreModule,
+  MdDatepickerModule,
+  MdDialogModule,
+  MdExpansionModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule,
+  MdMenuModule,
+  MdNativeDateModule,
+  MdPaginatorModule,
+  MdProgressBarModule,
+  MdProgressSpinnerModule,
+  MdRadioModule,
+  MdRippleModule,
+  MdSelectModule,
+  MdSidenavModule,
+  MdSliderModule,
+  MdSlideToggleModule,
+  MdSnackBarModule,
+  MdSortModule,
+  MdTableModule,
+  MdTabsModule,
+  MdToolbarModule,
+  MdTooltipModule,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/material'</span>;
+<span class="hljs-keyword">import</span> { HttpModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/http'</span>;
+<span class="hljs-keyword">import</span> { CdkTableModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/cdk'</span>;
+<span class="hljs-keyword">import</span> { CommonModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;
+<span class="hljs-keyword">import</span> { NavComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./nav/nav.component'</span>;
+
+<span class="hljs-keyword">import</span> {
+  FooterComponent, HeaderComponent,
+  LeftSideMenuComponent, LoaderComponent
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'./'</span>;
+
+
+<span class="hljs-meta">@NgModule</span>({
+  imports: [
+    CommonModule
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    HttpModule,
+    MdNativeDateModule,
+    ReactiveFormsModule,
+    CdkTableModule,
+    MdAutocompleteModule,
+    MdButtonModule,
+    MdButtonToggleModule,
+    MdCardModule,
+    MdCheckboxModule,
+    MdChipsModule,
+    MdCoreModule,
+    MdDatepickerModule,
+    MdDialogModule,
+    MdExpansionModule,
+    MdGridListModule,
+    MdIconModule,
+    MdInputModule,
+    MdListModule,
+    MdMenuModule,
+    MdNativeDateModule,
+    MdPaginatorModule,
+    MdProgressBarModule,
+    MdProgressSpinnerModule,
+    MdRadioModule,
+    MdRippleModule,
+    MdSelectModule,
+    MdSidenavModule,
+    MdSliderModule,
+    MdSlideToggleModule,
+    MdSnackBarModule,
+    MdSortModule,
+    MdTableModule,
+    MdTabsModule,
+    MdToolbarModule,
+    MdTooltipModule,
+    FlexLayoutModule,
+    FooterComponent, HeaderComponent,
+    LeftSideMenuComponent, LoaderComponent,
+    NavComponent
+
+  ],
+  declarations: [
+    FooterComponent, HeaderComponent,
+    LeftSideMenuComponent, LoaderComponent, NavComponent
+
+  ],
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> SharedModule { }</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

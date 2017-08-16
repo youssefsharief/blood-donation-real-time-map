@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>_users.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="_instatiationMiddlewares.html">
+                  _instatiationMiddlewares.js
+                </a>
+              
+                
+                <a class="source" href="errorHandlersMiddleware.html">
+                  errorHandlersMiddleware.js
+                </a>
+              
+                
+                <a class="source" href="countries.html">
+                  countries.js
+                </a>
+              
+                
+                <a class="source" href="entity.html">
+                  entity.js
+                </a>
+              
+                
+                <a class="source" href="neighborhoodRoute.html">
+                  neighborhoodRoute.js
+                </a>
+              
+                
+                <a class="source" href="_restaurants.html">
+                  _restaurants.js
+                </a>
+              
+                
+                <a class="source" href="service.html">
+                  service.js
+                </a>
+              
+                
+                <a class="source" href="_users.html">
+                  _users.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>_users.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> jwt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'jsonwebtoken'</span>);
+<span class="hljs-keyword">const</span> router = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>).Router()
+<span class="hljs-keyword">const</span> verifyAdmin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../core/authentication'</span>).verifyAdmin;
+<span class="hljs-keyword">const</span> RestaurantModel = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../models/restaurantModel.js'</span>)
+<span class="hljs-keyword">const</span> UserModel = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../models/userModel.js'</span>)
+
+<span class="hljs-built_in">module</span>.exports = router
+router.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+    UserModel.find().lean().exec(<span class="hljs-function">(<span class="hljs-params">err, user</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).json(<span class="hljs-string">"Error while getting user"</span>)
+        <span class="hljs-keyword">if</span> (!user) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).json(<span class="hljs-string">"No user Found"</span>)
+        <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">200</span>).json(user)
+    })
+
+});
+router.delete(<span class="hljs-string">'/:id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>{
+    <span class="hljs-keyword">const</span> {id} = req.params
+    UserModel.findById(id).remove().exec(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, user</span>) </span>{
+        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).send(<span class="hljs-string">'An error has occured while deleting the user.'</span>);
+        <span class="hljs-keyword">if</span> (!user) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).send(<span class="hljs-string">'No user with this id is found'</span>);
+        <span class="hljs-keyword">return</span> res.json(user);
+    });
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Resataurants that lies in the same neighborhood as the query</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>router.post(<span class="hljs-string">'/login'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+    <span class="hljs-keyword">if</span> (req.body.email == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).send(<span class="hljs-string">'Missing email.'</span>);
+    <span class="hljs-keyword">if</span> (req.body.password == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).send(<span class="hljs-string">'Missing password.'</span>);
+    <span class="hljs-keyword">if</span> (!req.body.version) <span class="hljs-keyword">return</span> res.send(<span class="hljs-string">'Please update your application'</span>);
+    UserModel.findOne({ <span class="hljs-attr">email</span>: req.body.email.toLowerCase() })
+        .populate(<span class="hljs-string">'division'</span>, <span class="hljs-string">'name _id colorTheme'</span>)
+        .select(<span class="hljs-string">'email division _id firstName lastName push_token salt hash'</span>)
+        .exec(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, user</span>) </span>{
+            <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">500</span>).send(<span class="hljs-string">"An unknown error occurred"</span>);
+            <span class="hljs-keyword">if</span> (!user) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).send(<span class="hljs-string">"Your account has been terminated"</span>);
+            <span class="hljs-keyword">if</span> (!user.division) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">200</span>).send(<span class="hljs-string">"Sorry, currently you are not assigned to a division. Please contact your administrator"</span>)
+            <span class="hljs-keyword">var</span> hash = crypto.pbkdf2Sync(req.body.password, user.salt, <span class="hljs-number">1000</span>, <span class="hljs-number">64</span>).toString(<span class="hljs-string">'hex'</span>);
+            <span class="hljs-keyword">if</span> (user.hash !== hash) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">401</span>).send(<span class="hljs-string">'Password and/or email are not correct'</span>);
+            <span class="hljs-keyword">var</span> token = jwt.sign({
+                <span class="hljs-attr">_id</span>: user._id
+            }, req.app.get(<span class="hljs-string">'mobileSecret'</span>), {
+                    <span class="hljs-attr">expiresIn</span>: <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">24</span> * <span class="hljs-number">365</span>
+                });
+            <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">200</span>).json({
+                <span class="hljs-attr">user</span>: {
+                    <span class="hljs-attr">email</span>: user.email,
+                    <span class="hljs-attr">division</span>: { <span class="hljs-attr">_id</span>: user.division._id, <span class="hljs-attr">name</span>: user.division.name, <span class="hljs-attr">colorTheme</span>: user.division.colorTheme },
+                    <span class="hljs-attr">_id</span>: user._id,
+                    <span class="hljs-attr">firstName</span>: user.firstName,
+                    <span class="hljs-attr">lastName</span>: user.lastName,
+                    <span class="hljs-attr">push_token</span>: user.push_token
+                },
+                <span class="hljs-attr">token</span>: token
+            });
+        });
+});
+
+router.post(<span class="hljs-string">'/signup'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+    <span class="hljs-keyword">const</span> { email, password } = req.body
+    <span class="hljs-keyword">if</span> (!email || !password) {
+        <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">400</span>).send(<span class="hljs-string">'An error has occured while creating the user.'</span>);
+    }
+    <span class="hljs-keyword">var</span> newUser = <span class="hljs-keyword">new</span> UserModel({ email, password });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Saving the user. If saved successfully send an email with credintials</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    newUser.save(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, savedUser</span>) </span>{
+        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">403</span>).send(<span class="hljs-string">'An error has occured while saving the password.'</span>);
+        <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">200</span>).json(savedUser);
+
+    });
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
