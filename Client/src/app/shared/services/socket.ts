@@ -9,16 +9,20 @@ export class AppSocketIoService {
     groupsBS: BehaviorSubject<string[]>
     groupsStore: string[]
     audienceBS: BehaviorSubject<any[]>
-    audienceStore: any[]
-
-    member: { name: string, id: any } = null
+    private audienceStore: any[]
+    private speakerName: any
+    speakerBS: BehaviorSubject<any>
+    private title: string
+    titleBS: BehaviorSubject<string>
+    member: any
     constructor(private sb: SnackBarService) {
         this.groupsBS = new BehaviorSubject(this.groupsStore)
         this.audienceBS = new BehaviorSubject(this.audienceStore)
+        this.speakerBS = new BehaviorSubject(this.speakerName)
+        this.titleBS = new BehaviorSubject(this.title)
     }
     rejoinMemberIfRefreshed() {
-        this.member = sessionStorage.member? JSON.parse(sessionStorage.member) : null
-        if (this.member) this.join(this.member)
+        sessionStorage.member ? this.member = JSON.parse(sessionStorage.member) : this.member = null
     }
 
 
@@ -26,22 +30,32 @@ export class AppSocketIoService {
 
         this.socket = io('http://localhost:3000');
         this.rejoinMemberIfRefreshed()
-        this.socket.on("joined", payload => this.member = payload)
+        this.socket.on("joined", payload => this.saveMember(payload))
+
         this.socket.on("audience updated", payload => {
             this.audienceStore = payload
             this.audienceBS.next(this.audienceStore)
         })
-        // this.socket.emit('connection')
+        this.socket.on("started", payload => this.saveMember(payload))
+
+        this.socket.on("session started", payload => {
+            this.speakerName = payload.speakerName
+            this.title = payload.title
+            this.speakerBS.next(this.speakerName)
+            this.titleBS.next(this.title)
+        })
     }
-    join(x) {
-        this.socket.emit('join', x)
-        sessionStorage.member = JSON.stringify(x)
+    join(name) {
+        this.socket.emit('join', {name})
     }
-    emit(action, payload?) {
-        return this.socket.emit(action, payload);
+    start(x) {
+        this.socket.emit('start', x)
     }
     isConnected(){
         return this.socket.connected
     }
-
+    private saveMember(payload){
+        this.member = payload
+        sessionStorage.member = JSON.stringify(this.member)
+    }
 }

@@ -1,10 +1,3 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-                <button [ngClass]="{'btn-success': isConnected(), 'btn-danger': !isConnected(), 'btn': true, 'btn-circle':true, 'pull-right': true}"></button>
-
-        <h1>Untitle Presentation</h1>
-        <h2>Join the session </h2>
         <form *ngIf="!member()" #form="ngForm">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -25,6 +18,3 @@
                    <li class="list-group-item" *ngFor="let item of audience">{{item.name}}</li>
                </ul>
                 
-        </div>
-    </div>
-</div>

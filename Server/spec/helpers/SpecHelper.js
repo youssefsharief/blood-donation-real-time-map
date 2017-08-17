@@ -13,7 +13,7 @@ beforeEach(function () {
     }
   });
 });
-const app = require('../../app')
+const app = require('../../src/app')
 const request = require('supertest')
 
 beforeAll(function () {

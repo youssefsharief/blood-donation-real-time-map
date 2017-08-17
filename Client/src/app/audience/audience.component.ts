@@ -8,11 +8,10 @@ import { AppSocketIoService } from '../shared/services/socket';
 export class AudienceComponent {
     audience
     constructor(private appSocketIoService: AppSocketIoService) {
-        this.appSocketIoService.intantiate()
         this.appSocketIoService.audienceBS.subscribe(data=> this.audience=data)
     }
     join(name) {
-        return this.appSocketIoService.join({name})
+        return this.appSocketIoService.join(name)
     }
 
     member(){

@@ -1,8 +1,9 @@
+const joi = require('joi')
 let io
 let audience = []
 let connections = []
 let speaker = {}
-const groups = ["Philiosophy Debates", "Comedy", "Political Debates"]
+let title
 module.exports = {
     instantiate(server) {
         io = require('socket.io')(server);
@@ -10,33 +11,39 @@ module.exports = {
         io.on('connection', (socket) => {
             connections.push(socket);
             console.log('Client Connected');
-            socket.broadcast.emit("new one connected")
-            socket.emit('groups', groups)
 
-            socket.once('disconnect', () => {
+            socket.on('disconnect', () => {
                 connections.splice(connections.indexOf(socket), 1);
-                audience = audience.filter(obj => socket.id != obj.id)
-                emitAudienceUpdated(io)
+                console.log('Client Disconnected');
                 socket.disconnect();
-                console.log('Socket.io Disconnected');
+                if (isSpeaker(socket)) {
+                    speaker = ''
+                    title = 'Untitled Presentation'
+                    io.emit('end', { speaker, title })
+                } else {
+                    audience = audience.filter(obj => socket.id != obj.id)
+                    emitAudienceUpdated(io)
+                }
+
+                
             });
 
-            socket.on('speaker join', (payload)=> {
-                speaker={name: payload.name, id:socket.id, type: 'speaker'}
-                socket.emit('joined', speaker)
+            socket.on('start', (payload) => {
+                validateSpeakerPayload(payload)
+                speaker = { name: payload.name, id: socket.id, type: 'speaker' }
+                title = payload.title
+                socket.emit('started', speaker)
+                io.sockets.emit('session started', { speakerName: speaker.name, title })
             })
 
 
             socket.on('join', (payload) => {
+                validateUserPayload(payload)
                 const newMember = { id: socket.id, name: payload.name, type: 'audience' }
                 audience.push(newMember)
                 emitAudienceUpdated(io)
                 socket.emit('joined', newMember)
             });
-
-
-
-
         });
     },
     emit(event) {
@@ -47,19 +54,22 @@ module.exports = {
         io.on(event, callback)
     }
 
-
-
-}//
+}
 function emitAudienceUpdated(io) {
     return io.sockets.emit('audience updated', audience)
 }
+const validateSpeakerPayload = (payload) => {
+    return joi.validate(payload, {
+        name: joi.string(),
+        title: joi.string()
+    })
+}
+const validateUserPayload = (payload) => {
+    return joi.validate(payload, {
+        name: joi.string(),
+    })
+}
 
-
-            // socket.on('group selected', (group) => {
-            //     socket.join(group)
-            //     console.log(socket.id, 'joined', group);
-            //     socket.on('send chat message', (payload) => {
-            //         io.sockets.in(group).emit('new chat message', payload)
-            //         console.log(socket.id, 'joined', group);
-            //     });
-            // });
+const isSpeaker = (socket) => {
+    return socket.id === speaker.id
+}

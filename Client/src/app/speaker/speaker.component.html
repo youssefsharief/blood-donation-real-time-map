@@ -1,1 +1,25 @@
-<!--component html goes here -->
+            <form *ngIf="!member()" #form="ngForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="name" class="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="Enter name" [(ngModel)]="name"
+                        required>
+                    <small id="emailHelp" class="form-text text-muted">Go on man. Why are you scared?</small>
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="title" class="form-control" id="title" name="title" aria-describedby="titleHelp" placeholder="Enter title" [(ngModel)]="title" required>
+                    <small id="emailHelp" class="form-text text-muted">Go on man. Why are you scared?</small>
+                </div>
+                <button type="submit" [disabled]="!form.valid" class="btn btn-primary" (click)="start(name)">Start</button>
+
+            </form>
+            <div *ngIf="member()">
+                <h2>Welcome {{member().name}}</h2>
+                <small class="form-text text-muted">Questions would appear here</small>
+            </div>
+            <div *ngIf="audience && member()">
+                <h2>Attendabce</h2>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let item of audience">{{item.name}}</li>
+                </ul>
+
