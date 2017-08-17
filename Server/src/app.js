@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const dbConnection= require('./core/dbConnection.js')
+const dbConnection = require('./core/dbConnection.js')
 const instatiateMiddleWares = require('./core/middlewares/_instatiationMiddlewares.js')
 const http = require('http');
 const devOpsHelper = require('./core/devOpsHelper.js')
@@ -26,7 +26,7 @@ socket_io.instantiate(server)
 
 module.exports = app;
 
-function setViews(app){
+function setViews(app) {
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'jade');
 }

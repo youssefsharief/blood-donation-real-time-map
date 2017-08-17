@@ -9,3 +9,5 @@ import '@angular/forms'
 import '@angular/material'
 import 'hammerjs'
 import 'socket.io-client';
+import 'angular-esri-loader'
+import { MdSnackBar, MdSnackBarConfig, MaterialModule } from '@angular/material';

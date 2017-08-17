@@ -1,3 +1,4 @@
+import { SpeakerComponent } from './speaker/speaker.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -5,9 +6,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppSocketIoService } from './shared/services/socket';
+import { AudienceComponent } from './audience/audience.component';
+import { BoardComponent } from './board/board.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SpeakerComponent,
+    AudienceComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +25,4 @@ import { AppSocketIoService } from './shared/services/socket';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private appSocketIoService: AppSocketIoService) {
-    this.appSocketIoService.emit('connection')
-  }
 }
