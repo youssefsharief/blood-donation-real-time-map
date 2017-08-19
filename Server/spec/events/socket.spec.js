@@ -72,24 +72,6 @@ describe("Scoket Events", function () {
             })
         }); 
     })
-
-    describe("Leaving as a speaker", function () {
-        beforeEach(() => {
-            speaker.disconnect()
-        })
-        it("speaker should get permitted and get his socket id", function (done) {
-            firstUser.on('end', (payload)=> {
-                done()
-            })
-        });
-        it("should get notiied that the session started with the title", function (done) {
-
-        });
-        it("users should get notified and get speaker's name and the title of presentation", function (done) {
-
-        }); 
-    })
-
     
 
 })

@@ -1,9 +1,11 @@
 {
-  "name": "smoott.mockapi",
+  "name": "crossover",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "nodemon ./src/app.js",
+    "coverage": "istanbul cover node_modules/jasmine/bin/jasmine.js",
+    "is": "istanbul cover ./test.js",
     "test": "jasmine"
   },
   "dependencies": {
@@ -14,6 +16,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "istanbul": "^0.4.5",
     "jade": "^1.11.0",
     "joi": "^10.6.0",
     "jsonwebtoken": "^7.4.2",
@@ -26,7 +29,6 @@
   "devDependencies": {
     "faker": "^4.1.0",
     "jasmine": "^2.7.0",
-    "karma-jasmine": "^1.1.0",
     "nodemon": "^1.11.0",
     "socket.io-client": "^2.0.3",
     "supertest": "^3.0.0"
