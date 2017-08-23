@@ -1,8 +1,6 @@
 require('jasmine')
-const firstUser = require('socket.io-client')('http://localhost:3000');
-const secondUser = require('socket.io-client')('http://localhost:3000');
-const speaker = require('socket.io-client')('http://localhost:3000');
-const faker = require('faker')
+
+let app, server, socket_io, firstUser, secondUser, speaker, faker
 // const rewire = require('rewire')
 // const serverSocket = rewire('../../src/modules/serverSocket')
 
@@ -13,6 +11,22 @@ describe("Scoket Events", function () {
     //         done()
     //     });
     // })
+    beforeAll(() => {
+        app = require('../../src/app')
+        server = app.listen(5000)
+        socket_io = require('../../src/modules/serverSocket.js')
+        socket_io.instantiate(server)
+        firstUser = require('socket.io-client')('http://localhost:5000');
+        secondUser = require('socket.io-client')('http://localhost:5000');
+        speaker = require('socket.io-client')('http://localhost:5000');
+        faker = require('faker')
+    })
+    afterAll(() => {
+        firstUser.disconnect()
+        secondUser.disconnect()
+        speaker.disconnect()
+        server.close()
+    })
 
     describe("Joining as a user", function () {
         const name = faker.name.firstName()
@@ -43,7 +57,6 @@ describe("Scoket Events", function () {
         });
     })
 
-
     describe("Joining as a speaker", function () {
         const name = faker.name.firstName()
         const title = faker.lorem.word()
@@ -70,8 +83,8 @@ describe("Scoket Events", function () {
                 expect(payload.title).toBeTruthy(title)
                 done()
             })
-        }); 
+        });
     })
-    
+
 
 })

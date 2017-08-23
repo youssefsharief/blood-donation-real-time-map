@@ -1,7 +1,14 @@
-describe("App", function () {
-
-	it("should get restaurants by neighborhood", function (done) {
-		global.appRequest.get('/restaurants/by_neighborhood/?long=-73.9928&lat=40.7193').set('Accept', 'application/json').expect('Content-Type', /json/).expect(200)
+const {setup} = require('../helpers/requestsSpecHelper')
+let server, request
+describe("R endpoint", function () {
+	beforeAll(()=>{
+		[server, request] = setup()
+	})
+	afterAll(() => {
+		server.close()
+	})
+	fit("should get restaurants by neighborhood", function (done) {
+		request.get('/restaurants/by_neighborhood/?long=-73.9928&lat=40.7193').set('Accept', 'application/json').expect('Content-Type', /json/).expect(200)
 			.end((err, res) => {
 				expect(res.body.length).toBeGreaterThanOrEqual(1)
 				done();
@@ -11,22 +18,28 @@ describe("App", function () {
 	describe("get restaurants by location api", function () {
 
 		it("should get restaurants by location if query is correct", function (done) {
-			global.appRequest.get('/restaurants/by_location/?long=-73.9928&lat=40.893&distance=5000').expect(200)
+			request.get('/restaurants/by_location/?long=-73.9928&lat=40.893&distance=5000').expect(200)
 				.end((err, res) => {
 					expect(Array.isArray(res.body)).toEqual(true)
 					done();
 				})
 		});
-
+		it("should return 422 in case of error", function (done) {
+			request.get('/restaurants/by_location/?long=-73.9928&lat=40.893&distace=5000').expect(400)
+				.end((err, res) => {
+					expect(res.status).toEqual(400)
+					done();
+				})
+		})
 		it("should throw error if query is wrong", function () {
-			global.appRequest.get('/restaurants/by_location/?long=string&lat=40.893&distance=5000').expect(400)
-				// .end((err, res) => {
-				// 	expect(res.status).toBe(400)
-				// 	done();
-				// })
+			request.get('/restaurants/by_location/?long=string&lat=40.893&distance=5000').expect(400)
+			// .end((err, res) => {
+			// 	expect(res.status).toBe(400)
+			// 	done();
+			// })
 		});
 
-		
+
 	})
 
 

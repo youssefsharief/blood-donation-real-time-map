@@ -1,8 +1,8 @@
-const specUtility = require('../helpers/specUtility')
+const utility = require('../helpers/utility')
 
-describe("specUtility", function () {
+describe("utility", function () {
 
     it("selectRandomFromArray",  () => {
-        expect(typeof specUtility.selectRandomFromArray([1, 2, 3, 4])).toBe('number')
+        expect(typeof utility.selectRandomFromArray([1, 2, 3, 4])).toBe('number')
     });
 })

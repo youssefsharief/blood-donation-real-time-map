@@ -1,32 +1,24 @@
 const express = require('express');
 const path = require('path');
-const dbConnection = require('./core/dbConnection.js')
-const instatiateMiddleWares = require('./core/middlewares/_instatiationMiddlewares.js')
-const http = require('http');
-const devOpsHelper = require('./core/devOpsHelper.js')
-const socket_io = require('./modules/serverSocket.js')
-const devOps = require('./core/devOps.js')
 const authentication = require('./core/authentication')
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const jwtConfig = require("./config/jwtConfig")
+const routesMiddleware = require("./routes/routesMiddleware")
+const errorHandlersMiddleware = require("./core/errorHandlersMiddleware")
+
 const app = express();
-const server = http.createServer(app);
-const port = devOpsHelper.normalizePort(process.env.PORT || '3000');
 
-dbConnection()
-
-authentication.setSecrets(app)
-
-setViews(app)
-instatiateMiddleWares(app)
-app.set('port', port);
-server.listen(port);
-
-devOps.instantiate(server, port)
-
-socket_io.instantiate(server)
+authentication.setSecrets(app, jwtConfig)
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+routesMiddleware(app)
+errorHandlersMiddleware(app)
 
 module.exports = app;
 
-function setViews(app) {
-    app.set('views', path.join(__dirname, 'views'));
-    app.set('view engine', 'jade');
-}

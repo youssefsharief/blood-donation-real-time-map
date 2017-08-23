@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./src/app.js",
+    "start": "nodemon ./src/bin/www",
     "coverage": "istanbul cover node_modules/jasmine/bin/jasmine.js",
     "is": "istanbul cover ./test.js",
-    "test": "jasmine"
+    "ins": "istanbul instrument ./src/modules/",
+    "test": "nodemon jasmine",
+    "watch": "nodemon --exec jasmine"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
@@ -27,6 +29,7 @@
     "socket.io": "^1.7.4"
   },
   "devDependencies": {
+    "cross-env": "^5.0.5",
     "faker": "^4.1.0",
     "jasmine": "^2.7.0",
     "nodemon": "^1.11.0",

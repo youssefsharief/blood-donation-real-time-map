@@ -1,12 +1,11 @@
-const jwtConfig = require("../config/jwtConfig")
 
 const jwt = require('jsonwebtoken');
 
 
 module.exports = {
-    setSecrets(app) {
-        app.set('adminSecret', jwtConfig.adminSecret);
-        app.set('mobileSecret', jwtConfig.mobileSecret);
+    setSecrets(app, config) {
+        app.set('adminSecret', config.adminSecret);
+        app.set('mobileSecret', config.mobileSecret);
     },
     verifyUser(req, res, next) {
         const token = req.body.token || req.params.token || req.headers['x-access-token'];

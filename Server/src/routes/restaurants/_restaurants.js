@@ -23,13 +23,10 @@ router
         const { long, lat, distance } = req.query
         RestaurantModel.find({ location: { $nearSphere: { $geometry: { type: "Point", coordinates: [long, lat] }, $maxDistance: distance } } }).lean().exec((err, restaurants) => {
             if (err) return res.status(400).json("Problematic input. Please only inpt nubers")
+                /*istanbul ignore if*/
             if (!restaurants) return res.status(422).send('No restaurants found with the sent data')
             return res.status(200).json(restaurants)
         })
-    })
-    .delete('/:id', (req, res) => {
-        data = data.filter(x => x.countryId != req.params.id)
-        return res.status(200).json(data);
     })
     .post('/', (req, res) => {
         const restaurant = new RestaurantModel({
