@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./src/bin/www",
-    "coverage": "istanbul cover node_modules/jasmine/bin/jasmine.js",
+    "coverage": "nodemon --exec istanbul cover node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
     "is": "istanbul cover ./test.js",
     "ins": "istanbul instrument ./src/modules/",
     "test": "nodemon jasmine",
@@ -22,16 +22,19 @@
     "jade": "^1.11.0",
     "joi": "^10.6.0",
     "jsonwebtoken": "^7.4.2",
+    "lodash": "^4.17.4",
     "mongoose": "^4.11.7",
     "morgan": "~1.8.1",
     "rewire": "^2.5.2",
-    "socket.io": "^1.7.4"
+    "socket.io": "^1.7.4",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "cross-env": "^5.0.5",
     "faker": "^4.1.0",
     "jasmine": "^2.7.0",
     "nodemon": "^1.11.0",
+    "sinon": "^3.2.1",
     "socket.io-client": "^2.0.3",
     "supertest": "^3.0.0"
   }
