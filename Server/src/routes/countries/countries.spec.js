@@ -1,4 +1,4 @@
-const {setup} = require('../helpers/requestsSpecHelper')
+const {setup} = require('../../helpers/requestsSpecHelper')
 let server, request
 describe("Coutries endpoint", function () {
 	beforeAll(()=>{
@@ -7,7 +7,7 @@ describe("Coutries endpoint", function () {
 	afterAll(() => {
 		server.close()
 	})
-	fit("should get countries", function (done) {
+	it("should get countries", function (done) {
 		request.get('/countries').set('Accept', 'application/json').expect('Content-Type', /json/).expect(200)
 			.end((err, res) => {
 				expect(res.body.length).toBeGreaterThanOrEqual(1)

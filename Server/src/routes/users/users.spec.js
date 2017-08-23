@@ -1,14 +1,14 @@
 const faker = require('faker')
-const utility = require('../helpers/utility')
+const utility = require('../../helpers/utility')
 
 
-const {setup} = require('../helpers/requestsSpecHelper')
+const { setup } = require('../../helpers/requestsSpecHelper')
 let server, request
-	
+
 
 
 describe("UserApi", function () {
-	beforeAll(()=>{
+	beforeAll(() => {
 		[server, request] = setup()
 	})
 	afterAll(() => {
@@ -26,11 +26,28 @@ describe("UserApi", function () {
 		})
 	});
 
+	// describe("Authentication should work", function () {
+	// 	beforeAll(() => {
+	// 		[server, request] = setup()
+	// 	})
+	// 	afterAll(() => {
+	// 		server.close()
+	// 	})
+	// 	it("should signup successgully if user is new", function (done) {
+	// 		post(newUser).end((err, res) => {
+	// 			expect(res.body.email).toEqual(email)
+	// 			expect(res.body.password.length).toBeGreaterThan(password.length)
+	// 			expect(res.body._id).toBeTruthy()
+	// 			done();
+	// 		})
+	// 	});
+	// })
+
 	it("should get users and refuse signing up an existing user", function (done) {
 		get().end((err, res) => {
 			const itemInArray = utility.selectRandomFromArray(res.body)
 			post(itemInArray).end((err, res) => {
-				expect(res.status).toBe(403)
+				expect(res.status).toBe(400)
 				done();
 			})
 		})
@@ -48,7 +65,7 @@ describe("UserApi", function () {
 	})
 
 	it("should get users", function (done) {
-		get().expect(200)
+		get().expect(400)
 			.end((err, res) => {
 				expect(Array.isArray(res.body)).toBe(true)
 				const itemInArray = utility.selectRandomFromArray(res.body)

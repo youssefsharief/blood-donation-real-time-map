@@ -64,7 +64,7 @@ router.post('/signup', function (req, res) {
 
     // Saving the user. If saved successfully send an email with credintials
     newUser.save(function (err, savedUser) {
-        if (err) return res.status(403).send('An error has occured while saving the password.');
+        if (err) return res.status(400).send('An error has occured while saving the password.');
         return res.status(200).json(savedUser);
 
     });

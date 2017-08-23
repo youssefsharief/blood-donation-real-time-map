@@ -1,6 +1,6 @@
 require('jasmine')
-
-let app, server, socket_io, firstUser, secondUser, speaker, faker
+const faker = require('faker')
+let app, server, socket_io, firstUser, secondUser, speaker
 // const rewire = require('rewire')
 // const serverSocket = rewire('../../src/modules/serverSocket')
 
@@ -12,14 +12,13 @@ describe("Scoket Events", function () {
     //     });
     // })
     beforeAll(() => {
-        app = require('../../src/app')
+        app = require('../app')
         server = app.listen(5000)
-        socket_io = require('../../src/modules/serverSocket.js')
+        socket_io = require('./serverSocket.js')
         socket_io.instantiate(server)
         firstUser = require('socket.io-client')('http://localhost:5000');
         secondUser = require('socket.io-client')('http://localhost:5000');
         speaker = require('socket.io-client')('http://localhost:5000');
-        faker = require('faker')
     })
     afterAll(() => {
         firstUser.disconnect()

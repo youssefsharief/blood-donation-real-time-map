@@ -7,6 +7,7 @@
     "start": "ng serve --extract-css",
     "build": "ng build --extract-css",
     "test": "ng test",
+    "coverage": "ng test -cc",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

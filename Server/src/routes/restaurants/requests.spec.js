@@ -1,4 +1,4 @@
-const {setup} = require('../helpers/requestsSpecHelper')
+const {setup} = require('../../helpers/requestsSpecHelper')
 let server, request
 describe("R endpoint", function () {
 	beforeAll(()=>{
@@ -7,7 +7,7 @@ describe("R endpoint", function () {
 	afterAll(() => {
 		server.close()
 	})
-	fit("should get restaurants by neighborhood", function (done) {
+	it("should get restaurants by neighborhood", function (done) {
 		request.get('/restaurants/by_neighborhood/?long=-73.9928&lat=40.7193').set('Accept', 'application/json').expect('Content-Type', /json/).expect(200)
 			.end((err, res) => {
 				expect(res.body.length).toBeGreaterThanOrEqual(1)

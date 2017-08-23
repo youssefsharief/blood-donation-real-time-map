@@ -1,5 +1,5 @@
-const app = require('../../src/app')
-const db = require('../../src/core/dbConnection.js')
+const app = require('../app')
+const db = require('../core/dbConnection.js')
 const request = require('supertest')
 
 
