@@ -1,7 +1,11 @@
-module.exports = function setRoutes(app) {
-    app.use('/entity', require('./entity/entity'));
-    app.use('/countries', require('./countries/countries'));
-    app.use('/neighborhoods', require('./neighborhoods/neighborhoodRoute'));
-    app.use('/restaurants', require('./restaurants/_restaurants'));
-    app.use('/users', require('./users/_users'));
+// const baseUrl = ''
+const routes = ['entity', 'countries', 'neighborhoods', 'restaurants', 'users']
+
+
+function setRoutes(app) {
+    routes.forEach(x => {
+        app.use(`/${x}`, require(`./${x}/_${x}`))
+    })
 }
+module.exports = setRoutes
+
