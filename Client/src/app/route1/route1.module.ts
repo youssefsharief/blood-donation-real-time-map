@@ -6,17 +6,22 @@ import { NgModule } from '@angular/core';
 import { Route1Component } from './route1.component';
 import { EsriLoaderModule } from 'angular-esri-loader';
 import { Route1RoutingModule } from './route1-routing.module';
+import { EsriLoaderService } from 'angular2-esri-loader';
+import { EsriMapComponent } from './esri-map/esri-map.component';
 
 @NgModule({
     imports: [
         Route1RoutingModule,
         SharedModule,
         EsriLoaderModule
-
-
+    ],
+    providers:[
+        EsriLoaderService
     ],
     declarations: [
         Route1Component,
+        EsriMapComponent
+        
     ],
     exports: [
         Route1Component,

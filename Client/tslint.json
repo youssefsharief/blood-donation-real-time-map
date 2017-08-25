@@ -75,7 +75,7 @@
 				"variable-declaration": "nospace"
 			}
 		],
-		"variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-snake-case"],
+		"variable-name": [false, "ban-keywords", "check-format", "allow-leading-underscore", "allow-snake-case"],
 		"whitespace": [
 			false,
 			"check-branch",
