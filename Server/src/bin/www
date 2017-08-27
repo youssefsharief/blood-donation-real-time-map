@@ -3,7 +3,7 @@
 
 const app = require('../app');
 const debug = require('debug')('mini-projects:server');
-const socket_io = require('../modules/serverSocket.js')
+const socket_io = require('../modules/socket.bootstrap.js')
 const http = require('http')
 const db = require('../core/dbConnection.js')
 const port = normalizePort(process.env.PORT || '3000');

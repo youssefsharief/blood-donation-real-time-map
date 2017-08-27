@@ -1,5 +1,5 @@
 require('jasmine')
-const socketUtility = require('./socketUtiltiy')
+const socketUtility = require('./socket.utility')
 
 describe("Filter Users and Identify Type", function () {
     let users
