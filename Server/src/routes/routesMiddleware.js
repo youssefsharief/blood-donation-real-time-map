@@ -1,10 +1,10 @@
 // const baseUrl = ''
-const routes = ['entity', 'countries', 'neighborhoods', 'restaurants', 'users']
+const routes = ['neighborhoods', 'restaurants', 'users']
 
 
 function setRoutes(app) {
     routes.forEach(x => {
-        app.use(`/${x}`, require(`./${x}/_${x}`))
+        app.use(`/${x}`, require(`./${x}/${x}.router`))
     })
 }
 module.exports = setRoutes

@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 const router = require('express').Router()
 const verifyAdmin = require('../../core/authentication').verifyAdmin;
-const RestaurantModel = require('../../models/restaurantModel.js')
+const RestaurantModel = require('../../models/restaurant.model.js')
 const UserModel = require('../../models/userModel.js')
 
 module.exports = router

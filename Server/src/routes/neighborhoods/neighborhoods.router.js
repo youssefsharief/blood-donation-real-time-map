@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const verifyAdmin = require('../../core/authentication').verifyAdmin;
-const NeighborhoodModel = require('../../models/neighborhoodModel.js')
+const NeighborhoodModel = require('../../models/neighborhood.model.js')
 module.exports = router
 
 router
