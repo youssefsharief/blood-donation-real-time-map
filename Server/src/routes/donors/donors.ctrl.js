@@ -31,9 +31,10 @@ function addDonor(req, res) {
 
 
 function findDonorAndUpdate(req, res) {
-    const { firstName, lastName,email, telephone,bloodGroup, location, ip, id  } = req.body
-    const newDonor = { firstName, lastName,email, telephone,bloodGroup, location, ip}
-    return findOneAndUpdate(id, newDonor)
+    if (!req.body._id) utility.missingData(res, '_id')
+    const { firstName, lastName,email, telephone,bloodGroup, location, _id  } = req.body
+    const newDonor = { firstName, lastName,email, telephone,bloodGroup, location, }
+    return findOneAndUpdate(_id, newDonor)
         .then((added) => res.status(200).json(added))
         .catch(err => utility.badRequest(res, 'to add your info'))
 }

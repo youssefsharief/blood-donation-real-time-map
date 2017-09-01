@@ -8,7 +8,15 @@ function findFromLocation(long, lat, distance) {
 }
 
 function findOneAndUpdate(id, update) {
-    return donorsModel.findByIdAndUpdate(id, update).exec()
+    return donorsModel.findById(id).exec().then((item)=>{
+        item.firstName = update.firstName
+        item.lastName = update.lastName
+        item.email = update.email
+        item.telephone = update.telephone
+        item.bloodGroup = update.bloodGroup
+        item.location  = update.location || item.location
+        return item.save()
+    })
 }
 
 function remove(id) {
