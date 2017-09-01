@@ -10,8 +10,8 @@ const paths: Routes = [
     { path: 'speaker', component: SpeakerComponent },
     { path: 'audience', component: AudienceComponent },
     { path: 'board', component: BoardComponent },
-    { path: '', redirectTo: 'audience', pathMatch: 'full' },
-    { path: '**', redirectTo: 'audience', pathMatch: 'full' }
+    { path: '', redirectTo: 'route1', pathMatch: 'full' },
+    { path: '**', redirectTo: 'route1', pathMatch: 'full' }
 ]
 
 
