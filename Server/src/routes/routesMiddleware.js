@@ -1,5 +1,5 @@
 // const baseUrl = ''
-const routes = ['neighborhoods', 'restaurants', 'users']
+const routes = ['neighborhoods', 'restaurants', 'donors']
 
 
 function setRoutes(app) {

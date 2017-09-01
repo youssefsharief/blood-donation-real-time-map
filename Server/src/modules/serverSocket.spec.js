@@ -31,7 +31,7 @@ describe("Scoket Events", function () {
     })
 
     describe("Connections", ()=>{
-        fit("should increase when a new socket is connected", function (done) {
+        it("should increase when a new socket is connected", function (done) {
             done()
         });
     })
@@ -40,24 +40,24 @@ describe("Scoket Events", function () {
         beforeEach(() => {
             firstUser.emit('join', { name })
         })
-        fit("should be accepted", function (done) {
+        it("should be accepted", function (done) {
             firstUser.on('joined', () => {
                 done()
             })
         });
-        fit("should get my name and socket id in payload", function (done) {
+        it("should get my name and socket id in payload", function (done) {
             firstUser.on('joined', (payload) => {
                 expect(payload.name).toBe(name)
                 expect(payload.id).toBeTruthy()
                 done()
             })
         });
-        fit("should broadcast to other that new member existed", function (done) {
+        it("should broadcast to other that new member existed", function (done) {
             secondUser.on('audience updated', () => {
                 done()
             })
         });
-        fit("should broadcast to other the new list of members", function (done) {
+        it("should broadcast to other the new list of members", function (done) {
             secondUser.on('audience updated', (payload) => {
                 expect(Array.isArray(payload)).toBeTruthy()
                 done()
@@ -71,7 +71,7 @@ describe("Scoket Events", function () {
         beforeEach(() => {
             speaker.emit('start', { name, title })
         })
-        fit("speaker should get permitted and get his socket id", function (done) {
+        it("speaker should get permitted and get his socket id", function (done) {
             speaker.on('started', (payload) => {
                 expect(payload.name).toBe(name)
                 expect(payload.id).toBeTruthy()
@@ -81,13 +81,13 @@ describe("Scoket Events", function () {
             })
         });
         describe('Audience', () => {
-            fit("should get notiied by 'session started' event", function (done) {
+            it("should get notiied by 'session started' event", function (done) {
                 speaker.on('session started', () => {
                     done()
                 })
             });
 
-            fit("should get payload that includes speakerName and title", function (done) {
+            it("should get payload that includes speakerName and title", function (done) {
                 speaker.on('session started', (payload) => {
                     expect(payload.speakerName).toBe(name)
                     expect(payload.title).toBeTruthy(title)
