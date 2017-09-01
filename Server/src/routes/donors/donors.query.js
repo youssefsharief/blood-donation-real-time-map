@@ -7,20 +7,22 @@ function findFromLocation(long, lat, distance) {
         find({ location: { $nearSphere: { $geometry: { type: "Point", coordinates: [long, lat] }, $maxDistance: distance } } }).lean().exec()
 }
 
-function findOneAndUpdate(id, update){
-    return donorsModel.
-    findByIdAndUpdate(id, update).exec()
+function findOneAndUpdate(id, update) {
+    return donorsModel.findByIdAndUpdate(id, update).exec()
 }
 
 function remove(id) {
-    return donorsModel.
-    findByIdAndRemove(id).lean().exec()
+    return donorsModel.findByIdAndRemove(id).lean().exec()
 }
 
-function add(item){
-    const newDonor =new donorsModel(item)
+function getOneById(id) {
+    return donorsModel.findById(id).lean().exec()
+}
+
+function add(item) {
+    const newDonor = new donorsModel(item)
     return newDonor.save()
 }
 module.exports = {
-    findFromLocation, findOneAndUpdate, remove, add
+    findFromLocation, findOneAndUpdate, remove, add, getOneById
 }

@@ -1,8 +1,6 @@
 
-// const neighborhoodModel = require('../models/neighborhood.model')
-const donorModel = require('../../models/donors.model')
 const utility = require('../../helpers/utility.js')
-const { findFromLocation, findOneAndUpdate, add, remove} = require('./donors.query.js')
+const { findFromLocation, findOneAndUpdate, add, remove, getOneById} = require('./donors.query.js')
 
 
 
@@ -16,11 +14,19 @@ function getDonorsByLocation(req, res) {
 
 
 function addDonor(req, res) {
-    const { firstName, lastName,email, telephone,bloodGroup, location, ip  } = req.body
+    let location = {
+        coordinates: req.body.location,
+        type: "Point"
+    }
+    let ip = req.body.ip ? req.body.ip : "0.0.0.0.0"
+    let { firstName, lastName,email, telephone,bloodGroup  } = req.body
+    
     const newDonor = { firstName, lastName,email, telephone,bloodGroup, location, ip}
     return add (newDonor)
         .then((added) => res.status(200).json(added))
-        .catch(err => utility.badRequest(res, 'to add your info'))
+        .catch(err => console.log(err))
+        
+            // utility.badRequest(res, 'to add your info'))
 }
 
 
@@ -39,4 +45,11 @@ function removeDonor(req, res) {
         .catch(err => utility.badRequest(res, 'to add your info'))
 }
 
-module.exports = { getDonorsByLocation, addDonor, findDonorAndUpdate, removeDonor }
+function getDonorInfoById(req, res) {
+    return getOneById(req.params.id)
+        .then((item) => res.status(200).json(item))
+        .catch(err => utility.badRequest(res, 'to add your info'))
+}
+
+
+module.exports = { getDonorsByLocation, addDonor, findDonorAndUpdate, removeDonor, getDonorInfoById }

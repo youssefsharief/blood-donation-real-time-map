@@ -15,11 +15,7 @@ describe("R endpoint", function () {
 			email : faker.internet.email(),
 			telephone : faker.phone.phoneNumber(),
 			bloodGroup : "O",
-			ip : faker.internet.ip(),
-			location: {
-				coordinates: [faker.address.longitude(), faker.address.latitude()],
-				type: 'Point'
-			}
+			location: [faker.address.longitude(), faker.address.latitude()],
 		}
 		
 		fit("should add donor", function (done) {
@@ -50,6 +46,26 @@ describe("R endpoint", function () {
 
 
 	})
+
+
+	describe("get donor info by id", function () {
+		
+				fit("should get donor info if id exists", function (done) {
+					request.get('/donors/59a940c120262515a8d59b8f').expect(200)
+						.end((err, res) => {
+							expect(res.body.firstName).toBeTruthy()
+							done();
+						})
+				});
+				fit("should return 400 in case of error", function (done) {
+					request.get('/donors/fd').end((err, res) => {
+						expect(res.status).toEqual(400)
+						done();
+					})
+				})
+		
+		
+			})
 
 
 

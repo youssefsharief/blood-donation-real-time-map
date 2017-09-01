@@ -8,6 +8,7 @@ const jwtConfig = require("./config/jwtConfig")
 const routesMiddleware = require("./routes/routesMiddleware")
 const errorHandlersMiddleware = require("./core/errorHandlersMiddleware")
 const winstonLogger = require('./core/logger')
+const cors = require('cors')
 
 const app = express();
 winstonLogger.configure()
@@ -18,6 +19,7 @@ app.use(morganLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors())
 routesMiddleware(app)
 errorHandlersMiddleware(app)
 
