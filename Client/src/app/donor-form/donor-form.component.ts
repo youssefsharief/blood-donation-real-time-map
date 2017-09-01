@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { globalValidators } from '../shared/global-validators';
 
@@ -11,6 +11,7 @@ export class DonorFormComponent {
     form: FormGroup
     bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
     @Output() submitted = new EventEmitter();
+    @Input() item
     constructor(private fb: FormBuilder){}
 
     ngOnInit() {
@@ -19,6 +20,17 @@ export class DonorFormComponent {
 
 
     buildForm() {
+        if (this.item){
+            this.form = this.fb.group ({
+                firstName: [this.item.firstName || '', Validators.required],
+                lastName: [this.item.lastName || '', Validators.required],
+                email: [this.item.email || '',  globalValidators.mailFormat],
+                telephone: [this.item.telephone || '', globalValidators.telephoneFormat],
+                bloodGroup: [this.item.bloodGroup || '', Validators.required],
+            })
+        }
+        
+        else
         this.form = this.fb.group ({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],

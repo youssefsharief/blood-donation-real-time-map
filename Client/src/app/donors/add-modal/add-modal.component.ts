@@ -23,7 +23,6 @@ export class AddModalComponent {
     
 
     onSubmit(c){
-        console.log(c);
         this.submitted.emit(c)
     }
 }

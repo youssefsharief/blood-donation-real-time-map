@@ -1,3 +1,4 @@
+import { InfoService } from './services/info.service';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +24,7 @@ import {
     
     
   ],
-  providers:[AppSocketIoService, SnackBarService, DataService],
+  providers:[AppSocketIoService, SnackBarService, DataService, InfoService],
   exports: [
     CommonModule,
     FormsModule,

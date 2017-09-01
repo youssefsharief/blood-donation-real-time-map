@@ -1,0 +1,12 @@
+
+<div class="container">
+    <h1>Edit you info</h1>
+    <div class="row">
+        <div class="col-md-6">
+            
+                <donor-form *ngIf="data" [item]="data" (submitted)="onSubmit($event)"></donor-form>
+                <hr />
+                <div class="btn btn-danger" (click)="onChangeLocationRequest()">Change My Location</div>
+        </div>
+    </div>
+</div>

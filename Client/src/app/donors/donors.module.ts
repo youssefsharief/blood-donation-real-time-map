@@ -10,6 +10,8 @@ import { EsriLoaderService, EsriLoaderModule } from 'angular-esri-loader';
 import { AddModalComponent } from './add-modal/add-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EsriMapComponent } from '../esri-map/esri-map.component';
+import { SuccessComponent } from './success/success.component';
+import { PostingComponent } from './posting/posting.component';
 
 @NgModule({
     imports: [
@@ -26,7 +28,9 @@ import { EsriMapComponent } from '../esri-map/esri-map.component';
         DonorsComponent,
         EsriMapComponent,
         AddModalComponent,
-        DonorFormComponent
+        DonorFormComponent,
+        SuccessComponent,
+        PostingComponent
         
     ],
 })
