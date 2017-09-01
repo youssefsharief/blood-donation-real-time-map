@@ -7,10 +7,11 @@ const paths: Routes = [
     { path: 'home', loadChildren: './home/home.module#HomeModule' },
     { path: 'route1', loadChildren: './route1/route1.module#Route1Module' },
     { path: 'success', loadChildren: './success/success.module#SuccessModule' },
+    { path: 'posting', loadChildren: './posting/posting.module#PostingModule' },
     { path: 'speaker', component: SpeakerComponent },
     { path: 'audience', component: AudienceComponent },
-    { path: '', redirectTo: 'route1', pathMatch: 'full' },
-    { path: '**', redirectTo: 'route1', pathMatch: 'full' }
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ]
 
 
