@@ -18,7 +18,8 @@ import {
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    
   ],
   providers:[AppSocketIoService, SnackBarService],
   exports: [
@@ -29,7 +30,7 @@ import {
     FooterComponent, HeaderComponent,
     LeftSideMenuComponent, LoaderComponent,
     NavComponent,
-    MaterialModule
+    MaterialModule,
 
   ],
   declarations: [
