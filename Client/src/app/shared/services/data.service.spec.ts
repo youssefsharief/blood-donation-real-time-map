@@ -44,7 +44,7 @@ describe('Service: DataService', () => {
     });
 
 
-    fit('GET ITEMS: success', (done) => {
+    it('GET ITEMS: success', (done) => {
         setupConnections(backend, {
             body: { data: fakeDonors },
             status: 200
@@ -55,7 +55,7 @@ describe('Service: DataService', () => {
         });
     });
 
-    fit('GET ITEMS: error', (done) => {
+    it('GET ITEMS: error', (done) => {
         setupConnectionsWithError(backend);
         service.getFromBackend(45,45).subscribe(
             payload => {},
@@ -65,7 +65,7 @@ describe('Service: DataService', () => {
             });
     });
 
-    fit('PUT ITEM: success', (done) => {
+    it('PUT ITEM: success', (done) => {
         setupConnections(backend, {
             body: { data: fakeDonors[1] },
             status: 200
@@ -78,7 +78,7 @@ describe('Service: DataService', () => {
         );
     });
 
-    fit('PUT ITEM: error', (done) => {
+    it('PUT ITEM: error', (done) => {
         setupConnectionsWithError(backend);
         service.update(fakeDonors[1]).subscribe(
             payload => {
@@ -89,7 +89,7 @@ describe('Service: DataService', () => {
             });
     });
 
-    fit('DELETE ITEM: success', (done) => {
+    it('DELETE ITEM: success', (done) => {
         setupConnections(backend, {
             body: { data: "OK" },
             status: 200
@@ -102,7 +102,7 @@ describe('Service: DataService', () => {
         );
     });
 
-    fit('DELETE ITEM: error', (done) => {
+    it('DELETE ITEM: error', (done) => {
         setupConnectionsWithError(backend);
         service.delete(fakeDonors[0]).subscribe(
             payload => {
@@ -113,7 +113,7 @@ describe('Service: DataService', () => {
             });
     });
 
-    fit('Add ITEM: success', (done) => {
+    it('Add ITEM: success', (done) => {
         setupConnections(backend, {
             body: { data: "OK" },
             status: 200
@@ -126,7 +126,7 @@ describe('Service: DataService', () => {
         );
     });
 
-    fit('Add ITEM: error', (done) => {
+    it('Add ITEM: error', (done) => {
         setupConnectionsWithError(backend);
         service.add(fakeDonors[0]).subscribe(
             payload => {

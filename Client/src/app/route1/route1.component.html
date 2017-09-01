@@ -1,5 +1,4 @@
-<esri-map></esri-map>
+<esri-map (clicked)="onMapClick($event)"></esri-map>
 
-<add-modal ></add-modal>
+<add-modal (submitted)="onSubmit($event)"></add-modal>
 
-<div class="btn btn-primary" (click)="showModal()">Show modal</div>

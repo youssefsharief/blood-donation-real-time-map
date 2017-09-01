@@ -7,13 +7,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppSocketIoService } from './shared/services/socket';
 import { AudienceComponent } from './audience/audience.component';
-import { BoardComponent } from './board/board.component';
 @NgModule({
   declarations: [
     AppComponent,
     SpeakerComponent,
     AudienceComponent,
-    BoardComponent
   ],
   imports: [
     BrowserModule,

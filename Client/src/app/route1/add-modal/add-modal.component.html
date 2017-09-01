@@ -8,7 +8,7 @@
 
 
       <div class="modal-body">
-        <form [formGroup]="form">
+        <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" >
           <div class="form-group">
             <label for="">First name
                   </label>
@@ -35,9 +35,10 @@
               <label for="">Blood Group
                 </label>
             <select class="form-control bg-white xs-inline loadServices" formControlName="bloodGroup">
-                    <option *ngFor="let item of bloodGroups" value="item">{{item}}</option>
+                    <option *ngFor="let item of bloodGroups" value="{{item}}">{{item}}</option>
                 </select>
           </div>
+
           <button type="submit" class="btn btn-green" [disabled]="!form.valid"> Submit</button>
           
 

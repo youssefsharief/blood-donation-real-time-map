@@ -9,6 +9,7 @@ import { AppSocketIoService } from './services/socket';
 import { SnackBarService } from './services/snackbar.service';
 import { MdSnackBar } from '@angular/material';
 import { MaterialModule } from '@angular/material';
+import { DataService } from './services/data.service';
 
 import {
   FooterComponent, HeaderComponent,
@@ -21,7 +22,7 @@ import {
     CommonModule,
     
   ],
-  providers:[AppSocketIoService, SnackBarService],
+  providers:[AppSocketIoService, SnackBarService, DataService],
   exports: [
     CommonModule,
     FormsModule,
