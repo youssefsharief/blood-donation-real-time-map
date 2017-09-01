@@ -5,6 +5,7 @@ import { EsriLoaderService } from 'angular-esri-loader';
 import { AppSocketIoService } from '../shared/services/socket';
 import { AddModalComponent } from './add-modal/add-modal.component'
 import { DataService } from '../shared/services/data.service';
+import { InfoService } from '../shared/services/info.service';
 @Component({
     selector: 'Donors',
     templateUrl: 'Donors.component.html',
@@ -14,11 +15,13 @@ export class DonorsComponent {
     @ViewChild(AddModalComponent) private addModalComponent: AddModalComponent
     map: any;
     location: number[]=[]
-    connection
     constructor(private appSocketIoService: AppSocketIoService, 
         private dataService: DataService, private snackbar: SnackBarService,
-        private router: Router
+        private router: Router, private infoService: InfoService
     ) { }
+
+   
+
 
     onMapClick(data) {
         this.captureLocation(data)
@@ -29,18 +32,16 @@ export class DonorsComponent {
         this.location.push(data.latitude)
     }
     onSubmit(data) {
-        console.log('recieved', data);
         const {firstName, lastName, email, telephone, bloodGroup}  = data
         this.dataService.add({firstName, lastName, email, telephone, bloodGroup, location:this.location}).subscribe(
             data=>{
-                console.log(data);
-                
+
+                this.infoService.id= data._id
                 this.router.navigate(['/success', data._id])
                 this.snackbar.emitSuccessSnackBar('You have successfully added your info as a donor')
-                
             },
             error=>this.snackbar.emitErrorSnackBar('Error!')        
         )
     }
-    
+
 }

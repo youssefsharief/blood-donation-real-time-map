@@ -19,7 +19,7 @@ export class DataService {
     getFromBackend(long, lat) {
         return this.http.get(`${this.url}/?long=${long}&lat=${lat}&distance=50000000`)
             .map(res => {
-                this.items = res.json().data
+                this.items = res.json()
                 return this.items || {};
             })
             .catch(this.handleError);
@@ -35,10 +35,11 @@ export class DataService {
     }
 
 
-    update(data) {
+    update(id, data) {
+        data._id = id        
         return this.http.put(`${this.url}`, data, this.options)
-            .map(res => {
-                return res.json().data
+            .map(res => {                
+                return res.json()
             })
             .catch(this.handleError);
     }
