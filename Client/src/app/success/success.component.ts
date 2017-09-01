@@ -1,4 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
+import { InfoService } from '../shared/services/info.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,14 +8,10 @@ import { Component } from '@angular/core';
 })
 export class SuccessComponent {
     id
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private infoService: InfoService, private router: Router) {}
     ngOnInit(){
-        this.route.params.subscribe(
-            params => {
-                this.id = params.id
-            }
-        
-        )
+        this.id= this.infoService.id
+        if(!this.id) this.router.navigate(['/donors'])
     }
 
 

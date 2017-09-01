@@ -1,3 +1,4 @@
+import { InfoService } from './shared/services/info.service';
 import { SpeakerComponent } from './speaker/speaker.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +20,7 @@ import { AudienceComponent } from './audience/audience.component';
     SharedModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [InfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

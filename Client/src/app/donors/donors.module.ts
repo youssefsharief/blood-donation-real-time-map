@@ -1,4 +1,3 @@
-import { DonorFormComponent } from '../donor-form/donor-form.component';
 import { SharedModule } from '../shared/shared.module';
 // Angular Imports
 import { NgModule } from '@angular/core';
@@ -26,7 +25,6 @@ import { EsriMapComponent } from '../esri-map/esri-map.component';
         DonorsComponent,
         EsriMapComponent,
         AddModalComponent,
-        DonorFormComponent
         
     ],
 })

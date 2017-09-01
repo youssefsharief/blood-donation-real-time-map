@@ -7,7 +7,7 @@ const paths: Routes = [
     { path: 'home', loadChildren: './home/home.module#HomeModule' },
     { path: 'donors', loadChildren: './donors/donors.module#DonorsModule' },
     { path: 'patients', loadChildren: './patients/patients.module#PatientsModule' },
-    { path: 'success/:id', loadChildren: './success/success.module#SuccessModule' },
+    { path: 'success', loadChildren: './success/success.module#SuccessModule' },
     { path: 'posting/:id', loadChildren: './posting/posting.module#PostingModule' },
     { path: 'speaker', component: SpeakerComponent },
     { path: 'audience', component: AudienceComponent },

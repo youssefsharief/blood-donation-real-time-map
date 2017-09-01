@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../shared/services/data.service';
+import { InfoService } from '../shared/services/info.service';
 
 @Component({
     selector: 'posting',
@@ -9,22 +10,44 @@ import { DataService } from '../shared/services/data.service';
 export class PostingComponent {
     id
     data
-    constructor(private route: ActivatedRoute, private dataService: DataService) {}
-    ngOnInit(){
+    constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router, private infoService: InfoService) { }
+    ngOnInit() {
         this.grabIdAndGetInfo()
     }
-    
-    private grabIdAndGetInfo(){
+
+    private grabIdAndGetInfo() {
         this.route.params.subscribe(
             params => {
-                this.getDonorInfo(params.id)
+                this.id = params.id
+                this.getDonorInfo(this.id)
             })
     }
 
-    private getDonorInfo(id){
+    private getDonorInfo(id) {
         this.dataService.getDonorInfo(id).subscribe(
-            data=> this.data = data,
-            error=> console.log(error)            
+            data => {
+                this.data = data
+            },
+            error => console.log(error)
         )
     }
+
+    onSubmit(formData) {
+        const toSend = formData
+        this.dataService.update(this.id, formData).subscribe(
+            success => {
+                this.infoService.id=this.id
+                this.router.navigate(['/success'])
+            },
+            error => console.log(error)
+        )
+    }
+
+
+    onChangeLocationRequest() {
+        this.infoService.data = this.data
+        this.infoService.id = this.id
+        this.router.navigate(['/donors'])
+    }
+
 }

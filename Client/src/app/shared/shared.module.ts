@@ -1,4 +1,3 @@
-import { InfoService } from './services/info.service';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +10,7 @@ import { SnackBarService } from './services/snackbar.service';
 import { MdSnackBar } from '@angular/material';
 import { MaterialModule } from '@angular/material';
 import { DataService } from './services/data.service';
+import { DonorFormComponent } from '../donor-form/donor-form.component';
 
 import {
   FooterComponent, HeaderComponent,
@@ -21,10 +21,12 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule
     
     
   ],
-  providers:[AppSocketIoService, SnackBarService, DataService, InfoService],
+  providers:[AppSocketIoService, SnackBarService, DataService],
   exports: [
     CommonModule,
     FormsModule,
@@ -34,11 +36,12 @@ import {
     LeftSideMenuComponent, LoaderComponent,
     NavComponent,
     MaterialModule,
+    DonorFormComponent
 
   ],
   declarations: [
     FooterComponent, HeaderComponent,
-    LeftSideMenuComponent, LoaderComponent, NavComponent
+    LeftSideMenuComponent, LoaderComponent, NavComponent, DonorFormComponent
 
   ],
 })

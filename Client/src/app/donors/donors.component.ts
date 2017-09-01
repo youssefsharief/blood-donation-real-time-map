@@ -37,7 +37,7 @@ export class DonorsComponent {
             data=>{
 
                 this.infoService.id= data._id
-                this.router.navigate(['/success', data._id])
+                this.router.navigate(['/success'])
                 this.snackbar.emitSuccessSnackBar('You have successfully added your info as a donor')
             },
             error=>this.snackbar.emitErrorSnackBar('Error!')        
