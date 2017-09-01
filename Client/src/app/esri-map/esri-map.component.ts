@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, Input } from '@angular/core';
 import { EsriLoaderService } from 'angular-esri-loader';
 import { modules, addUI } from './esri-helper';
 
@@ -9,6 +9,7 @@ import { modules, addUI } from './esri-helper';
 })
 export class EsriMapComponent implements OnInit {
 	public mapView: any;
+	@Input() type: string
 	@ViewChild('mapViewNode') private mapViewEl: ElementRef;
     @Output() clicked = new EventEmitter();
 	
@@ -56,21 +57,12 @@ export class EsriMapComponent implements OnInit {
 
 				addUI(view, track, searchWidget)
 				view.on("click", function (evt) {
-					console.log(evt.mapPoint);
 					self.clicked.emit(evt.mapPoint)
 				})
 
-
-				// The sample will start tracking your location
-				// once the view becomes ready
 				view.then(function () {
 					track.start();
 				});
-
-
-
-
-				// this.mapView = new MapView(view);
 			});
 		});
 	}

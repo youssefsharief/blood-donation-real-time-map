@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { PostingRoutingModule } from './posting-routing.module';
 import { PostingComponent } from './posting.component';
+import { DonorFormComponent } from '../donor-form/donor-form.component';
 
 @NgModule({
     imports: [
@@ -13,10 +14,9 @@ import { PostingComponent } from './posting.component';
     ],
     declarations: [
         PostingComponent,
+        DonorFormComponent
     ],
-    exports: [
-        PostingComponent,
-    ]
+    
 })
 export class PostingModule {
 

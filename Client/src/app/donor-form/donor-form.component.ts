@@ -1,18 +1,15 @@
-import { Component, ViewChild, EventEmitter, Output } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { globalValidators } from '../../shared/global-validators';
-import { DataService } from '../../shared/services/data.service';
+import { globalValidators } from '../shared/global-validators';
 
 @Component({
-    selector: 'add-modal',
-    templateUrl: 'add-modal.component.html',
+    selector: 'donor-form',
+    templateUrl: 'donor-form.component.html',
+    styleUrls: ['donor-form.component.scss']
 })
-export class AddModalComponent {
-    location
+export class DonorFormComponent {
     form: FormGroup
     bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
-    @ViewChild('modal') private modal: ModalDirective
     @Output() submitted = new EventEmitter();
     constructor(private fb: FormBuilder){}
 
@@ -20,12 +17,6 @@ export class AddModalComponent {
         this.buildForm()
     }
 
-    show() {
-        this.modal.show();
-    }
-    hide() {
-        this.modal.hide();
-    }
 
     buildForm() {
         this.form = this.fb.group ({
@@ -45,7 +36,7 @@ export class AddModalComponent {
     }
 
     onSubmit(c){
-        console.log(c);
         this.submitted.emit(c)
     }
+
 }

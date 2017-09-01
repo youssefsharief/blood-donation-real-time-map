@@ -11,9 +11,7 @@ export class SuccessComponent {
     ngOnInit(){
         this.route.params.subscribe(
             params => {
-                console.log(params);
-                
-                this.id = params
+                this.id = params.id
             }
         
         )

@@ -48,11 +48,18 @@ export class DataService {
     add(item) {
         return this.http.post(this.url, item, this.options)
             .map(res => {
-                return res.json().data
+                return res.json()
             })
             .catch(this.handleError);
     }
 
+    getDonorInfo(id) {
+        return this.http.get(`${this.url}/${id}`)
+            .map(res => {
+                return res.json()
+            })
+            .catch(this.handleError);
+    }
 
 
     private handleError(error: Response | any) {

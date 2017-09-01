@@ -137,6 +137,29 @@ describe('Service: DataService', () => {
             });
     });
 
+    it('GET ITEM: success', (done) => {
+        setupConnections(backend, {
+            body: fakeDonors[0] ,
+            status: 200
+        });
+        service.getDonorInfo(fakeDonors[0]._id).subscribe(
+            payload => {
+                expect(payload).toBeTruthy()
+                done()
+            }
+        );
+    });
+
+    it('GET ITEM: error', (done) => {
+        setupConnectionsWithError(backend);
+        service.getDonorInfo(fakeDonors[0]._id).subscribe(
+            payload => {
+            },
+            error => {
+                expect(error).toBeTruthy()
+                done()
+            });
+    });
 
 
 });

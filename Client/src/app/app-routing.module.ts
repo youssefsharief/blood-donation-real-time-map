@@ -5,13 +5,14 @@ import { AudienceComponent } from './audience/audience.component';
 
 const paths: Routes = [
     { path: 'home', loadChildren: './home/home.module#HomeModule' },
-    { path: 'route1', loadChildren: './route1/route1.module#Route1Module' },
-    { path: 'success', loadChildren: './success/success.module#SuccessModule' },
-    { path: 'posting', loadChildren: './posting/posting.module#PostingModule' },
+    { path: 'donors', loadChildren: './donors/donors.module#DonorsModule' },
+    { path: 'patients', loadChildren: './patients/patients.module#PatientsModule' },
+    { path: 'success/:id', loadChildren: './success/success.module#SuccessModule' },
+    { path: 'posting/:id', loadChildren: './posting/posting.module#PostingModule' },
     { path: 'speaker', component: SpeakerComponent },
     { path: 'audience', component: AudienceComponent },
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    // { path: '', redirectTo: 'home', pathMatch: 'full' },
+    // { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ]
 
 
