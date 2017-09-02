@@ -3,7 +3,7 @@ import { EsriLoaderService } from 'angular-esri-loader';
 import { modules, addUI, assignMapClickWatcher } from './esri-helper';
 import { DataService } from '../shared/services/data.service';
 import { GraphicsService } from './GraphicsService';
-import { showHiddenItems } from './utility';
+import { showHiddenItems, debounce } from './utility';
 
 @Component({
 	selector: 'esri-map',
@@ -17,8 +17,11 @@ export class EsriMapComponent implements OnInit {
 	@Output() clicked = new EventEmitter();
 
 	constructor(
-		private esriLoader: EsriLoaderService, private dataService: DataService, private graphicsService: GraphicsService
-	) { }
+		private esriLoader: EsriLoaderService, private dataService: DataService, 
+		private graphicsService: GraphicsService,
+	) { 
+		
+	}
 
 	
 	ngOnInit() {
@@ -58,8 +61,11 @@ export class EsriMapComponent implements OnInit {
 				});
 
 
-				 
-				
+				// When data arrives from backen render the graphics
+				this.dataService.dataBS.subscribe(
+					data=> this.graphicsService.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data),
+					error=> console.log('Problem with socket connector')					
+				)
 				
 				// Set up a locator task using the world geocoding service
 				var locatorTask = new Locator({
@@ -83,10 +89,20 @@ export class EsriMapComponent implements OnInit {
 						showHiddenItems(view)
 					}
 				  });
-				self.graphicsService.assignMouseDragWatcher(view, SimpleMarkerSymbol, Point, Graphic)
+
+				  view.on("drag", debounce(captureLocation, 300))
+					  function captureLocation(event) {
+						  let x = view.toMap(new Point({
+							  x: event.x,
+							  y: event.y
+						  }))
+						  self.dataService.getData(x.longitude, x.latitude)
+					  }
+
 				view.then(function (x) {
 					track.start();
-					self.graphicsService.getPoints(view, SimpleMarkerSymbol, Point, Graphic, x.center.longitude, x.center.latitude);
+					self.dataService.getData(x.center.longitude, x.center.latitude)
+					
 				});
 			});
 		});

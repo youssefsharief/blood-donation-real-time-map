@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { EsriLoaderService } from 'angular-esri-loader';
-import { AppSocketIoService } from '../shared/services/socket';
 import { AddModalComponent } from './add-modal/add-modal.component'
 import { DataService } from '../shared/services/data.service';
 import { InfoService } from '../shared/services/info.service';
@@ -14,14 +13,15 @@ export class DonorsComponent {
     @ViewChild(AddModalComponent) private addModalComponent: AddModalComponent
     map: any;
     location: number[]=[]
-    constructor(private appSocketIoService: AppSocketIoService, 
-        private dataService: DataService, private snackbar: SnackBarService,
+    constructor( private dataService: DataService, private snackbar: SnackBarService,
         private router: Router, private infoService: InfoService
     ) { }
 
    
 
-
+    isConnected(){
+        return this.dataService.isConnected()
+    }
     onMapClick(data) {
         this.captureLocation(data)
     }

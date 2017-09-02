@@ -2,9 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/Rx';
+import * as io from 'socket.io-client';
+import { SnackBarService } from './snackbar.service';
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class DataService {
+    private socket: SocketIOClient.Socket;
+    private dataStore: any[]
+    dataBS: Subject<any>
+
     url = 'http://localhost:3000/donors'
     items
 
@@ -13,16 +21,25 @@ export class DataService {
     options = new RequestOptions({ headers: this.headers });
 
     constructor(private http: Http) {
-    
+        this.dataBS = new Subject()
     }
 
-    getFromBackend(long, lat) {
-        return this.http.get(`${this.url}/?long=${long}&lat=${lat}&distance=50000000`)
-            .map(res => {
-                this.items = res.json()
-                return this.items || {};
-            })
-            .catch(this.handleError);
+    instantiate() {
+        this.socket = io('http://localhost:3000');
+
+        this.socket.on("new data", payload => {
+            this.dataStore = payload
+            this.dataBS.next(this.dataStore)
+        })
+
+    }
+    getData(logitude, latitude) {
+        this.socket.emit('location changed', {logitude, latitude})
+    }
+  
+    
+    isConnected(){
+        return this.socket.connected
     }
 
 
@@ -79,4 +96,5 @@ export class DataService {
     
 
 }
+
 

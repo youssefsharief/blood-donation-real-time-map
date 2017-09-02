@@ -22,6 +22,8 @@ export function addUI(view, track, searchWidget) {
 }
 
 
+
+
 export function assignMapClickWatcher(view, locatorTask, self) {
     view.on("double-click", function (event) {
         // event.stopPropagation(); // overwrite default click-for-popup behavior

@@ -12,3 +12,4 @@ import 'socket.io-client';
 import 'angular-esri-loader'
 import { MdSnackBar, MdSnackBarConfig, MaterialModule } from '@angular/material';
 import 'ngx-bootstrap/modal'
+import 'rxjs'

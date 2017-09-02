@@ -56,7 +56,7 @@ describe("R endpoint", function () {
 					done();
 				})
 		});
-		it("should return 400 in case of error", function (done) {
+		fit("should return 400 in case of error", function (done) {
 			request.get('/donors/fd').end((err, res) => {
 				expect(res.status).toEqual(400)
 				done();
@@ -66,7 +66,7 @@ describe("R endpoint", function () {
 
 
 	describe("update donor", function () {
-		fit("should get donor info if id exists", function (done) {
+		it("should get donor info if id exists", function (done) {
 			request.get('/donors/?long=-73.9928&lat=40.893&distance=50000000').end((err, res) => {
 				const _id = res.body[0]._id
 				const updatedDonor = {

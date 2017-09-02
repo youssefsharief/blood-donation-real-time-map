@@ -1,16 +1,9 @@
 
 const utility = require('../../helpers/utility.js')
-const { findFromLocation, findOneAndUpdate, add, remove, getOneById} = require('./donors.query.js')
+const { findOneAndUpdate, add, remove, getOneById} = require('./donors.query.js')
 
 
 
-
-function getDonorsByLocation(req, res) {
-    const { long, lat, distance } = req.query
-    return findFromLocation(long, lat, distance)
-        .then((donors) => res.status(200).json(donors))
-        .catch(err => utility.badRequest(res, 'to retrieve donors by location'))
-}
 
 
 function addDonor(req, res) {
@@ -53,4 +46,4 @@ function getDonorInfoById(req, res) {
 }
 
 
-module.exports = { getDonorsByLocation, addDonor, findDonorAndUpdate, removeDonor, getDonorInfoById }
+module.exports = {  addDonor, findDonorAndUpdate, removeDonor, getDonorInfoById }

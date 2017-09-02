@@ -5,15 +5,13 @@ import { HttpModule } from '@angular/http';
 import { CdkTableModule } from '@angular/cdk';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
-import { AppSocketIoService } from './services/socket';
 import { SnackBarService } from './services/snackbar.service';
 import { MdSnackBar } from '@angular/material';
 import { MaterialModule } from '@angular/material';
-import { DataService } from './services/data.service';
 import { DonorFormComponent } from '../donor-form/donor-form.component';
 
 import {
-  FooterComponent, HeaderComponent,
+  FooterComponent,
   LeftSideMenuComponent, LoaderComponent
 } from './';
 
@@ -26,13 +24,13 @@ import {
     
     
   ],
-  providers:[AppSocketIoService, SnackBarService, DataService],
+  providers:[ SnackBarService],
   exports: [
     CommonModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    FooterComponent, HeaderComponent,
+    FooterComponent,
     LeftSideMenuComponent, LoaderComponent,
     NavComponent,
     MaterialModule,
@@ -40,7 +38,7 @@ import {
 
   ],
   declarations: [
-    FooterComponent, HeaderComponent,
+    FooterComponent, 
     LeftSideMenuComponent, LoaderComponent, NavComponent, DonorFormComponent
 
   ],

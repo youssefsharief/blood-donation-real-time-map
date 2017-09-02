@@ -1,5 +1,5 @@
 const { onAudienceJoin } = require('./socket.audience')
-const { onSpeakerStart } = require('./socket.speaker')
+const { onLocationChanged } = require('./socket.data')
 
 
 
@@ -10,7 +10,7 @@ const onConnection = (io) =>
             console.log('Client Disconnected');
             socket.disconnect();
         })
-        onSpeakerStart(io, socket)
+        onLocationChanged(io, socket)
         onAudienceJoin(io, socket)
     })
 

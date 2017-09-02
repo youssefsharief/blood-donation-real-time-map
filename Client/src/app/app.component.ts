@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppSocketIoService } from './shared/services/socket';
+import { DataService } from './shared/services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +7,8 @@ import { AppSocketIoService } from './shared/services/socket';
 })
 export class AppComponent {
 
-     constructor(private appSocketIoService: AppSocketIoService) {
-        this.appSocketIoService.instantiate()
+     constructor(private dataService: DataService) {
+        this.dataService.instantiate()
     }
 
     
