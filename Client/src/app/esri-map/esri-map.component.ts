@@ -53,11 +53,11 @@ export class EsriMapComponent implements OnInit {
 				const view = new MapView({
 					container: this.mapViewEl.nativeElement,
 					map,
-					zoom: 10
+					zoom: 10,
 				});
 
 
-				self.graphicsService.setGraphics(view, SimpleMarkerSymbol, Point, Graphic) 
+				 
 				
 				
 				// Set up a locator task using the world geocoding service
@@ -82,9 +82,10 @@ export class EsriMapComponent implements OnInit {
 					assignMapClickWatcher(view, locatorTask, self)
 				}
 
-
-				view.then(function () {
+				self.graphicsService.assignMouseDragWatcher(view, SimpleMarkerSymbol, Point, Graphic)
+				view.then(function (x) {
 					track.start();
+					self.graphicsService.getPoints(view, SimpleMarkerSymbol, Point, Graphic, x.center.longitude, x.center.latitude);
 				});
 			});
 		});

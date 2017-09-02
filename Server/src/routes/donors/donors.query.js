@@ -4,7 +4,7 @@ const donorsModel = require('../../models/donors.model')
 
 function findFromLocation(long, lat, distance) {
     return donorsModel.
-        find({ location: { $nearSphere: { $geometry: { type: "Point", coordinates: [long, lat] }, $maxDistance: distance } } }).lean().exec()
+        find({ location: { $nearSphere: { $geometry: { type: "Point", coordinates: [long, lat] }, $maxDistance: distance } } }).limit(10).lean().exec()
 }
 
 function findOneAndUpdate(id, update) {
