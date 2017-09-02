@@ -18,19 +18,19 @@ export class EsriMapComponent implements OnInit {
 	@Output() clicked = new EventEmitter();
 
 	constructor(
-		private esriLoader: EsriLoaderService, private dataService: DataService, 
+		private esriLoader: EsriLoaderService, private dataService: DataService,
 		private graphicsService: GraphicsService,
-	) { 
-		
+	) {
+
 	}
 
-	
+
 	ngOnInit() {
 		this.loadMap()
 
 	}
 
-	
+
 
 	loadMap() {
 		const self = this
@@ -65,16 +65,16 @@ export class EsriMapComponent implements OnInit {
 
 				// When data arrives from backen render the graphics
 				this.dataService.dataBS.subscribe(
-					data=> this.graphicsService.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data),
-					error=> console.log('Problem with socket connector')					
+					data => this.graphicsService.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data),
+					error => console.log('Problem with socket connector')
 				)
-				
-				// Set up a locator task using the world geocoding service
-				// var locatorTask = new Locator({
-				// 	url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
-				// });
 
-				const getData = ()=>self.dataService.getData(view.center.longitude, view.center.latitude)
+				// Set up a locator task using the world geocoding service
+				var locatorTask = new Locator({
+					url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+				});
+
+				const getData = () => self.dataService.getData(view.center.longitude, view.center.latitude)
 				const track = new Track({
 					view: view
 				});
@@ -84,19 +84,21 @@ export class EsriMapComponent implements OnInit {
 					view: view
 				});
 
-				addUI(view, track, searchWidget)
+				
 
-				view.popup.on("trigger-action", function(event) {
+
+				addUI(view, track, searchWidget)
+				view.on("drag", debounce(getData, 25))
+				view.on("mouse-wheel", debounce(getData, 25))
+				view.on("hold", debounce(getData, 25))
+				view.on("double-click", ()=>{
+					this.clicked.emit()
+				})
+				view.popup.on("trigger-action", (event) => {
 					if (event.action.id === "show-hidden") {
 						showHiddenItems(view)
 					}
-				  });
-
-				  view.on("drag", debounce(getData, 1))
-				  view.on("mouse-wheel", debounce(getData, 1))
-				  view.on("hold", debounce(getData, 1))
-					
-					  
+				});
 
 				view.then(function (x) {
 					getData()

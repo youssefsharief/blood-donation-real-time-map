@@ -48,9 +48,7 @@ export class GraphicsService {
                             fieldName: "telephone"
                         }, {
                             fieldName: "email"
-                        }, {
-                            fieldName: "bloodGroup"
-                        },]
+                        }]
                     }]
                 }
             });
