@@ -4,6 +4,7 @@ import { modules, addUI, assignMapClickWatcher } from './esri-helper';
 import { DataService } from '../shared/services/data.service';
 import { GraphicsService } from './GraphicsService';
 import { showHiddenItems, debounce } from './utility';
+import { center } from './esri.config';
 
 @Component({
 	selector: 'esri-map',
@@ -57,6 +58,7 @@ export class EsriMapComponent implements OnInit {
 				const view = new MapView({
 					container: this.mapViewEl.nativeElement,
 					map,
+					center: center,
 					zoom: 10,
 				});
 
@@ -68,11 +70,11 @@ export class EsriMapComponent implements OnInit {
 				)
 				
 				// Set up a locator task using the world geocoding service
-				var locatorTask = new Locator({
-					url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
-				});
+				// var locatorTask = new Locator({
+				// 	url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+				// });
 
-
+				const getData = ()=>self.dataService.getData(view.center.longitude, view.center.latitude)
 				const track = new Track({
 					view: view
 				});
@@ -90,19 +92,14 @@ export class EsriMapComponent implements OnInit {
 					}
 				  });
 
-				  view.on("drag", debounce(captureLocation, 300))
-					  function captureLocation(event) {
-						  let x = view.toMap(new Point({
-							  x: event.x,
-							  y: event.y
-						  }))
-						  self.dataService.getData(x.longitude, x.latitude)
-					  }
+				  view.on("drag", debounce(getData, 1))
+				  view.on("mouse-wheel", debounce(getData, 1))
+				  view.on("hold", debounce(getData, 1))
+					
+					  
 
 				view.then(function (x) {
-					track.start();
-					self.dataService.getData(x.center.longitude, x.center.latitude)
-					
+					getData()
 				});
 			});
 		});

@@ -1,0 +1,1 @@
+export const center = [31.2,30]

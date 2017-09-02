@@ -4,6 +4,8 @@ function onLocationChanged(io, socket) {
     return socket.on('location changed', (payload) => {
         socket.logitude = payload.logitude
         socket.latitude = payload.latitude
+        // global.log.warn(socket);
+        
         return findFromLocation(socket.logitude, socket.latitude).then((donors) => socket.emit('new data', donors))
     })
 }
