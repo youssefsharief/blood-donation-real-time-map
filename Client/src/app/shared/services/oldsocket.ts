@@ -21,9 +21,29 @@ export class AppSocketIoService {
         this.speakerBS = new BehaviorSubject(this.speakerName)
         this.titleBS = new BehaviorSubject(this.title)
     }
+    rejoinMemberIfRefreshed() {
+        sessionStorage.member ? this.member = JSON.parse(sessionStorage.member) : this.member = null
+    }
 
-    instantiate() {
+
+    intantiate() {
+
         this.socket = io('http://localhost:3000');
+        this.rejoinMemberIfRefreshed()
+        this.socket.on("joined", payload => this.saveMember(payload))
+
+        this.socket.on("audience updated", payload => {
+            this.audienceStore = payload
+            this.audienceBS.next(this.audienceStore)
+        })
+        this.socket.on("started", payload => this.saveMember(payload))
+
+        this.socket.on("session started", payload => {
+            this.speakerName = payload.speakerName
+            this.title = payload.title
+            this.speakerBS.next(this.speakerName)
+            this.titleBS.next(this.title)
+        })
     }
     join(name) {
         this.socket.emit('join', {name})
@@ -33,5 +53,9 @@ export class AppSocketIoService {
     }
     isConnected(){
         return this.socket.connected
+    }
+    private saveMember(payload){
+        this.member = payload
+        sessionStorage.member = JSON.stringify(this.member)
     }
 }

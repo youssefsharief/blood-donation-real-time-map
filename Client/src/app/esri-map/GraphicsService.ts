@@ -9,33 +9,32 @@ export class GraphicsService {
     longitude
     latitude
 
-    constructor(private dataService: DataService){}
+    constructor(private dataService: DataService) { }
 
-    
+
 
     assignMouseDragWatcher(view, SimpleMarkerSymbol, Point, Graphic) {
-        const self=this
+        const self = this
         function captureLocation(event) {
             let x = view.toMap(new Point({
                 x: event.x,
                 y: event.y
             }))
-            this.longitude = x.longitude
-            this.latitude = x.latitude
+            // console.log(x);
             self.getPoints(view, SimpleMarkerSymbol, Point, Graphic, x.longitude, x.latitude)
         }
         view.on("drag", debounce(captureLocation, 300))
     }
 
 
-    getPoints(view, SimpleMarkerSymbol, Point, Graphic, longitude, latitude){
+    getPoints(view, SimpleMarkerSymbol, Point, Graphic, longitude, latitude) {
         this.dataService.getFromBackend(longitude, latitude).subscribe(
-            data=> this.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data)
+            data => this.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data)
         )
-        
+
     }
 
-    private setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data){
+    private setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data) {
         var markerSymbol = new SimpleMarkerSymbol({
             color: [226, 119, 40],
             outline: { // autocasts as new SimpleLineSymbol()
@@ -43,20 +42,38 @@ export class GraphicsService {
                 width: 2
             }
         });
-    
-        const y = data.map(person => person.location.coordinates).map(arr => new Point({
-            longitude: arr[0],
-            latitude: arr[1]
-        })).map(point => {
-            return new Graphic({
+
+        const newGraphics = data.map(person => {
+
+            const point = new Point({
+                longitude: person.location.coordinates[0],
+                latitude: person.location.coordinates[1]
+            })
+
+           return new Graphic({
                 geometry: point,
-                symbol: markerSymbol
+                symbol: markerSymbol,
+                attributes: person,
+                popupTemplate: {
+                    title: "{firstName} {lastName}",
+                    content: [{
+                        type: "fields",
+                        fieldInfos: [{
+                            fieldName: "telephone"
+                        }, {
+                            fieldName: "bloodGroup"
+                        }, {
+                            fieldName: "email"
+                        }]
+                    }]
+                }
             });
         })
-        view.graphics.addMany(y)
+        view.graphics.removeAll()
+        view.graphics.addMany(newGraphics)
     }
 
-    
+
 
 }
 

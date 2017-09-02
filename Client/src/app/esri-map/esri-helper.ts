@@ -23,8 +23,8 @@ export function addUI(view, track, searchWidget) {
 
 
 export function assignMapClickWatcher(view, locatorTask, self) {
-    view.on("click", function (event) {
-        event.stopPropagation(); // overwrite default click-for-popup behavior
+    view.on("double-click", function (event) {
+        // event.stopPropagation(); // overwrite default click-for-popup behavior
 
         // Get the coordinates of the click on the view
         var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
