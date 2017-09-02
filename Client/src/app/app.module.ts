@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppSocketIoService } from './shared/services/socket';
 import { AudienceComponent } from './audience/audience.component';
+import { GraphicsService } from './esri-map/GraphicsService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,7 @@ import { AudienceComponent } from './audience/audience.component';
     SharedModule,
     AppRoutingModule
   ],
-  providers: [InfoService],
+  providers: [InfoService, GraphicsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

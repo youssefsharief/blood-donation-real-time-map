@@ -6,6 +6,9 @@ export const modules = [
     "esri/geometry/support/webMercatorUtils",
      "esri/layers/FeatureLayer",
      "esri/tasks/Locator",
+     "esri/Graphic",
+     "esri/geometry/Point",
+     "esri/symbols/SimpleMarkerSymbol",
 ]
 
 
@@ -17,3 +20,70 @@ export function  addUI(view, track, searchWidget){
     });
  }
  
+
+ export function assignMapClickWatcher(view, locatorTask, self){
+	view.on("click", function (event) {
+		event.stopPropagation(); // overwrite default click-for-popup behavior
+	
+		// Get the coordinates of the click on the view
+		var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
+		var lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
+	
+		view.popup.open({
+			// Set the popup's title to the coordinates of the location
+			title: "Reverse geocode: [" + lon + ", " + lat + "]",
+			location: event.mapPoint // Set the location of the popup to the clicked location
+		});
+	
+		// Display the popup
+		// Execute a reverse geocode using the clicked location
+		locatorTask.locationToAddress(event.mapPoint).then(function (
+			response) {
+				console.log(view.popup);
+				
+			// If an address is successfully found, show it in the popup's content
+			view.popup.content = response.address;
+			console.log(response);
+			
+		}).otherwise(function (err) {
+			// If the promise fails and no result is found, show a generic message
+			view.popup.content =
+				"No address was found for this location";
+		});
+		self.clicked.emit(event.mapPoint)
+	});
+}
+
+
+export function assignMouseMoveWatcher(view, locatorTask, self){
+	view.on("click", function (event) {
+		event.stopPropagation(); // overwrite default click-for-popup behavior
+	
+		// Get the coordinates of the click on the view
+		var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
+		var lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
+	
+		view.popup.open({
+			// Set the popup's title to the coordinates of the location
+			title: "Reverse geocode: [" + lon + ", " + lat + "]",
+			location: event.mapPoint // Set the location of the popup to the clicked location
+		});
+	
+		// Display the popup
+		// Execute a reverse geocode using the clicked location
+		locatorTask.locationToAddress(event.mapPoint).then(function (
+			response) {
+				console.log(view.popup);
+				
+			// If an address is successfully found, show it in the popup's content
+			view.popup.content = response.address;
+			console.log(response);
+			
+		}).otherwise(function (err) {
+			// If the promise fails and no result is found, show a generic message
+			view.popup.content =
+				"No address was found for this location";
+		});
+		self.clicked.emit(event.mapPoint)
+	});
+}

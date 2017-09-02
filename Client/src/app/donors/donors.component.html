@@ -3,6 +3,6 @@
     <span class="btn btn-primary " *ngIf="location.length" (click)="showModal()">Choose this as my location</span>
 </div>
 
-<esri-map [type]="donor" (clicked)="onMapClick($event)"></esri-map>
+<esri-map [type]="'donors'" (clicked)="onMapClick($event)"></esri-map>
 
 <add-modal (submitted)="onSubmit($event)"></add-modal>
