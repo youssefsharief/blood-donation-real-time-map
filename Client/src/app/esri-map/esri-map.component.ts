@@ -3,6 +3,7 @@ import { EsriLoaderService } from 'angular-esri-loader';
 import { modules, addUI, assignMapClickWatcher } from './esri-helper';
 import { DataService } from '../shared/services/data.service';
 import { GraphicsService } from './GraphicsService';
+import { showHiddenItems } from './utility';
 
 @Component({
 	selector: 'esri-map',
@@ -77,11 +78,11 @@ export class EsriMapComponent implements OnInit {
 
 				addUI(view, track, searchWidget)
 
-
-				if (self.type == "donors") {
-					assignMapClickWatcher(view, locatorTask, self)
-				}
-
+				view.popup.on("trigger-action", function(event) {
+					if (event.action.id === "show-hidden") {
+						showHiddenItems(view)
+					}
+				  });
 				self.graphicsService.assignMouseDragWatcher(view, SimpleMarkerSymbol, Point, Graphic)
 				view.then(function (x) {
 					track.start();
@@ -91,4 +92,6 @@ export class EsriMapComponent implements OnInit {
 		});
 	}
 }
+
+
 
