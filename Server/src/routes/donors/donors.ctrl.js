@@ -1,6 +1,6 @@
 
 const utility = require('../../helpers/utility.js')
-const { findOneAndUpdate, add, remove, getOneById} = require('./donors.query.js')
+const { findOneAndUpdate, add, remove, getOneById, findFromLocation} = require('./donors.query.js')
 
 
 
@@ -22,13 +22,19 @@ function addDonor(req, res) {
             // utility.badRequest(res, 'to add your info'))
 }
 
+// setInterval(()=>{
+//     global.io.emit('updated')
+// },300000)
 
 function findDonorAndUpdate(req, res) {
     if (!req.body._id) utility.missingData(res, '_id')
     const { firstName, lastName,email, telephone,bloodGroup, location, _id  } = req.body
     const newDonor = { firstName, lastName,email, telephone,bloodGroup, location, }
     return findOneAndUpdate(_id, newDonor)
-        .then((added) => res.status(200).json(added))
+        .then((added) => {
+            global.io.emit('updated')
+            res.status(200).json(added)
+        })
         .catch(err => utility.badRequest(res, 'to add your info'))
 }
 

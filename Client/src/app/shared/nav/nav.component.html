@@ -13,7 +13,8 @@
             <p class="navbar-text">Help change others' lives</p>
         </div>
 
-    
+                <button [ngClass]="{'btn-success': isConnected, 'btn-danger': !isConnected, 'btn': true, 'btn-circle':true, 'top-buffer':true, 'pull-right': true}"></button>
+                
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->

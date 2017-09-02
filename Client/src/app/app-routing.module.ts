@@ -8,8 +8,8 @@ const paths: Routes = [
     { path: 'patients', loadChildren: './patients/patients.module#PatientsModule' },
     { path: 'success', loadChildren: './success/success.module#SuccessModule' },
     { path: 'posting/:id', loadChildren: './posting/posting.module#PostingModule' },
-    // { path: '', redirectTo: 'home', pathMatch: 'full' },
-    // { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ]
 
 

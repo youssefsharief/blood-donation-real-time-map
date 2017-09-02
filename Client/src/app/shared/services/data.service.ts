@@ -32,9 +32,15 @@ export class DataService {
             this.dataBS.next(this.dataStore)
         })
 
+        this.socket.on("updated", payload => {
+            this.getData()
+        })
+
+        
+
     }
-    getData(logitude, latitude) {
-        this.socket.emit('location changed', {logitude, latitude})
+    getData(longitude?, latitude?) {
+        this.socket.emit('needs data', {longitude, latitude})
     }
   
     

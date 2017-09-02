@@ -1,5 +1,5 @@
 // const { onAudienceJoin } = require('./socket.audience')
-const { onLocationChanged } = require('./socket.onLocationChanged')
+const { onNeedsData } = require('./socket.onNeedsData')
 
 
 
@@ -10,7 +10,7 @@ const onConnection = (io) =>
             console.log('Client Disconnected');
             socket.disconnect();
         })
-        onLocationChanged(io, socket)
+        onNeedsData(io, socket)
         // onAudienceJoin(io, socket)
     })
 

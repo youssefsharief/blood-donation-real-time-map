@@ -18,10 +18,6 @@ export class DonorsComponent {
     ) { }
 
    
-
-    isConnected(){
-        return this.dataService.isConnected()
-    }
     onMapClick(data) {
         this.captureLocation(data)
     }

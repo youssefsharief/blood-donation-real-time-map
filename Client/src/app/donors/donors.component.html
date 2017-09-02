@@ -1,9 +1,7 @@
 <div class="container">
     <h3 class="text-left"> Chose your location by clicking on the map </h3>
     <span class="btn btn-primary " *ngIf="location.length" (click)="showModal()">Choose this as my location</span>
-    <button [ngClass]="{'btn-success': isConnected, 'btn-danger': !isConnected, 'btn': true, 'btn-circle':true, 'pull-right': true}"></button>
-    
-</div>
+   </div>
 
 <esri-map [type]="'donors'" (clicked)="onMapClick($event)"></esri-map>
 
