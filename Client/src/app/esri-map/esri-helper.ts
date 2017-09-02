@@ -3,12 +3,9 @@ export const modules = [
     "esri/views/MapView",
     "esri/widgets/Track",
     "esri/widgets/Search",
-    "esri/Graphic",
     "esri/geometry/support/webMercatorUtils",
-    "esri/symbols/SimpleMarkerSymbol",
-    "esri/symbols/SimpleLineSymbol",
-     "esri/Color",
-     "esri/layers/GraphicsLayer"
+     "esri/layers/FeatureLayer",
+     "esri/tasks/Locator",
 ]
 
 

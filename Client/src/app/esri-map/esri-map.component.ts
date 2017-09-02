@@ -11,54 +11,88 @@ export class EsriMapComponent implements OnInit {
 	public mapView: any;
 	@Input() type: string
 	@ViewChild('mapViewNode') private mapViewEl: ElementRef;
-    @Output() clicked = new EventEmitter();
-	
+	@Output() clicked = new EventEmitter();
+
 	constructor(
 		private esriLoader: EsriLoaderService
 	) { }
 
 	public ngOnInit() {
-		this.loadMap([45, 45], 'topo', 12)
+		this.loadMap()
 	}
-	
-	loadMap(center = [45, 45], basemap = 'topo', zoom = 10, container = this.mapViewEl.nativeElement) {
-		const self=this
+
+	loadMap() {
+		const self = this
 		return this.esriLoader.load({
-			url: 'https://js.arcgis.com/4.3/'
+			url: 'https://js.arcgis.com/4.4/'
 		}).then(() => {
 			this.esriLoader.loadModules(modules).then(([
-				map,
+				Map,
 				MapView,
 				Track,
 				Search,
-				webMercatorUtils
+				webMercatorUtils,
+				FeatureLayer,
+				Locator
 			]) => {
-				;
-
-				var map = new map({
-					basemap
+				let featureLayer
+				var map = new Map({
+					basemap: "streets-navigation-vector"
 				});
 
-				var view = new MapView({
+
+				const view = new MapView({
+					container: this.mapViewEl.nativeElement,
 					map,
-					container,
-					center,
-					zoom
+					zoom: 10
 				});
 
-				var track = new Track({
+				// Set up a locator task using the world geocoding service
+				var locatorTask = new Locator({
+					url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+				});
+
+
+				const track = new Track({
 					view: view
 				});
 
 
-				var searchWidget = new Search({
+				const searchWidget = new Search({
 					view: view
 				});
 
 				addUI(view, track, searchWidget)
-				view.on("click", function (evt) {
-					self.clicked.emit(evt.mapPoint)
-				})
+				view.on("click", function (event) {
+					event.stopPropagation(); // overwrite default click-for-popup behavior
+
+					// Get the coordinates of the click on the view
+					var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
+					var lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
+
+					view.popup.open({
+						// Set the popup's title to the coordinates of the location
+						title: "Reverse geocode: [" + lon + ", " + lat + "]",
+						location: event.mapPoint // Set the location of the popup to the clicked location
+					});
+
+					// Display the popup
+					// Execute a reverse geocode using the clicked location
+					locatorTask.locationToAddress(event.mapPoint).then(function (
+						response) {
+							console.log(view.popup);
+							
+						// If an address is successfully found, show it in the popup's content
+						view.popup.content = response.address;
+						console.log(response);
+						
+					}).otherwise(function (err) {
+						// If the promise fails and no result is found, show a generic message
+						view.popup.content =
+							"No address was found for this location";
+					});
+					self.clicked.emit(event.mapPoint)
+				});
 
 				view.then(function () {
 					track.start();
@@ -67,4 +101,5 @@ export class EsriMapComponent implements OnInit {
 		});
 	}
 }
+
 

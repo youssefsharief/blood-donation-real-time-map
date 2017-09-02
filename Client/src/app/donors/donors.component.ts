@@ -9,7 +9,6 @@ import { InfoService } from '../shared/services/info.service';
 @Component({
     selector: 'Donors',
     templateUrl: 'Donors.component.html',
-    styleUrls: ['Donors.component.css']
 })
 export class DonorsComponent {
     @ViewChild(AddModalComponent) private addModalComponent: AddModalComponent
@@ -25,6 +24,8 @@ export class DonorsComponent {
 
     onMapClick(data) {
         this.captureLocation(data)
+    }
+    showModal(){
         this.addModalComponent.show()
     }
     captureLocation(data){
