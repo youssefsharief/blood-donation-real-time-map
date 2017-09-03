@@ -11,7 +11,7 @@ export class SuccessComponent {
     constructor(private route: ActivatedRoute, private infoService: InfoService, private router: Router) {}
     ngOnInit(){
         this.id= this.infoService.id
-        if(!this.id) this.router.navigate(['/donors'])
+        if(!this.id) this.router.navigate(['/map'])
     }
 
 

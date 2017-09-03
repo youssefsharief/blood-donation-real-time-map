@@ -49,8 +49,8 @@ export class DataService {
     }
 
 
-    delete(toBedDeleted) {
-        return this.http.delete(`${this.url}/${toBedDeleted.id}`)
+    delete(id) {
+        return this.http.delete(`${this.url}/${id}`)
             .map(res => {
                  return "OK"
             })
@@ -59,7 +59,7 @@ export class DataService {
 
 
     update(id, data) {
-        data._id = id        
+        data._id = id       
         return this.http.put(`${this.url}`, data, this.options)
             .map(res => {                
                 return res.json()

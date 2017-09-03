@@ -3,28 +3,24 @@ import { SharedModule } from '../shared/shared.module';
 import { NgModule } from '@angular/core';
 
 // This Module's Components
-import { DonorsComponent } from './Donors.component';
-import { DonorsRoutingModule } from './Donors-routing.module';
 import { EsriLoaderService, EsriLoaderModule } from 'angular-esri-loader';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EsriMapComponent } from '../esri-map/esri-map.component';
+import { EsriMapRoutingModule } from './esri-map-routing.module';
 
 @NgModule({
     imports: [
-        DonorsRoutingModule,
+        EsriMapRoutingModule,
         SharedModule,
         EsriLoaderModule,
-        ModalModule.forRoot(),
-        
     ],
     providers:[
         EsriLoaderService
     ],
     declarations: [
-        DonorsComponent,
         EsriMapComponent,        
     ],
 })
-export class DonorsModule {
+export class EsriMapModule {
 
 }

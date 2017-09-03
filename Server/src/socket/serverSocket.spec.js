@@ -5,7 +5,7 @@ const {io} = require('./socket.bootstrap')
 
 let app, server, socket_io, firstUser, secondUser, speaker
 // const rewire = require('rewire')
-// const serverSocket = rewire('../../src/modules/serverSocket')
+// const serverSocket = rewire('../../src/socket/serverSocket')
 
 describe("Scoket Events", function () {
     // describe("Disonnection", function () {

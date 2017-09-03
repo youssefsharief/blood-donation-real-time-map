@@ -1,10 +1,12 @@
+import { InfoService } from '../shared/services/info.service';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, Input } from '@angular/core';
 import { EsriLoaderService } from 'angular-esri-loader';
 import { modules, addUI, assignMapClickWatcher } from './esri-helper';
 import { DataService } from '../shared/services/data.service';
-import { GraphicsService } from './GraphicsService';
 import { showHiddenItems, debounce } from './utility';
 import { center } from './esri.config';
+import { GraphicsService } from '../shared/services/graphics.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'esri-map',
@@ -13,13 +15,12 @@ import { center } from './esri.config';
 })
 export class EsriMapComponent implements OnInit {
 	public mapView: any;
-	@Input() type: string
 	@ViewChild('mapViewNode') private mapViewEl: ElementRef;
 	@Output() clicked = new EventEmitter();
 
 	constructor(
 		private esriLoader: EsriLoaderService, private dataService: DataService,
-		private graphicsService: GraphicsService,
+		private graphicsService: GraphicsService, private router: Router, private infoService: InfoService
 	) {
 
 	}
@@ -102,18 +103,19 @@ export class EsriMapComponent implements OnInit {
 						// If an address is successfully found, show it in the popup's content
 						address = response.address
 						self.graphicsService.showAddingPopup(view, event.mapPoint, address)
-						
+
 					}).otherwise(function (err) {
 						// If the promise fails and no result is found, show a generic message
 						self.graphicsService.showAddingPopup(view, event.mapPoint)
 					});
-					
+
 					view.popup.on("trigger-action", (event) => {
 						if (event.action.id === "show-add-modal") {
-							self.clicked.emit({longitude, latitude, address})
+							self.infoService.setLocation(longitude, latitude, address)
+							self.router.navigate(['/posting'])
 						}
 					});
-					
+
 				});
 
 

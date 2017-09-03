@@ -1,5 +1,5 @@
 
-const {findFromLocation} = require('../routes/donors/donors.query')
+const {findFromLocation} = require('../query/donors.query')
 function onNeedsData(io, socket) {
     return socket.on('needs data', (payload) => {
         if(payload.longitude)  {

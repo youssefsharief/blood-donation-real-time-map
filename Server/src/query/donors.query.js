@@ -1,6 +1,6 @@
 
 
-const donorsModel = require('../../models/donors.model')
+const donorsModel = require('../models/donors.model')
 
 function findFromLocation(long, lat, distance=5000000) {
     return donorsModel.

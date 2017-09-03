@@ -1,4 +1,3 @@
-// const { onAudienceJoin } = require('./socket.audience')
 const { onNeedsData } = require('./socket.onNeedsData')
 
 
@@ -11,7 +10,6 @@ const onConnection = (io) =>
             socket.disconnect();
         })
         onNeedsData(io, socket)
-        // onAudienceJoin(io, socket)
     })
 
 
