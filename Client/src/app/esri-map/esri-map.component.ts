@@ -1,5 +1,5 @@
 import { InfoService } from '../shared/services/info.service';
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, Input } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { EsriLoaderService } from 'angular-esri-loader';
 import { modules, addUI, assignMapClickWatcher } from './esri-helper';
 import { DataService } from '../shared/services/data.service';
@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
 export class EsriMapComponent implements OnInit {
 	public mapView: any;
 	@ViewChild('mapViewNode') private mapViewEl: ElementRef;
-	@Output() clicked = new EventEmitter();
 
 	constructor(
 		private esriLoader: EsriLoaderService, private dataService: DataService,
@@ -65,7 +64,7 @@ export class EsriMapComponent implements OnInit {
 
 
 				// When data arrives from backen render the graphics
-				this.dataService.dataBS.subscribe(
+				this.dataService.nearbyDonorsSubscription.subscribe(
 					data => this.graphicsService.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data),
 					error => console.log('Problem with socket connector')
 				)
@@ -75,7 +74,7 @@ export class EsriMapComponent implements OnInit {
 					url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
 				});
 
-				const getData = () => self.dataService.getData(view.center.longitude, view.center.latitude)
+				const getData = () => self.dataService.getNearbyDonors(view.center.longitude, view.center.latitude)
 				const track = new Track({
 					view: view
 				});
@@ -111,7 +110,7 @@ export class EsriMapComponent implements OnInit {
 
 					view.popup.on("trigger-action", (event) => {
 						if (event.action.id === "show-add-modal") {
-							self.infoService.setLocation(longitude, latitude, address)
+							self.infoService.saveLocation(longitude, latitude, address)
 							self.router.navigate(['/posting'])
 						}
 					});

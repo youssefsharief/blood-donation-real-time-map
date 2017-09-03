@@ -10,7 +10,7 @@ export class SuccessComponent {
     id
     constructor(private route: ActivatedRoute, private infoService: InfoService, private router: Router) {}
     ngOnInit(){
-        this.id= this.infoService.id
+        this.id= this.infoService.userId
         if(!this.id) this.router.navigate(['/map'])
     }
 

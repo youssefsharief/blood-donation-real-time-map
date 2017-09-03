@@ -2,25 +2,25 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class InfoService {
-    data
-    id
+    userData
+    userId
     constructor() {
     }
 
-    setLocation(longitude, latitude, address) {
-        if (!this.data) {
-            this.data = {}
+    saveLocation(longitude, latitude, address) {
+        if (!this.userData) {
+            this.userData = {}
         }
-        this.data.longitude = longitude
-        this.data.latitude = latitude
-        this.data.address = address
+        this.userData.longitude = longitude
+        this.userData.latitude = latitude
+        this.userData.address = address
 
     }
 
 
     clearData(){
-        this.data = null
-        this.id=null
+        this.userData = null
+        this.userId=null
     }
 
 }

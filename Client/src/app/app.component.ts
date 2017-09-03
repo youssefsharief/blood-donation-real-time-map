@@ -8,7 +8,7 @@ import { DataService } from './shared/services/data.service';
 export class AppComponent {
 
      constructor(private dataService: DataService) {
-        this.dataService.instantiate()
+        this.dataService.instantiateSocket()
     }
 
     

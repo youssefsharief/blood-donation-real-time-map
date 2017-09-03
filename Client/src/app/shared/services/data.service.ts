@@ -10,36 +10,31 @@ import 'rxjs/Rx'
 @Injectable()
 export class DataService {
     private socket: SocketIOClient.Socket;
-    private dataStore: any[]
-    dataBS: Subject<any>
+    private nearbyDonorsStore: any[]
+    nearbyDonorsSubscription: Subject<any>
 
-    url = 'http://localhost:3000/donors'
-    items
-
-
-    headers = new Headers({ 'Content-Type': 'application/json' });
-    options = new RequestOptions({ headers: this.headers });
+    private apiUrl = 'http://localhost:3000/donors'
+    private requestHeaders = new Headers({ 'Content-Type': 'application/json' });
+    private requestOptions = new RequestOptions({ headers: this.requestHeaders });
 
     constructor(private http: Http) {
-        this.dataBS = new Subject()
+        this.nearbyDonorsSubscription = new Subject()
     }
 
-    instantiate() {
+    instantiateSocket() {
         this.socket = io('http://localhost:3000');
 
         this.socket.on("new data", payload => {
-            this.dataStore = payload
-            this.dataBS.next(this.dataStore)
+            this.nearbyDonorsStore = payload
+            this.nearbyDonorsSubscription.next(this.nearbyDonorsStore)
         })
 
         this.socket.on("updated", payload => {
-            this.getData()
+            this.getNearbyDonors()
         })
-
-        
-
     }
-    getData(longitude?, latitude?) {
+
+    getNearbyDonors(longitude?, latitude?) {
         this.socket.emit('needs data', {longitude, latitude})
     }
   
@@ -49,8 +44,8 @@ export class DataService {
     }
 
 
-    delete(id) {
-        return this.http.delete(`${this.url}/${id}`)
+    deleteDonor(id) {
+        return this.http.delete(`${this.apiUrl}/${id}`)
             .map(res => {
                  return "OK"
             })
@@ -58,9 +53,9 @@ export class DataService {
     }
 
 
-    update(id, data) {
+    updateDonor(id, data) {
         data._id = id       
-        return this.http.put(`${this.url}`, data, this.options)
+        return this.http.put(`${this.apiUrl}`, data, this.requestOptions)
             .map(res => {                
                 return res.json()
             })
@@ -69,8 +64,8 @@ export class DataService {
 
    
 
-    add(item) {
-        return this.http.post(this.url, item, this.options)
+    addDonor(item) {
+        return this.http.post(this.apiUrl, item, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -78,7 +73,7 @@ export class DataService {
     }
 
     getDonorInfo(id) {
-        return this.http.get(`${this.url}/${id}`)
+        return this.http.get(`${this.apiUrl}/${id}`)
             .map(res => {
                 const item= res.json()
                 item.longitude = item.location.coordinates[0]

@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../shared/services/data.service';
 import { InfoService } from '../shared/services/info.service';
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { globalValidators } from '../shared/global-validators';
 import { SnackBarService } from '../shared/services/snackbar.service';
@@ -14,7 +14,6 @@ export class PostingComponent {
     isEdit: boolean
     form: FormGroup
     bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
-    @Output() submitted = new EventEmitter();
 
     constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute,
         private dataService: DataService, private router: Router, private infoService: InfoService,
@@ -27,7 +26,7 @@ export class PostingComponent {
             this.isEdit =true
             this.getDonorInfo(this.activatedRoute.snapshot.url[0].path)
         }
-        else if(this.infoService.id){
+        else if(this.infoService.userId){
             this.isEdit =true
             this.buildForm()
         } else {
@@ -42,8 +41,8 @@ export class PostingComponent {
     private getDonorInfo(id) {
         this.dataService.getDonorInfo(id).subscribe(
             data => {
-                this.infoService.id = id
-                this.infoService.data = data
+                this.infoService.userId = id
+                this.infoService.userData = data
                 this.buildForm()
             },
             error => {
@@ -54,7 +53,7 @@ export class PostingComponent {
     }
 
     onRemove(){
-        return this.dataService.delete(this.infoService.id).subscribe(
+        return this.dataService.deleteDonor(this.infoService.userId).subscribe(
             data => {
                 this.infoService.clearData()
                 this.form.reset()
@@ -64,15 +63,15 @@ export class PostingComponent {
         )
     }
     onSubmit(formData) {
-        if (this.infoService.id) return this.dataService.update(this.infoService.id, formData).subscribe(
+        if (this.infoService.userId) return this.dataService.updateDonor(this.infoService.userId, formData).subscribe(
             success => {
                 this.router.navigate(['/success'])
             },
             error => console.log(error)
         )
-        else return this.dataService.add(formData).subscribe(
+        else return this.dataService.addDonor(formData).subscribe(
             data => {
-                this.infoService.id = data._id
+                this.infoService.userId = data._id
                 this.router.navigate(['/success'])
             },
             error => console.log(error)
@@ -87,16 +86,16 @@ export class PostingComponent {
 
     buildForm() {
 
-        if (this.infoService.data){
+        if (this.infoService.userData){
             this.form = this.fb.group({
-                firstName: [this.infoService.data.firstName || '', Validators.required],
-                lastName: [this.infoService.data.lastName || '', Validators.required],
-                email: [this.infoService.data.email || '', globalValidators.mailFormat],
-                telephone: [this.infoService.data.telephone || '', globalValidators.telephoneFormat],
-                bloodGroup: [this.infoService.data.bloodGroup || '', Validators.required],
-                longitude: [this.infoService.data.longitude || '', Validators.required],
-                latitude: [this.infoService.data.latitude || '', Validators.required],
-                address: [this.infoService.data.address || '',Validators.required],
+                firstName: [this.infoService.userData.firstName || '', Validators.required],
+                lastName: [this.infoService.userData.lastName || '', Validators.required],
+                email: [this.infoService.userData.email || '', globalValidators.mailFormat],
+                telephone: [this.infoService.userData.telephone || '', globalValidators.telephoneFormat],
+                bloodGroup: [this.infoService.userData.bloodGroup || '', Validators.required],
+                longitude: [this.infoService.userData.longitude || '', Validators.required],
+                latitude: [this.infoService.userData.latitude || '', Validators.required],
+                address: [this.infoService.userData.address || '',Validators.required],
             })
         }
         else {  

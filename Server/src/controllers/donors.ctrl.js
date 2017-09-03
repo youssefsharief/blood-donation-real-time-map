@@ -1,42 +1,40 @@
 
 const utility = require('../helpers/utility.js')
-const { findOneAndUpdate, add, remove, getOneById} = require('../query/donors.query.js')
+const { findOneAndUpdate, add, remove, getOneById } = require('../query/donors.query.js')
 
 
 
 
 
 function addDonor(req, res) {
-    let location = {
+    const location = {
         coordinates: [req.body.longitude, req.body.latitude],
         type: "Point"
     }
-    let ip = req.body.ip ? req.body.ip : "0.0.0.0.0"
-    let { firstName, lastName,email, telephone,bloodGroup, address  } = req.body
-    
-    const newDonor = { firstName, lastName,email, telephone,bloodGroup, location, ip, address}
-    return add (newDonor)
+    const ip = req.body.ip ? req.body.ip : "0.0.0.0.0"
+    const { firstName, lastName, email, telephone, bloodGroup, address } = req.body
+
+    const newDonor = { firstName, lastName, email, telephone, bloodGroup, location, ip, address }
+    return add(newDonor)
         .then((added) => res.status(200).json(added))
-        .catch(err => console.log(err))
-        
-            // utility.badRequest(res, 'to add your info'))
+        .catch(err => utility.badRequest(res, 'to add your info'))
 }
 
-// setInterval(()=>{
-//     global.io.emit('updated')
-// },300000)
 
 function findDonorAndUpdate(req, res) {
     if (!req.body._id) utility.missingData(res, '_id')
-    const { firstName, lastName,email, telephone,bloodGroup, location, _id, address  } = req.body
-    const newDonor = { firstName, lastName,email, telephone,bloodGroup, location,address }
+        const location = {
+            coordinates: [req.body.longitude, req.body.latitude],
+            type: "Point"
+        }
+    const { firstName, lastName, email, telephone, bloodGroup, _id, address } = req.body
+    const newDonor = { firstName, lastName, email, telephone, bloodGroup, location, address }
     return findOneAndUpdate(_id, newDonor)
         .then((added) => {
             global.io.emit('updated')
-            res.status(200).json(added)
+            return res.status(200).json(added)
         })
-        .catch(err =>  res.status(400).json(err))
-            // utility.badRequest(res, 'to update your info'))
+        .catch(err => utility.badRequest(res, err))
 }
 
 
@@ -53,4 +51,4 @@ function getDonorInfoById(req, res) {
 }
 
 
-module.exports = {  addDonor, findDonorAndUpdate, removeDonor, getDonorInfoById }
+module.exports = { addDonor, findDonorAndUpdate, removeDonor, getDonorInfoById }
