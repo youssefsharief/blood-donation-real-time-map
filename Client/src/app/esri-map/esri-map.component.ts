@@ -84,21 +84,45 @@ export class EsriMapComponent implements OnInit {
 					view: view
 				});
 
-				
+
 
 
 				addUI(view, track, searchWidget)
 				view.on("drag", debounce(getData, 25))
 				view.on("mouse-wheel", debounce(getData, 25))
 				view.on("hold", debounce(getData, 25))
-				view.on("double-click", ()=>{
-					this.clicked.emit()
-				})
+
+				view.on("double-click", function (event) {
+					event.stopPropagation();
+					const longitude = event.mapPoint.longitude
+					const latitude = event.mapPoint.latitude
+					let address = ''
+					// Execute a reverse geocode using the clicked location
+					locatorTask.locationToAddress(event.mapPoint).then(response => {
+						// If an address is successfully found, show it in the popup's content
+						address = response.address
+						self.graphicsService.showAddingPopup(view, event.mapPoint, address)
+						
+					}).otherwise(function (err) {
+						// If the promise fails and no result is found, show a generic message
+						self.graphicsService.showAddingPopup(view, event.mapPoint)
+					});
+					
+					view.popup.on("trigger-action", (event) => {
+						if (event.action.id === "show-add-modal") {
+							self.clicked.emit({longitude, latitude, address})
+						}
+					});
+					
+				});
+
+
 				view.popup.on("trigger-action", (event) => {
 					if (event.action.id === "show-hidden") {
 						showHiddenItems(view)
 					}
 				});
+
 
 				view.then(function (x) {
 					getData()

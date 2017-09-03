@@ -6,13 +6,11 @@ import { CdkTableModule } from '@angular/cdk';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
 import { SnackBarService } from './services/snackbar.service';
-import { MdSnackBar } from '@angular/material';
 import { MaterialModule } from '@angular/material';
-import { DonorFormComponent } from '../donor-form/donor-form.component';
 
 import {
   FooterComponent,
-  LeftSideMenuComponent, LoaderComponent
+  LoaderComponent
 } from './';
 
 
@@ -21,25 +19,22 @@ import {
     CommonModule,
     FormsModule,
     ReactiveFormsModule
-    
-    
   ],
-  providers:[ SnackBarService],
+  providers:[ ],
   exports: [
     CommonModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
     FooterComponent,
-    LeftSideMenuComponent, LoaderComponent,
+    LoaderComponent,
     NavComponent,
     MaterialModule,
-    DonorFormComponent
 
   ],
   declarations: [
     FooterComponent, 
-    LeftSideMenuComponent, LoaderComponent, NavComponent, DonorFormComponent
+    LoaderComponent, NavComponent
 
   ],
 })

@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { DonorsComponent } from './Donors.component';
 import { DonorsRoutingModule } from './Donors-routing.module';
 import { EsriLoaderService, EsriLoaderModule } from 'angular-esri-loader';
-import { AddModalComponent } from './add-modal/add-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EsriMapComponent } from '../esri-map/esri-map.component';
 
@@ -23,9 +22,7 @@ import { EsriMapComponent } from '../esri-map/esri-map.component';
     ],
     declarations: [
         DonorsComponent,
-        EsriMapComponent,
-        AddModalComponent,
-        
+        EsriMapComponent,        
     ],
 })
 export class DonorsModule {

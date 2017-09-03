@@ -1,6 +1,6 @@
 
 const utility = require('../../helpers/utility.js')
-const { findOneAndUpdate, add, remove, getOneById, findFromLocation} = require('./donors.query.js')
+const { findOneAndUpdate, add, remove, getOneById} = require('./donors.query.js')
 
 
 
@@ -8,13 +8,13 @@ const { findOneAndUpdate, add, remove, getOneById, findFromLocation} = require('
 
 function addDonor(req, res) {
     let location = {
-        coordinates: req.body.location,
+        coordinates: [req.body.longitude, req.body.latitude],
         type: "Point"
     }
     let ip = req.body.ip ? req.body.ip : "0.0.0.0.0"
-    let { firstName, lastName,email, telephone,bloodGroup  } = req.body
+    let { firstName, lastName,email, telephone,bloodGroup, address  } = req.body
     
-    const newDonor = { firstName, lastName,email, telephone,bloodGroup, location, ip}
+    const newDonor = { firstName, lastName,email, telephone,bloodGroup, location, ip, address}
     return add (newDonor)
         .then((added) => res.status(200).json(added))
         .catch(err => console.log(err))

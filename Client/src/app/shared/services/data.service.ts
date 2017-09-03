@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import * as io from 'socket.io-client';
 import { SnackBarService } from './snackbar.service';
 import { Subject } from "rxjs/Subject";
-
+import 'rxjs/Rx'
 @Injectable()
 export class DataService {
     private socket: SocketIOClient.Socket;
@@ -80,7 +80,10 @@ export class DataService {
     getDonorInfo(id) {
         return this.http.get(`${this.url}/${id}`)
             .map(res => {
-                return res.json()
+                const item= res.json()
+                item.longitude = item.location.coordinates[0]
+                item.latitude = item.location.coordinates[1]
+                return item
             })
             .catch(this.handleError);
     }

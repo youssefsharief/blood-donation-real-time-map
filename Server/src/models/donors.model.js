@@ -7,6 +7,7 @@ const _schema = new Schema({
     email: {type: String, required: true},
     telephone: {type: String, required: true},
     bloodGroup: {type: String, required: true},
+    address: {type: String, required: true},
     ip: {type: String, required: true},
     location: new Schema({
         coordinates: {  type: [Number], required: true  },

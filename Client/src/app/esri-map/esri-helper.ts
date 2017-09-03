@@ -42,11 +42,8 @@ export function assignMapClickWatcher(view, locatorTask, self) {
         // Execute a reverse geocode using the clicked location
         locatorTask.locationToAddress(event.mapPoint).then(function (
             response) {
-            console.log(view.popup);
-
             // If an address is successfully found, show it in the popup's content
             view.popup.content = response.address;
-            console.log(response);
 
         }).otherwise(function (err) {
             // If the promise fails and no result is found, show a generic message

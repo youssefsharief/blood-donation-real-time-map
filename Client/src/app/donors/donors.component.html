@@ -1,8 +1,8 @@
-<div class="container">
-    <h3 class="text-left"> Chose your location by clicking on the map </h3>
-    <span class="btn btn-primary " *ngIf="location.length" (click)="showModal()">Choose this as my location</span>
+<div class="container-fluid">
+    <h5 class="text-left"> Chose your location by double-clicking clicking on the map, then press confirm location </h5>
+    <!-- <span class="btn btn-primary " *ngIf="location.length" (click)="showModal()">Choose this as my location</span> -->
    </div>
 
 <esri-map [type]="'donors'" (clicked)="onMapClick($event)"></esri-map>
 
-<add-modal (submitted)="onSubmit($event)"></add-modal>
+<!-- <add-modal  *ngIf="item" (submitted)="onSubmit($event)" [item]="item"></add-modal> -->

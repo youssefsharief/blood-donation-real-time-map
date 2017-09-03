@@ -15,6 +15,7 @@ function findOneAndUpdate(id, update) {
         item.telephone = update.telephone
         item.bloodGroup = update.bloodGroup
         item.location  = update.location || item.location
+        item.address  = update.address || item.address
         return item.save()
     })
 }
