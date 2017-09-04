@@ -8,10 +8,6 @@ import { NavComponent } from './nav/nav.component';
 import { SnackBarService } from './services/snackbar.service';
 import { MaterialModule } from '@angular/material';
 
-import {
-  FooterComponent,
-  LoaderComponent
-} from './';
 
 
 @NgModule({
@@ -26,15 +22,13 @@ import {
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    FooterComponent,
-    LoaderComponent,
+    
     NavComponent,
     MaterialModule,
 
   ],
   declarations: [
-    FooterComponent, 
-    LoaderComponent, NavComponent
+    NavComponent
 
   ],
 })
