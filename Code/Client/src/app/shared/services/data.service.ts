@@ -7,22 +7,25 @@ import * as io from 'socket.io-client';
 import { SnackBarService } from './snackbar.service';
 import { Subject } from "rxjs/Subject";
 import 'rxjs/Rx'
+import { environment } from '../../../environments/environment';
 @Injectable()
 export class DataService {
     private socket: SocketIOClient.Socket;
     private nearbyDonorsStore: any[]
     nearbyDonorsSubscription: Subject<any>
 
-    private apiUrl = 'http://localhost:3000/donors'
     private requestHeaders = new Headers({ 'Content-Type': 'application/json' });
     private requestOptions = new RequestOptions({ headers: this.requestHeaders });
-
+    private donorsEndPoint
     constructor(private http: Http) {
+        if (environment.production) this.donorsEndPoint = '/donors'
+        else this.donorsEndPoint = environment.apiUrl+'/donors'
         this.nearbyDonorsSubscription = new Subject()
     }
 
     instantiateSocket() {
-        this.socket = io('http://localhost:3000');
+        if (environment.production) this.socket = io()
+        else this.socket = io(environment.apiUrl);
 
         this.socket.on("new data", payload => {
             this.nearbyDonorsStore = payload
@@ -45,7 +48,7 @@ export class DataService {
 
 
     deleteDonor(id) {
-        return this.http.delete(`${this.apiUrl}/${id}`)
+        return this.http.delete(`${this.donorsEndPoint}/${id}`)
             .map(res => {
                  return "OK"
             })
@@ -55,7 +58,7 @@ export class DataService {
 
     updateDonor(id, data) {
         data._id = id       
-        return this.http.put(`${this.apiUrl}`, data, this.requestOptions)
+        return this.http.put(`${this.donorsEndPoint}`, data, this.requestOptions)
             .map(res => {                
                 return res.json()
             })
@@ -65,7 +68,7 @@ export class DataService {
    
 
     addDonor(item) {
-        return this.http.post(this.apiUrl, item, this.requestOptions)
+        return this.http.post(`${this.donorsEndPoint}`, item, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -73,9 +76,12 @@ export class DataService {
     }
 
     getDonorInfo(id) {
-        return this.http.get(`${this.apiUrl}/${id}`)
+        return this.http.get(`${this.donorsEndPoint}/${id}`)
             .map(res => {
+                
+                
                 const item= res.json()
+                console.log(item);
                 item.longitude = item.location.coordinates[0]
                 item.latitude = item.location.coordinates[1]
                 return item
@@ -85,6 +91,8 @@ export class DataService {
 
 
     private handleError(error: Response | any) {
+        console.log(error);
+        
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';

@@ -7,11 +7,14 @@ import { Component } from '@angular/core';
     templateUrl: 'success.component.html',
 })
 export class SuccessComponent {
-    id
-    constructor(private route: ActivatedRoute, private infoService: InfoService, private router: Router) {}
+    id: string
+    url= window.location.origin
+    constructor(private route: ActivatedRoute, private infoService: InfoService, private router: Router) {
+    }
     ngOnInit(){
         this.id= this.infoService.userId
         if(!this.id) this.router.navigate(['/map'])
+        
     }
 
 

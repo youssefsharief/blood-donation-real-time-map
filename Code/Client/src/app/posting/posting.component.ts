@@ -39,13 +39,18 @@ export class PostingComponent {
     }
   
     private getDonorInfo(id) {
+        console.log(id);
         this.dataService.getDonorInfo(id).subscribe(
             data => {
+                
+                
                 this.infoService.userId = id
                 this.infoService.userData = data
                 this.buildForm()
             },
             error => {
+                console.log(error);
+                
                 this.sb.emitErrorSnackBar("This account is currently non-existant")
                 this.router.navigate(['/map'])
             }
@@ -58,6 +63,7 @@ export class PostingComponent {
                 this.infoService.clearData()
                 this.form.reset()
                 this.sb.emitSuccessSnackBar("You have successfully deleted your info")
+                this.router.navigate(['/map'])
             },
             error => console.log(error)
         )
