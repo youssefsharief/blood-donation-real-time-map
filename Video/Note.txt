@@ -1,0 +1,1 @@
+A video (15 minutes max) with a demonstration of the working solution and an explanation of your implementation

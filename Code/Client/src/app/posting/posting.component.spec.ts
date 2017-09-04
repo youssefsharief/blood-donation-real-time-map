@@ -131,15 +131,15 @@ describe('Posting Component', () => {
     });
 
 
-    fit("should load", () => {
+    it("should load", () => {
         expect(comp).toBeTruthy()
     })
 
-    fit("should save id from path to info infoService", () => {
+    it("should save id from path to info infoService", () => {
         expect(infoService.userId).toEqual(123)
     })
 
-    // fit("should save data to info infoService", () => {
+    // it("should save data to info infoService", () => {
     //     dataService.getDonorInfo = (id) => {
     //         return Observable.of(fakeDonors[0])
     //     }
@@ -147,7 +147,7 @@ describe('Posting Component', () => {
     // })
    
     
-    fit("should respond to error from data service", () => {
+    it("should respond to error from data service", () => {
         dataService.getDonorInfo = (id) => {
                 return Observable.throw('Error')
             }
