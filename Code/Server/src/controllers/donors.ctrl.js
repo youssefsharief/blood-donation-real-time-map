@@ -16,19 +16,23 @@ function addDonor(req, res) {
 
     const newDonor = { firstName, lastName, email, telephone, bloodGroup, location, ip, address }
     return add(newDonor)
-        .then((added) => res.status(200).json(added))
+        .then((added) => {
+            global.io.emit('updated')
+            return res.status(200).json(added)
+        })
         .catch(err => utility.badRequest(res, 'to add your info'))
 }
 
 
 function findDonorAndUpdate(req, res) {
     if (!req.body._id) utility.missingData(res, '_id')
-        const location = {
-            coordinates: [req.body.longitude, req.body.latitude],
-            type: "Point"
-        }
+    const location = {
+        coordinates: [req.body.longitude, req.body.latitude],
+        type: "Point"
+    }
+    const ip = req.body.ip ? req.body.ip : "0.0.0.0.0"
     const { firstName, lastName, email, telephone, bloodGroup, _id, address } = req.body
-    const newDonor = { firstName, lastName, email, telephone, bloodGroup, location, address }
+    const newDonor = { firstName, lastName, email, telephone, bloodGroup, location, ip, address }
     return findOneAndUpdate(_id, newDonor)
         .then((added) => {
             global.io.emit('updated')
@@ -40,7 +44,10 @@ function findDonorAndUpdate(req, res) {
 
 function removeDonor(req, res) {
     return remove(req.params.id)
-        .then(() => res.status(200).json("Ok"))
+        .then(() => {
+            res.status(200).json("Ok")
+            global.io.emit('updated')
+        })
         .catch(err => utility.badRequest(res, 'to add your info'))
 }
 

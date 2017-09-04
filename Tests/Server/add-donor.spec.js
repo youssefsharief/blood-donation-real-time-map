@@ -1,12 +1,16 @@
 const { setup } = require('./helpers/requestsSpecHelper')
 const faker = require('faker')
-let server, request
+let server, request, socket_io, firstUser
 describe("Donors endpoint", function () {
 	beforeAll(() => {
+		socket_io = require('../../Code/Server/src/socket/socket.bootstrap.js')
+        socket_io.instantiate(server)
+        firstUser = require('socket.io-client')('http://localhost:6000');
 		[server, request] = setup()
 	})
 	afterAll(() => {
-		server.close()
+		firstUser.disconnect()
+        server.close()
 	})
 	describe("Adding donor", function () {
 		const newDonor = {

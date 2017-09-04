@@ -8,7 +8,7 @@ describe("Donors endpoint", function () {
 	afterAll(() => {
 		server.close()
 	})
-	describe("Deleting donor", function () {
+	describe("Getting donor", function () {
 		const newDonor = {
 			firstName: faker.name.firstName(),
 			lastName: faker.name.lastName(),
@@ -41,9 +41,9 @@ describe("Donors endpoint", function () {
 				done();
 			})
         })
-        it("should respond by 404 error when id is not provided ", function (done) {
+        it("should serve static files when id is not provided ", function (done) {
 			request.get('/donors/').end((err, res) => {
-                expect(res.status).toEqual(404)
+                expect(res.status).toEqual(200)
 				done();
 			})
         })

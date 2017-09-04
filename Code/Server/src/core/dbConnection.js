@@ -1,5 +1,4 @@
 
-// const dbConfing= require('../config/dbConfig.js')
 const mongoose = require("mongoose")
 
 function connectToOriginalDb(){
