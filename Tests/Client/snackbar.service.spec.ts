@@ -1,4 +1,4 @@
-import { SnackBarService } from './snackbar.service';
+import { SnackBarService } from '../../Code/Client/src/app/shared/services/snackbar.service';
 import { async, getTestBed, TestBed } from '@angular/core/testing';
 import { MdSnackBar } from '@angular/material';
 

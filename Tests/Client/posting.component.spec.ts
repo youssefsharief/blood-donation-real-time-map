@@ -1,16 +1,16 @@
-import { SnackBarService } from '../shared/services/snackbar.service';
-import { SharedModule } from '../shared/shared.module';
-import { PostingComponent } from './posting.component';
+import { SnackBarService } from '../../Code/Client/src/app/shared//services/snackbar.service';
+import { SharedModule } from '../../Code/Client/src/app/shared/shared.module';
+import { PostingComponent } from '../../Code/Client/src/app/posting/posting.component';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PostingModule } from './posting.module';
+import { PostingModule } from '../../Code/Client/src/app/posting/posting.module';
 import { ActivatedRoute } from '@angular/router';
-import { InfoService } from '../shared/services/info.service';
-import { DataService } from '../shared/services/data.service';
+import { InfoService } from '../../Code/Client/src/app/shared/services/info.service';
+import { DataService } from '../../Code/Client/src/app/shared/services/data.service';
 
 export const fakeDonors = [
     {
@@ -130,15 +130,15 @@ describe('Posting Component', () => {
     });
 
 
-    fit("should load", () => {
+    it("should load", () => {
         expect(comp).toBeTruthy()
     })
 
-    fit("should save id from path to info infoService", () => {
+    it("should save id from path to info infoService", () => {
         expect(infoService.userId).toEqual(123)
     })
 
-    // fit("should save data to info infoService", () => {
+    // it("should save data to info infoService", () => {
     //     dataService.getDonorInfo = (id) => {
     //         return Observable.of(fakeDonors[0])
     //     }
@@ -146,7 +146,7 @@ describe('Posting Component', () => {
     // })
    
     
-    fit("should respond to error from data service", () => {
+    it("should respond to error from data service", () => {
         dataService.getDonorInfo = (id) => {
                 return Observable.throw('Error')
             }

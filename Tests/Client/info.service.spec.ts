@@ -1,4 +1,4 @@
-import { InfoService } from './info.service';
+import { InfoService } from '../../Code/Client/src/app/shared/services/info.service';
 import { async, getTestBed, TestBed } from '@angular/core/testing';
 
 describe('Service: Info Service', () => {
