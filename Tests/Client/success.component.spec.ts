@@ -1,4 +1,3 @@
-import { accessSync } from 'fs';
 import { SharedModule } from '../shared/shared.module';
 import { SuccessComponent } from './success.component';
 import { DebugElement } from '@angular/core';
