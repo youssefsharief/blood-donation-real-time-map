@@ -4,9 +4,77 @@ import { MockBackend } from '@angular/http/testing';
 import { getResponse, setupConnections, setupConnectionsWithError } from '../../shared/spec-helpers/helper';
 import { Response, ResponseOptions, ResponseType, Request } from '@angular/http';
 import { MockConnection } from '@angular/http/testing';
-import { fakeDonors } from '../models/donors.model';
 import { DataService } from './data.service';
+import { setupConnectionsWithNoMessageError } from '../spec-helpers/helper';
+export const fakeDonors = [
+    {
+        _id: '59a940edbfb2961a5c82263c',
+        firstName: 'Arvilla',
+        lastName: 'Jacobi',
+        email: 'Antoinette78@yahoo.com',
+        telephone: '362-936-7361 x9143',
+        bloodGroup: 'O',
+        location:
+        {
+            type: 'Point',
+            _id: '59a940edbfb2961a5c82263d',
+            coordinates: [140.3284, -8.2974]
+        },
+        ip: '199.70.222.102',
+        __v: 0
+    },
 
+    {
+        _id: '59a94219be9707282cb9fd2e',
+        firstName: 'Devon',
+        lastName: 'King',
+        email: 'Cleora.Keebler@hotmail.com',
+        telephone: '833-236-9831 x570',
+        bloodGroup: 'O',
+        location:
+        {
+            type: 'Point',
+            _id: '59a94219be9707282cb9fd2f',
+            coordinates: [111.785, -0.3458]
+        },
+        ip: '243.48.84.158',
+        __v: 0
+    },
+
+    {
+        _id: '59a940ea01d0ad21ccc7d440',
+        firstName: 'Chadrick',
+        lastName: 'Gutmann',
+        email: 'Desiree_Aufderhar59@hotmail.com',
+        telephone: '(017) 442-4699 x946',
+        bloodGroup: 'O',
+        location:
+        {
+            type: 'Point',
+            _id: '59a940ea01d0ad21ccc7d441',
+            coordinates: [84.6453, -40.1547]
+        },
+        ip: '108.178.126.215',
+        __v: 0
+    },
+
+    {
+        _id: '59a942455a5cb02048b8d8fa',
+        firstName: 'Ola',
+        lastName: 'Murazik',
+        email: 'Chaya.Lubowitz@yahoo.com',
+        telephone: '1-366-170-1541',
+        bloodGroup: 'O',
+        location:
+        {
+            type: 'Point',
+            _id: '59a942455a5cb02048b8d8fb',
+            coordinates: [111.8305, -29.6411]
+        },
+        ip: '91.49.201.28',
+        __v: 0
+    }
+]
 describe('Service: DataService', () => {
     let backend: MockBackend;
     let service: DataService;
@@ -44,20 +112,110 @@ describe('Service: DataService', () => {
     });
 
 
-    it('GET ITEMS: success', (done) => {
+
+    describe('Socket',()=>{
+        const environment = {production: true}
+        it('should get instantiated', (done) => {
+            const io = (param?) =>({
+                    emit: (eventName: string, payload?:any)=> {
+                        console.log('emitted');
+                    },
+                    on: (eventName: string, eventHandler:Function)=>{
+                        console.log('dealt with');
+                    },
+                    connected: true
+                })
+
+            service.instantiateSocket()
+            
+            done()
+
+
+
+        });
+
+        it('should get instantiated in production', (done) => {
+            
+            const io = (param?) =>({
+                    emit: (eventName: string, payload?:any)=> {
+                        console.log('emitted');
+                    },
+                    on: (eventName: string, eventHandler:Function)=>{
+                        console.log('dealt with');
+                    }
+                })
+            service.instantiateSocket()
+            done()
+
+
+
+        });
+
+
+      
+
+        it('should emit get nearby donors event', (done) => {
+            const io = (param?) =>({
+                    emit: (eventName: string, payload?:any)=> {
+                        console.log('emitted');
+                    },
+                    on: (eventName: string, eventHandler:Function)=>{
+                        console.log('dealt with');
+                    },
+                    connected: true
+                })
+
+            service.instantiateSocket()
+            
+            service.getNearbyDonors(30,30)
+            done()
+
+
+        });
+
+
+        it('should get whether  socket is connected', (done) => {
+            const io = (param?) =>({
+                    emit: (eventName: string, payload?:any)=> {
+                        console.log('emitted');
+                    },
+                    on: (eventName: string, eventHandler:Function)=>{
+                        console.log('dealt with');
+                    },
+                    connected: true
+                })
+            service.instantiateSocket()
+            service.isConnected()
+            done()
+
+
+        });
+
+
+
+
+    })
+    it('should get donor info successfully from backend', (done) => {
         setupConnections(backend, {
-            body: { data: fakeDonors },
+            body: fakeDonors[0],
             status: 200
         });
-        service.getFromBackend(45,45).subscribe((items) => {
-            expect(items.length).toBeTruthy();
+        service.getDonorInfo(fakeDonors[0]._id).subscribe((payload) => {
+            expect(payload).toBeTruthy();
+            expect(payload._id).toBe(fakeDonors[0]._id)
+            expect(payload.firstName).toBe(fakeDonors[0].firstName)
+            expect(payload.lastName).toBe(fakeDonors[0].lastName)
+            expect(payload.email).toBe(fakeDonors[0].email)
+            expect(payload.telephone).toBe(fakeDonors[0].telephone)
+            expect(payload.bloodGroup).toBe(fakeDonors[0].bloodGroup)
+            expect(payload.ip).toBe(fakeDonors[0].ip)
             done()
         });
     });
 
-    it('GET ITEMS: error', (done) => {
+    it('should respond to error while getting donor', (done) => {
         setupConnectionsWithError(backend);
-        service.getFromBackend(45,45).subscribe(
+        service.getDonorInfo(fakeDonors[0]._id).subscribe(
             payload => {},
             error => {
                 expect(error).toBeTruthy()
@@ -65,22 +223,22 @@ describe('Service: DataService', () => {
             });
     });
 
-    it('PUT ITEM: success', (done) => {
+    it('should update donor info successfully to backend', (done) => {
         setupConnections(backend, {
             body: { data: fakeDonors[1] },
             status: 200
         });
-        service.update(fakeDonors[1]).subscribe(
+        service.updateDonor(fakeDonors[1]._id, fakeDonors[0]).subscribe(
             payload => {
-                expect(payload._id).toBeTruthy()
+                expect(payload).toBeTruthy()
                 done()
             }
         );
     });
 
-    it('PUT ITEM: error', (done) => {
+    it('should respond to error while updating donor', (done) => {
         setupConnectionsWithError(backend);
-        service.update(fakeDonors[1]).subscribe(
+        service.updateDonor(fakeDonors[1]._id, fakeDonors[1]).subscribe(
             payload => {
             },
             error => {
@@ -89,12 +247,12 @@ describe('Service: DataService', () => {
             });
     });
 
-    it('DELETE ITEM: success', (done) => {
+    it('should delete donor info successfully from backend', (done) => {
         setupConnections(backend, {
             body: { data: "OK" },
             status: 200
         });
-        service.delete(fakeDonors[0]).subscribe(
+        service.deleteDonor(fakeDonors[0]._id).subscribe(
             payload => {
                 expect(payload).toBeTruthy()
                 done()
@@ -102,9 +260,9 @@ describe('Service: DataService', () => {
         );
     });
 
-    it('DELETE ITEM: error', (done) => {
+    it('should respond to error while adding donor', (done) => {
         setupConnectionsWithError(backend);
-        service.delete(fakeDonors[0]).subscribe(
+        service.deleteDonor(fakeDonors[0]._id).subscribe(
             payload => {
             },
             error => {
@@ -113,22 +271,41 @@ describe('Service: DataService', () => {
             });
     });
 
-    it('Add ITEM: success', (done) => {
+    it('should respond to error without message while deleting donor', (done) => {
+        setupConnectionsWithNoMessageError(backend);
+        service.deleteDonor(fakeDonors[0]._id).subscribe(
+            payload => {
+            },
+            error => {
+                expect(error).toBeTruthy()
+                done()
+            });
+    });
+    
+
+    it('should add donor successfully to backend', (done) => {
         setupConnections(backend, {
-            body: { data: "OK" },
+            body: fakeDonors[0],
             status: 200
         });
-        service.add(fakeDonors[0]).subscribe(
+        service.addDonor(fakeDonors[0]).subscribe(
             payload => {
                 expect(payload).toBeTruthy()
+                expect(payload._id).toBe(fakeDonors[0]._id)
+                expect(payload.firstName).toBe(fakeDonors[0].firstName)
+                expect(payload.lastName).toBe(fakeDonors[0].lastName)
+                expect(payload.email).toBe(fakeDonors[0].email)
+                expect(payload.telephone).toBe(fakeDonors[0].telephone)
+                expect(payload.bloodGroup).toBe(fakeDonors[0].bloodGroup)
+                expect(payload.ip).toBe(fakeDonors[0].ip)
                 done()
             }
         );
     });
 
-    it('Add ITEM: error', (done) => {
+    it('should respond to error while adding donor', (done) => {
         setupConnectionsWithError(backend);
-        service.add(fakeDonors[0]).subscribe(
+        service.addDonor(fakeDonors[0]).subscribe(
             payload => {
             },
             error => {
@@ -137,29 +314,6 @@ describe('Service: DataService', () => {
             });
     });
 
-    it('GET ITEM: success', (done) => {
-        setupConnections(backend, {
-            body: fakeDonors[0] ,
-            status: 200
-        });
-        service.getDonorInfo(fakeDonors[0]._id).subscribe(
-            payload => {
-                expect(payload).toBeTruthy()
-                done()
-            }
-        );
-    });
-
-    it('GET ITEM: error', (done) => {
-        setupConnectionsWithError(backend);
-        service.getDonorInfo(fakeDonors[0]._id).subscribe(
-            payload => {
-            },
-            error => {
-                expect(error).toBeTruthy()
-                done()
-            });
-    });
 
 
 });

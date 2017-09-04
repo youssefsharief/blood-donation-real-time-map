@@ -31,11 +31,11 @@ describe('Success Component', () => {
     });
 
 
-    fit("should load", () => {
+    it("should load", () => {
         expect(comp).toBeTruthy()
     })
 
-    fit("should get Params", () => {
+    it("should get Params", () => {
     })
 
 

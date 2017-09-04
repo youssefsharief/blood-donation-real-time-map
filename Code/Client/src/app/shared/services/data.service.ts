@@ -78,10 +78,8 @@ export class DataService {
     getDonorInfo(id) {
         return this.http.get(`${this.donorsEndPoint}/${id}`)
             .map(res => {
-                
-                
+
                 const item= res.json()
-                console.log(item);
                 item.longitude = item.location.coordinates[0]
                 item.latitude = item.location.coordinates[1]
                 return item

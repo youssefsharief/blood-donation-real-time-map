@@ -96,7 +96,7 @@ export class EsriMapComponent implements OnInit {
 					event.stopPropagation();
 					const longitude = event.mapPoint.longitude
 					const latitude = event.mapPoint.latitude
-					let address = ''
+					let address = 'none'
 					// Execute a reverse geocode using the clicked location
 					locatorTask.locationToAddress(event.mapPoint).then(response => {
 						// If an address is successfully found, show it in the popup's content

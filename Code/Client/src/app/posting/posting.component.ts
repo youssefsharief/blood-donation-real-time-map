@@ -39,11 +39,8 @@ export class PostingComponent {
     }
   
     private getDonorInfo(id) {
-        console.log(id);
         this.dataService.getDonorInfo(id).subscribe(
             data => {
-                
-                
                 this.infoService.userId = id
                 this.infoService.userData = data
                 this.buildForm()

@@ -24,3 +24,9 @@ export const setupConnectionsWithError = (backend: MockBackend) => {
     });
 }
 
+export const setupConnectionsWithNoMessageError = (backend: MockBackend) => {
+    backend.connections.subscribe((connection: MockConnection) => {
+        connection.mockError()
+    });
+}
+
