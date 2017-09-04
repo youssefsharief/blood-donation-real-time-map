@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "nodemon --exec istanbul cover node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
+    "test": "nodemon --exec jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "faker": "^4.1.0",
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.8.0",
     "socket.io-client": "^2.0.3",
     "supertest": "^3.0.0"
   }

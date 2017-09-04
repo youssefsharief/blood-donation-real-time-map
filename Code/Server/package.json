@@ -6,14 +6,10 @@
     "start": "nodemon ./src/bin/www",
     "coverage": "nodemon --exec istanbul cover node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
     "is": "istanbul cover ./test.js",
-    "ins": "istanbul instrument ./src/modules/",
     "test": "nodemon --exec jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "dependencies": {
-    "bcrypt": "^1.0.2",
     "body-parser": "~1.17.1",
-    "bunyan": "^1.8.12",
-    "cli-color": "^1.2.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.3",
@@ -25,7 +21,6 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.11.7",
     "morgan": "~1.8.1",
-    "rewire": "^2.5.2",
     "socket.io": "^1.7.4",
     "winston": "^2.3.1"
   },
