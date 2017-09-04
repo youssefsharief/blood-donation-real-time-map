@@ -19,13 +19,13 @@ export class DataService {
     private donorsEndPoint
     constructor(private http: Http) {
         if (environment.production) this.donorsEndPoint = '/donors'
-        else this.donorsEndPoint = '/donors'
+        else this.donorsEndPoint = 'http://localhost:3000/donors'
         this.nearbyDonorsSubscription = new Subject()
     }
 
     instantiateSocket() {
         if (environment.production) this.socket = io()
-        else this.socket = io();
+        else this.socket = io("http://localhost:3000");
 
         this.socket.on("new data", payload => {
             this.nearbyDonorsStore = payload
