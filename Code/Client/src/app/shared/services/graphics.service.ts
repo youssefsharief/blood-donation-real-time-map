@@ -69,12 +69,11 @@ export class GraphicsService {
         }]
         view.popup.open({
             // Set the popup's title to the coordinates of the location
-            title: "[" + lon + ", " + lat + "]",
+            title: address? address : "No address was found for this location" ,
             location: mapPoint // Set the location of the popup to the clicked location
         });
-
-        if(address) view.popup.content = address;
-        else view.popup.content = "No address was found for this location";
+        
+         view.popup.content = "[" + lon + ", " + lat + "]"
         
         
     }
