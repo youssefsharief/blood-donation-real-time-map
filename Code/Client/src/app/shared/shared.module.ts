@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
 import { SnackBarService } from './services/snackbar.service';
 import { MaterialModule } from '@angular/material';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -21,13 +22,14 @@ import { MaterialModule } from '@angular/material';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    
+    FooterComponent,
     NavComponent,
     MaterialModule,
 
   ],
   declarations: [
-    NavComponent
+    NavComponent,
+    FooterComponent
 
   ],
 })

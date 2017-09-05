@@ -32,7 +32,7 @@ export class GraphicsService {
                 },
                 popupTemplate: {
                     actions: [{
-                        title: "Show hidden atributes",
+                        title: "Show phone and email",
                         id: "show-hidden",
                     }],
                     title: "{firstName} {lastName}",

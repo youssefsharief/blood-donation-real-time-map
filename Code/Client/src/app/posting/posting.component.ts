@@ -94,8 +94,8 @@ export class PostingComponent {
                 email: [this.infoService.userData.email || '', globalValidators.mailFormat],
                 telephone: [this.infoService.userData.telephone || '', globalValidators.telephoneFormat],
                 bloodGroup: [this.infoService.userData.bloodGroup || '', Validators.required],
-                longitude: [this.infoService.userData.longitude || '', Validators.required],
-                latitude: [this.infoService.userData.latitude || '', Validators.required],
+                longitude: [this.infoService.userData.longitude || '', globalValidators.longitudeFormat],
+                latitude: [this.infoService.userData.latitude || '', globalValidators.latitudeFormat],
                 address: [this.infoService.userData.address || '',Validators.required],
             })
         }
@@ -106,8 +106,8 @@ export class PostingComponent {
                 email: ['', globalValidators.mailFormat],
                 telephone: [  '', globalValidators.telephoneFormat],
                 bloodGroup: ['', Validators.required],
-                longitude: [  '', Validators.required],
-                latitude: [ '', Validators.required],
+                longitude: [  '', globalValidators.longitudeFormat],
+                latitude: [ '', globalValidators.latitudeFormat],
                 address: ['',Validators.required],
             })
 
@@ -121,6 +121,12 @@ export class PostingComponent {
     }
     isIncorrectTelephoneFormat(control) {
         return this.form.get(control).hasError('incorrectTelephoneFormat')
+    }
+    isIncorrectLongitudeFormat(control) {
+        return this.form.get(control).hasError('incorrectLongitudeFormat')
+    }
+    isIncorrectLatitudeFormat(control) {
+        return this.form.get(control).hasError('incorrectLatitudeFormat')
     }
 
 
