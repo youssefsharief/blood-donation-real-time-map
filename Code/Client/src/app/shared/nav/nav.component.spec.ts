@@ -45,21 +45,21 @@ describe('Success Component', () => {
     })
 
 
-    describe('Html component color', ()=>{
-        it("should be green when connected", () => {
-            dataService.isConnected = () => true
-            fixture.detectChanges()
-            expect(el.querySelector('#connectionStatus').classList.contains('btn-success')).toBeTruthy()
-            expect(el.querySelector('#connectionStatus').classList.contains('btn-danger')).toBeFalsy()
-        })
+    // describe('Html component color', ()=>{
+    //     it("should be green when connected", () => {
+    //         dataService.isConnected = () => true
+    //         fixture.detectChanges()
+    //         expect(el.querySelector('#connectionStatus').classList.contains('btn-success')).toBeTruthy()
+    //         expect(el.querySelector('#connectionStatus').classList.contains('btn-danger')).toBeFalsy()
+    //     })
 
-        it("should be red when disconnected", () => {
-            dataService.isConnected = () => false
-            fixture.detectChanges()
-            expect(el.querySelector('#connectionStatus').classList.contains('btn-danger')).toBeTruthy()
-            expect(el.querySelector('#connectionStatus').classList.contains('btn-success')).toBeFalsy()
-        })
-    })
+    //     it("should be red when disconnected", () => {
+    //         dataService.isConnected = () => false
+    //         fixture.detectChanges()
+    //         expect(el.querySelector('#connectionStatus').classList.contains('btn-danger')).toBeTruthy()
+    //         expect(el.querySelector('#connectionStatus').classList.contains('btn-success')).toBeFalsy()
+    //     })
+    // })
 
 
 

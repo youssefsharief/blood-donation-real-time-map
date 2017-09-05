@@ -12,10 +12,10 @@
             <a class="navbar-brand" href="#">Rescue</a>
             <p class="navbar-text">Donate the gift of life</p>
         </div>
-
-                <button id="connectionStatus" [ngClass]="{'btn-success': isConnected(), 'btn-danger': !isConnected(), 'btn': true, 'btn-circle':true, 'top-buffer':true, 'pull-right': true}"></button>
-                
+        <img *ngIf="isConnected()"  class="connectionStatus pull-right" src="assets/images/connected.png" alt="">
+        <img *ngIf="!isConnected()" class="connectionStatus pull-right" src="assets/images/not_connected.jpg" alt="">
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
 </nav>
+
