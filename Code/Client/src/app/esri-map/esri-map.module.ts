@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 
 // This Module's Components
 import { EsriLoaderService, EsriLoaderModule } from 'angular-esri-loader';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { EsriMapComponent } from '../esri-map/esri-map.component';
 import { EsriMapRoutingModule } from './esri-map-routing.module';
 
