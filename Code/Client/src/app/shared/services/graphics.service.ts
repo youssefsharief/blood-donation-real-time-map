@@ -24,11 +24,11 @@ export class GraphicsService {
                 }),
                 symbol: markerSymbol,
                 attributes: {
-                    firstName: person.firstName,
-                    lastName: person.lastName,
-                    bloodGroup: person.bloodGroup,
-                    telephone: `<a id="telephone-${index}" data="${person.telephone}"  > Hidden </a> `,
-                    email: `<a id="email-${index}" data="${person.email}" > Hidden </a> `,
+                    "First Name": person.firstName,
+                    "Last Name": person.lastName,
+                    "Blood Group": person.bloodGroup,
+                    "Phone Number": `<a id="telephone-${index}" data="${person.telephone}"  > Hidden </a> `,
+                    "Email": `<a id="email-${index}" data="${person.email}" > Hidden </a> `,
                 },
                 popupTemplate: {
                     actions: [{
@@ -39,15 +39,15 @@ export class GraphicsService {
                     content: [{
                         type: "fields",
                         fieldInfos: [{
-                            fieldName: "firstName"
+                            fieldName: "First Name"
                         }, {
-                            fieldName: "lastName"
+                            fieldName: "Last Name"
                         }, {
-                            fieldName: "bloodGroup"
+                            fieldName: "Blood Group"
                         }, {
-                            fieldName: "telephone"
+                            fieldName: "Phone Number"
                         }, {
-                            fieldName: "email"
+                            fieldName: "Email"
                         }]
                     }]
                 }
