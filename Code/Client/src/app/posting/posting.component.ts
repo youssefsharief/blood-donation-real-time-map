@@ -46,8 +46,6 @@ export class PostingComponent {
                 this.buildForm()
             },
             error => {
-                console.log(error);
-                
                 this.sb.emitErrorSnackBar("This account is currently non-existant")
                 this.router.navigate(['/map'])
             }

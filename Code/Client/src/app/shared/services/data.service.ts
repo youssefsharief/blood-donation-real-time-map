@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/Rx';
 import * as io from 'socket.io-client';
 import { SnackBarService } from './snackbar.service';
 import { Subject } from "rxjs/Subject";
-import 'rxjs/Rx'
+import 'rxjs/Observable'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/observable/throw'
 import { environment } from '../../../environments/environment';
 @Injectable()
 export class DataService {

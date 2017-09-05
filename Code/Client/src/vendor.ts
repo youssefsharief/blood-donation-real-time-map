@@ -11,5 +11,9 @@ import 'hammerjs'
 import 'socket.io-client';
 import 'angular-esri-loader'
 import { MdSnackBar, MdSnackBarConfig, MaterialModule } from '@angular/material';
-import 'ngx-bootstrap/modal'
-import 'rxjs'
+import 'rxjs/Observable'
+import 'rxjs/Subject'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/observable/of'
+import 'rxjs/add/observable/throw'
