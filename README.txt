@@ -19,6 +19,10 @@ Go to Code Folder => Client Folder =>   Open terminal => run npm t
 2. Server-side tests  (These tests need an internet connection to be executed)
 Go to Code Folder => Server Folder =>  Open terminal => run npm t
 
+NOTE: I have included unit tests for client side in the Tests folder (only for preview) but they are actually running from Code Folder.
+	It is recommended by the angular team that angular unit tests be located near src files
+
+
 
 4. Tests coverage along with tests
 Go to Code/Server =>  Open terminal => npm run coverage => wait for completion => Code/Server/coverage/lcov-report/index.html
