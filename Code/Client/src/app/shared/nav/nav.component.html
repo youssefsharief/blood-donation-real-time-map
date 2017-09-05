@@ -13,7 +13,7 @@
             <p class="navbar-text">Donate the gift of life</p>
         </div>
 
-                <button [ngClass]="{'btn-success': isConnected, 'btn-danger': !isConnected, 'btn': true, 'btn-circle':true, 'top-buffer':true, 'pull-right': true}"></button>
+                <button id="connectionStatus" [ngClass]="{'btn-success': isConnected(), 'btn-danger': !isConnected(), 'btn': true, 'btn-circle':true, 'top-buffer':true, 'pull-right': true}"></button>
                 
         <!-- /.navbar-collapse -->
     </div>
