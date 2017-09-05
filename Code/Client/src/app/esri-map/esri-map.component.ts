@@ -1,10 +1,10 @@
 import { InfoService } from '../shared/services/info.service';
 import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { EsriLoaderService } from 'angular-esri-loader';
-import { modules, addUI, assignMapClickWatcher } from './esri-helper';
+import {  addUI, assignMapClickWatcher } from './esri-helper';
 import { DataService } from '../shared/services/data.service';
 import { showHiddenItems, debounce } from './utility';
-import { center } from './esri.config';
+import { center, modules } from './esri.config';
 import { GraphicsService } from '../shared/services/graphics.service';
 import { Router } from '@angular/router';
 
