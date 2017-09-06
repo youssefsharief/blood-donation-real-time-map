@@ -41,16 +41,8 @@ describe("Donors endpoint", function () {
 				done();
 			})
         })
-        it("should give 404 when id is not provided ", function (done) {
-			request.get('/donors/').end((err, res) => {
-                expect(res.status).toEqual(404)
-				done();
-			})
-        })
         it("should respond by 400 error when id is wrong ", function (done) {
 			request.get('/donors/'+ 20).end((err, res) => {
-				console.log(res.body);
-				
                 expect(res.status).toEqual(400)
 				done();
 			})

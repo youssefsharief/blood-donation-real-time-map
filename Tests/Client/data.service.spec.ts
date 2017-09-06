@@ -117,10 +117,8 @@ describe('Service: DataService', () => {
         it('should get instantiated', (done) => {
             const io = (param?) =>({
                     emit: (eventName: string, payload?:any)=> {
-                        console.log('emitted');
                     },
                     on: (eventName: string, eventHandler:Function)=>{
-                        console.log('dealt with');
                     },
                     connected: true
                 })
@@ -137,10 +135,8 @@ describe('Service: DataService', () => {
             
             const io = (param?) =>({
                     emit: (eventName: string, payload?:any)=> {
-                        console.log('emitted');
                     },
                     on: (eventName: string, eventHandler:Function)=>{
-                        console.log('dealt with');
                     }
                 })
             service.instantiateSocket()
@@ -156,10 +152,8 @@ describe('Service: DataService', () => {
         it('should emit get nearby donors event', (done) => {
             const io = (param?) =>({
                     emit: (eventName: string, payload?:any)=> {
-                        console.log('emitted');
                     },
                     on: (eventName: string, eventHandler:Function)=>{
-                        console.log('dealt with');
                     },
                     connected: true
                 })
@@ -176,10 +170,8 @@ describe('Service: DataService', () => {
         it('should get whether  socket is connected', (done) => {
             const io = (param?) =>({
                     emit: (eventName: string, payload?:any)=> {
-                        console.log('emitted');
                     },
                     on: (eventName: string, eventHandler:Function)=>{
-                        console.log('dealt with');
                     },
                     connected: true
                 })

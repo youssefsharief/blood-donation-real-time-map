@@ -46,8 +46,6 @@ describe("Donors endpoint", function () {
         })
         it("should respond by error when id is wrong ", function (done) {
 			request.delete('/donors/'+ 53).end((err, res) => {
-				console.log(res.body);
-				
                 expect(res.status).toEqual(400)
 				done();
 			})
