@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SuccessModule } from './success.module';
 import { ActivatedRoute } from '@angular/router';
-import { InfoService } from '../shared/services/info.service';
+import { UserService } from '../shared/services/user.service';
 
 
 describe('Success Component', () => {
@@ -17,11 +17,11 @@ describe('Success Component', () => {
     let fixture: ComponentFixture<SuccessComponent>;
     let de: DebugElement;
     let el: HTMLElement;
-    let infoService
+    let userService
     let ActivatedRouteStub = {
         params: Observable.of('45456')
     }
-    let infoServiceStub = {
+    let userServiceStub = {
         userId:123
     }
     beforeEach(() => {
@@ -30,14 +30,14 @@ describe('Success Component', () => {
             declarations: [],
             providers: [
                 {provide: ActivatedRoute, useValue: ActivatedRouteStub},
-                {provide: InfoService, useValue: infoServiceStub} ,
+                {provide: UserService, useValue: userServiceStub} ,
             
             ],
         });
         fixture = TestBed.createComponent(SuccessComponent);
         comp = fixture.componentInstance;
 
-        infoService = fixture.debugElement.injector.get(InfoService);
+        userService = fixture.debugElement.injector.get(UserService);
         // sb = fixture.debugElement.injector.get(SnackBarConfig);
     });
 
@@ -46,13 +46,13 @@ describe('Success Component', () => {
         expect(comp).toBeTruthy()
     })
 
-    it("should save id if id is available in info service", () => {
+    it("should save id if id is available in User Service", () => {
         comp.ngOnInit()
         expect(comp.id).toBeTruthy()
     })
 
     it("should navigate if id is not available", () => {
-        infoService.userId = null
+        userService.userId = null
         comp.ngOnInit()
         expect(comp.id).toBeFalsy()
     })

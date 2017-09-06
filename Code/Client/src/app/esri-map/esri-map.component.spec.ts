@@ -11,7 +11,7 @@
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { EsriMapModule } from './esri-map.module';
 // import { ActivatedRoute } from '@angular/router';
-// import { InfoService } from '../shared/services/info.service';
+// import { UserService } from '../shared/services/user.service';
 // import { DataService } from '../shared/services/data.service';
 // import 'rxjs/add/observable/of';
 // // import 'rxjs/add/observable/throw'
@@ -91,9 +91,9 @@
 //     let de: DebugElement;
 //     let el: HTMLElement;
 //     let sb
-//     let infoService
+//     let userService
   
-//     let infoServiceStub = {
+//     let userServiceStub = {
 //         saveLocation(long, lat, address){
 
 //         },
@@ -129,7 +129,7 @@
 //             providers: [
 //                 { provide: EsriLoaderService, useValue: EsriLoaderServiceStub },
 //                 { provide: GraphicsService, useValue: GraphicsServiceStub },
-//                 { provide: InfoService, useValue: infoServiceStub },
+//                 { provide: UserService, useValue: userServiceStub },
 //                 {provide: DataService, useValue: dataServiceStub} ,
 //                 { provide: SnackBarService, useValue: {} },
 
@@ -139,7 +139,7 @@
 //         comp = fixture.componentInstance;
 
 //         dataService = fixture.debugElement.injector.get(DataService);
-//         infoService = fixture.debugElement.injector.get(InfoService);
+//         userService = fixture.debugElement.injector.get(UserService);
 //         sb = fixture.debugElement.injector.get(SnackBarService);
 //     });
 
@@ -150,11 +150,11 @@
 //     })
 
  
-//     // it("should save data to info infoService", () => {
+//     // it("should save data to info userService", () => {
 //     //     dataService.getDonorInfo = (id) => {
 //     //         return Observable.of(fakeDonors[0])
 //     //     }
-//     //     expect(infoService.data).toBeTruthy()
+//     //     expect(userService.data).toBeTruthy()
 //     // })
 
 

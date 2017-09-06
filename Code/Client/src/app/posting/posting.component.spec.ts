@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PostingModule } from './posting.module';
 import { ActivatedRoute } from '@angular/router';
-import { InfoService } from '../shared/services/info.service';
+import { UserService } from '../shared/services/user.service';
 import { DataService } from '../shared/services/data.service';
 import 'rxjs/add/observable/of'
 import 'rxjs/add/observable/throw'
@@ -73,7 +73,7 @@ describe('Posting Component', () => {
     let de: DebugElement;
     let el: HTMLElement;
     let sb: SnackBarService
-    let infoService: InfoService
+    let userService: UserService
 
 
     let dataServiceStub = {
@@ -100,7 +100,7 @@ describe('Posting Component', () => {
             declarations: [],
             providers: [
                 { provide: ActivatedRoute, useValue: activatedRouteStub },
-                { provide: InfoService, useValue: {} },
+                { provide: UserService, useValue: {} },
                 // DataService,
                 { provide: DataService, useValue: dataServiceStub },
                 { provide: SnackBarService, useValue: SnackBarServiceStub },
@@ -110,7 +110,7 @@ describe('Posting Component', () => {
         comp = fixture.componentInstance;
 
         dataService = fixture.debugElement.injector.get(DataService);
-        infoService = fixture.debugElement.injector.get(InfoService);
+        userService = fixture.debugElement.injector.get(UserService);
         activatedRoute = fixture.debugElement.injector.get(ActivatedRoute);
         sb = fixture.debugElement.injector.get(SnackBarService);
     });
@@ -125,33 +125,33 @@ describe('Posting Component', () => {
                 expect(comp.isEdit).toBe(true)
             })
             describe('Secneario: data service responeded successfully ', () => {
-                it("should save user id in info service", () => {
-                    expect(infoService.userId).toEqual('32')
+                it("should save user id in User Service", () => {
+                    expect(userService.userId).toEqual('32')
                 })
-                describe('info service user data', () => {
-                    it("should save user firstName in info service", () => {
-                        expect(infoService.userData.firstName).toEqual(fakeDonors[0].firstName)
+                describe('User Service user data', () => {
+                    it("should save user firstName in User Service", () => {
+                        expect(userService.userData.firstName).toEqual(fakeDonors[0].firstName)
                     })
-                    it("should save user lastName in info service", () => {
-                        expect(infoService.userData.lastName).toEqual(fakeDonors[0].lastName)
+                    it("should save user lastName in User Service", () => {
+                        expect(userService.userData.lastName).toEqual(fakeDonors[0].lastName)
                     })
-                    it("should save user email in info service", () => {
-                        expect(infoService.userData.email).toEqual(fakeDonors[0].email)
+                    it("should save user email in User Service", () => {
+                        expect(userService.userData.email).toEqual(fakeDonors[0].email)
                     })
-                    it("should save user phone number in info service", () => {
-                        expect(infoService.userData.telephone).toEqual(fakeDonors[0].telephone)
+                    it("should save user phone number in User Service", () => {
+                        expect(userService.userData.telephone).toEqual(fakeDonors[0].telephone)
                     })
-                    it("should save user ip in info service", () => {
-                        expect(infoService.userData.ip).toEqual(fakeDonors[0].ip)
+                    it("should save user ip in User Service", () => {
+                        expect(userService.userData.ip).toEqual(fakeDonors[0].ip)
                     })
-                    it("should save user bloodGroup in info service", () => {
-                        expect(infoService.userData.bloodGroup).toEqual(fakeDonors[0].bloodGroup)
+                    it("should save user bloodGroup in User Service", () => {
+                        expect(userService.userData.bloodGroup).toEqual(fakeDonors[0].bloodGroup)
                     })
-                    it("should save user longitude in info service", () => {
-                        expect(infoService.userData.longitude).toEqual(fakeDonors[0].longitude)
+                    it("should save user longitude in User Service", () => {
+                        expect(userService.userData.longitude).toEqual(fakeDonors[0].longitude)
                     })
-                    it("should save user latitude in info service", () => {
-                        expect(infoService.userData.latitude).toEqual(fakeDonors[0].latitude)
+                    it("should save user latitude in User Service", () => {
+                        expect(userService.userData.latitude).toEqual(fakeDonors[0].latitude)
                     })
                 })
 
@@ -183,10 +183,10 @@ describe('Posting Component', () => {
             })
         })
 
-        // describe('Secneario: id is not located in url but already saved in info service', () => {
+        // describe('Secneario: id is not located in url but already saved in User Service', () => {
         //     beforeAll(() => {
-        //         infoService.userId = '565656565'
-        //         infoService.userData = fakeDonors[2]
+        //         userService.userId = '565656565'
+        //         userService.userData = fakeDonors[2]
         //     })
         //     it("should load", () => {
         //         expect(comp).toBeTruthy()
@@ -212,10 +212,10 @@ describe('Posting Component', () => {
         //             expect(comp.form.value.bloodGroup).toEqual(fakeDonors[2].bloodGroup)
         //         })
         //         it("should save user longitude in form", () => {
-        //             expect(infoService.userData.longitude).toEqual(fakeDonors[2].longitude)
+        //             expect(userService.userData.longitude).toEqual(fakeDonors[2].longitude)
         //         })
         //         it("should save user latitude in form", () => {
-        //             expect(infoService.userData.latitude).toEqual(fakeDonors[2].latitude)
+        //             expect(userService.userData.latitude).toEqual(fakeDonors[2].latitude)
         //         })
         //     })
         // })
@@ -229,26 +229,26 @@ describe('Posting Component', () => {
     describe('Deleting Donor', () => {
 
         it("should perform action if id is available", () => {
-            infoService.clearData = () => {
-                infoService.userId = null
-                infoService.userData = null
+            userService.clearData = () => {
+                userService.userId = null
+                userService.userData = null
             }
-            dataService.deleteDonor = (infoServiceId) => Observable.of("ok")
-            infoService.userId = 1
+            dataService.deleteDonor = (userServiceId) => Observable.of("ok")
+            userService.userId = 1
             comp.onRemove()
-            expect(infoService.userId).toBeFalsy()
+            expect(userService.userId).toBeFalsy()
         })
 
 
         it("should respond to error from data service", () => {
-            infoService.clearData = () => {
-                infoService.userId = null
-                infoService.userData = null
+            userService.clearData = () => {
+                userService.userId = null
+                userService.userData = null
             }
-            dataService.deleteDonor = (infoServiceId) => Observable.throw("Error")
-            infoService.userId = 1
+            dataService.deleteDonor = (userServiceId) => Observable.throw("Error")
+            userService.userId = 1
             comp.onRemove()
-            expect(infoService.userId).toBe(1)
+            expect(userService.userId).toBe(1)
         })
 
 
@@ -260,11 +260,11 @@ describe('Posting Component', () => {
     describe('Submitting Form', () => {
         describe("Scenario: posting new", () => {
             beforeEach(() => {
-                infoService.userId = '123'
+                userService.userId = '123'
             })
             describe('Scenario: Success', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (infoServiceId, data) => Observable.of(fakeDonors[0])
+                    dataService.updateDonor = (userServiceId, data) => Observable.of(fakeDonors[0])
                     dataService.addDonor = (data) => Observable.of(fakeDonors[0])
                     comp.onSubmit(fakeDonors[0])
                 })
@@ -276,7 +276,7 @@ describe('Posting Component', () => {
 
             describe('Scenario: Error', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (infoServiceId, data) => Observable.throw('Error')
+                    dataService.updateDonor = (userServiceId, data) => Observable.throw('Error')
                     dataService.addDonor = (data) => Observable.throw('Error')
                     comp.onSubmit(fakeDonors[0])
                 })
@@ -288,11 +288,11 @@ describe('Posting Component', () => {
 
         describe("Scenario: updaing existing", () => {
             beforeEach(() => {
-                infoService.userId = null
+                userService.userId = null
             })
             describe('Scenario: Success', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (infoServiceId, data) => Observable.of(fakeDonors[0])
+                    dataService.updateDonor = (userServiceId, data) => Observable.of(fakeDonors[0])
                     dataService.addDonor = (data) => Observable.of(fakeDonors[0])
                     comp.onSubmit(fakeDonors[0])
                 })
@@ -304,7 +304,7 @@ describe('Posting Component', () => {
 
             describe('Scenario: Error', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (infoServiceId, data) => Observable.throw('Error')
+                    dataService.updateDonor = (userServiceId, data) => Observable.throw('Error')
                     dataService.addDonor = (data) => Observable.throw('Error')
                     comp.onSubmit(fakeDonors[0])
                 })
@@ -327,15 +327,15 @@ describe('Posting Component', () => {
     // describe('Secneario: data service responeded with an error ', () => {
     //     it("should respond to error by emiting alert", () => {
     //         sb.emitErrorSnackBar = () => {}
-    //         expect(infoService.userId).toBeFalsy()
+    //         expect(userService.userId).toBeFalsy()
     //     })
 
-    //     it("should not save user id in info service", () => {
-    //         expect(infoService.userId).toBeFalsy()
+    //     it("should not save user id in User Service", () => {
+    //         expect(userService.userId).toBeFalsy()
     //     })
 
-    //     it("should not save user data in info service", () => {
-    //         expect(infoService.userData).toBeFalsy()
+    //     it("should not save user data in User Service", () => {
+    //         expect(userService.userData).toBeFalsy()
     //     })
 
 

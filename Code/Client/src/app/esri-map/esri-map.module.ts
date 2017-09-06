@@ -1,3 +1,4 @@
+import { MapCoreEventsHandler } from './services/event-handlers/map-core-events-handler';
 import { SharedModule } from '../shared/shared.module';
 // Angular Imports
 import { NgModule } from '@angular/core';
@@ -6,6 +7,8 @@ import { NgModule } from '@angular/core';
 import { EsriLoaderService, EsriLoaderModule } from 'angular-esri-loader';
 import { EsriMapComponent } from '../esri-map/esri-map.component';
 import { EsriMapRoutingModule } from './esri-map-routing.module';
+import { MapCoreService } from './services/map-core.service';
+import { MapDoubleClickHandler } from './services/event-handlers/map-double-click-handler';
 
 @NgModule({
     imports: [
@@ -14,7 +17,10 @@ import { EsriMapRoutingModule } from './esri-map-routing.module';
         EsriLoaderModule,
     ],
     providers:[
-        EsriLoaderService
+        EsriLoaderService,
+        MapCoreService,
+        MapCoreEventsHandler,
+        MapDoubleClickHandler,
     ],
     declarations: [
         EsriMapComponent,        

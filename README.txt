@@ -12,6 +12,7 @@ Set environment variable MONGODB_URI  "mongodb://admin:admin@ds163711.mlab.com:6
 2. Running app locally
 Go to Code Folder => Server Folder =>   Open terminal => npm start
 Go to Code Folder => Client Folder =>   Open terminal => npm start
+Go to browser => open localhost:4200
 
 3. Running tests locally
 1. Client-side-tests 

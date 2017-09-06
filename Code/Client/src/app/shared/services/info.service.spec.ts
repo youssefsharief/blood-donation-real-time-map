@@ -1,16 +1,16 @@
-import { InfoService } from './info.service';
+import { UserService } from './user.service';
 import { async, getTestBed, TestBed } from '@angular/core/testing';
 
-describe('Service: Info Service', () => {
-    let service: InfoService;
+describe('Service: User Service', () => {
+    let service: UserService;
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-               InfoService
+               UserService
             ]
         });
         const testbed = getTestBed();
-        service = testbed.get(InfoService);
+        service = testbed.get(UserService);
     });
 
 

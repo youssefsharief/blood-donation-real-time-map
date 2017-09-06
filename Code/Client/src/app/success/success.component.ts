@@ -1,4 +1,4 @@
-import { InfoService } from '../shared/services/info.service';
+import { UserService } from '../shared/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 
@@ -9,10 +9,10 @@ import { Component } from '@angular/core';
 export class SuccessComponent {
     id: string
     url= window.location.origin
-    constructor(private route: ActivatedRoute, private infoService: InfoService, private router: Router) {
+    constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {
     }
     ngOnInit(){
-        this.id= this.infoService.userId
+        this.id= this.userService.userId
         if(!this.id) this.router.navigate(['/map'])
         
     }
