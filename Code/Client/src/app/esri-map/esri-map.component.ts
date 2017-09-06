@@ -51,7 +51,7 @@ export class EsriMapComponent implements OnInit {
 			]) => {
 				let featureLayer
 				var map = new Map({
-					basemap: "streets-navigation-vector"
+					basemap: "osm"
 				});
 
 
