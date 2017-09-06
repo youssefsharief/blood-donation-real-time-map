@@ -9,7 +9,7 @@ export class GraphicsService {
 
 
         var markerSymbol = new SimpleMarkerSymbol({
-            color: [255, 0, 0],
+            color: [107, 0, 232],
             outline: { // autocasts as new SimpleLineSymbol()
                 color: [255, 255, 255],
                 width: 2
