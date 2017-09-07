@@ -9,20 +9,11 @@ import { MapCoreEventsHandler } from './event-handlers/map-core-events-handler';
 @Injectable()
 export class MapCoreService {
     constructor(private dataService: DataService, private graphicsService: GraphicsService, 
-        private mapCoreEventsHandler: MapCoreEventsHandler,private userService: UserService) { }
-
-    
-
-    private subscribeForData(view, SimpleMarkerSymbol, Point, Graphic) {
-        this.dataService.nearbyDonorsSubscription.subscribe(
-            data => this.graphicsService.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data),
-            error => console.log('Problem with socket connector')
-        )
-    }
+        private mapCoreEventsHandler: MapCoreEventsHandler) { }
 
 
     loadMap(mapDomElement, loadedModules) {
-        const [Map, MapView, Track, Search, webMercatorUtils, Locator, Graphic, Point, SimpleMarkerSymbol] = loadedModules
+        const [Map, MapView, Track, Search, Locator, Graphic, Point, SimpleMarkerSymbol] = loadedModules
         const map = new Map({ basemap: "osm" });
         const view = new MapView({
             container: mapDomElement,
@@ -31,9 +22,10 @@ export class MapCoreService {
             zoom: 10,
         });
         
-
-        // When data arrives from backen render the graphics
-        this.subscribeForData(view, SimpleMarkerSymbol, Point, Graphic)
+        this.dataService.nearbyDonorsSubscription.subscribe(
+            data=> this.graphicsService.setGraphicsFromData(view, SimpleMarkerSymbol, Point, Graphic, data),
+            error => console.log('Problem with socket connector')
+        )
 
         addUIWidgets(view, Track, Search)
         this.mapCoreEventsHandler.assignMapEventHandlers(view, Locator)

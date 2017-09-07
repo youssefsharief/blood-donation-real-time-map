@@ -35,7 +35,6 @@ export class EsriMapComponent implements OnInit {
 			"esri/views/MapView",
 			"esri/widgets/Track",
 			"esri/widgets/Search",
-			"esri/geometry/support/webMercatorUtils",
 			"esri/tasks/Locator",
 			"esri/Graphic",
 			"esri/geometry/Point",
