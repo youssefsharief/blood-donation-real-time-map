@@ -1,10 +1,10 @@
-import { CrossoverPage } from './app.po';
+import { BloodDonationPage } from './app.po';
 
-describe('crossover App', () => {
-  let page: CrossoverPage;
+describe('bloodDonation App', () => {
+  let page: BloodDonationPage;
 
   beforeEach(() => {
-    page = new CrossoverPage();
+    page = new BloodDonationPage();
   });
 
   it('should display welcome message', () => {

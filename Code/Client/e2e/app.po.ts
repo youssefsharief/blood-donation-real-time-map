@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class CrossoverPage {
+export class BloodDonationPage {
   navigateTo() {
     return browser.get('/');
   }
