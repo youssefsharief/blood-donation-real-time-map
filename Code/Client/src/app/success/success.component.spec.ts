@@ -4,11 +4,11 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SuccessModule } from './success.module';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
+import { of } from 'rxjs';
 
 
 describe('Success Component', () => {
@@ -19,7 +19,7 @@ describe('Success Component', () => {
     let el: HTMLElement;
     let userService
     let ActivatedRouteStub = {
-        params: Observable.of('45456')
+        params: of('45456')
     }
     let userServiceStub = {
         userId:123
@@ -31,7 +31,7 @@ describe('Success Component', () => {
             providers: [
                 {provide: ActivatedRoute, useValue: ActivatedRouteStub},
                 {provide: UserService, useValue: userServiceStub} ,
-            
+
             ],
         });
         fixture = TestBed.createComponent(SuccessComponent);
@@ -56,7 +56,7 @@ describe('Success Component', () => {
         comp.ngOnInit()
         expect(comp.id).toBeFalsy()
     })
- 
+
 
 
 })

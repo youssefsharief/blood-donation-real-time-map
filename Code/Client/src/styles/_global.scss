@@ -1,5 +1,5 @@
 .top-buffer{
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 body{
@@ -9,5 +9,9 @@ body{
 .page-container{
     min-height: 600px;
     height: auto !important; /* This is a hack to make IE6 fix itself to a set height */
-    height: 600px; 
+    height: 600px;
+}
+
+.link {
+    cursor: pointer;
 }

@@ -16,8 +16,8 @@ export class PostingComponent {
     bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
 
     constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute,
-        private dataService: DataService, private router: Router, private userService: UserService,
-        private sb: SnackBarService) { 
+        private dataService: DataService, private router: Router, public userService: UserService,
+        private sb: SnackBarService) {
             this.grabIdAndGetInfo()
         }
 
@@ -33,11 +33,11 @@ export class PostingComponent {
             this.isEdit =false
             this.buildForm()
         }
-        
-        
-    
+
+
+
     }
-  
+
     private getDonorInfo(id) {
         this.dataService.getDonorInfo(id).subscribe(
             data => {
@@ -99,7 +99,7 @@ export class PostingComponent {
                 address: [this.userService.userData.address || '',Validators.required],
             })
         }
-        else {  
+        else {
             this.form = this.fb.group({
                 firstName: [  '', Validators.required],
                 lastName: [ '', Validators.required],
@@ -112,7 +112,7 @@ export class PostingComponent {
             })
 
         }
-        
+
     }
 
 

@@ -1,12 +1,10 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
-import { SnackBarService } from './services/snackbar.service';
-import { MaterialModule } from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
+import { MatSnackBarModule } from '@angular/material';
 
 
 
@@ -14,9 +12,9 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
-  providers:[ ],
   exports: [
     CommonModule,
     FormsModule,
@@ -24,13 +22,11 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     FooterComponent,
     NavComponent,
-    MaterialModule,
 
   ],
   declarations: [
     NavComponent,
     FooterComponent
-
   ],
 })
 export class SharedModule { }

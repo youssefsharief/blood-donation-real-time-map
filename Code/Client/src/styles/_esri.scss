@@ -5,7 +5,7 @@
 
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid $brand-success; /* Blue */
+    border-top: 16px solid map-get($theme-colors, "success"); /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -31,10 +31,10 @@
 
 .fa{
     font-size: 75px;
-    color:$brand-danger;
+    color:map-get($theme-colors, "danger");
 
 }
 
 .fa-heart-o{
-    color:$brand-info
+    color:map-get($theme-colors, "info")
 }

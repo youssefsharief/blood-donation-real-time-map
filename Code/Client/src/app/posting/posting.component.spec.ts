@@ -5,14 +5,13 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PostingModule } from './posting.module';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { DataService } from '../shared/services/data.service';
-import 'rxjs/add/observable/of'
-import 'rxjs/add/observable/throw'
+import { of, throwError } from 'rxjs';
+
 export const fakeDonors = [
     {
         _id: '59a940edbfb2961a5c82263c',
@@ -78,7 +77,7 @@ describe('Posting Component', () => {
 
     let dataServiceStub = {
         getDonorInfo(id) {
-            return Observable.of(fakeDonors[0])
+            return of(fakeDonors[0])
         }
     }
     let activatedRouteStub = {
@@ -233,7 +232,7 @@ describe('Posting Component', () => {
                 userService.userId = null
                 userService.userData = null
             }
-            dataService.deleteDonor = (userServiceId) => Observable.of("ok")
+            dataService.deleteDonor = (userServiceId) => of("ok")
             userService.userId = 1
             comp.onRemove()
             expect(userService.userId).toBeFalsy()
@@ -245,7 +244,7 @@ describe('Posting Component', () => {
                 userService.userId = null
                 userService.userData = null
             }
-            dataService.deleteDonor = (userServiceId) => Observable.throw("Error")
+            dataService.deleteDonor = (userServiceId) => throwError("Error")
             userService.userId = 1
             comp.onRemove()
             expect(userService.userId).toBe(1)
@@ -264,8 +263,8 @@ describe('Posting Component', () => {
             })
             describe('Scenario: Success', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (userServiceId, data) => Observable.of(fakeDonors[0])
-                    dataService.addDonor = (data) => Observable.of(fakeDonors[0])
+                    dataService.updateDonor = (userServiceId, data) => of(fakeDonors[0])
+                    dataService.addDonor = (data) => of(fakeDonors[0])
                     comp.onSubmit(fakeDonors[0])
                 })
                 it("should successfully post", () => {
@@ -276,8 +275,8 @@ describe('Posting Component', () => {
 
             describe('Scenario: Error', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (userServiceId, data) => Observable.throw('Error')
-                    dataService.addDonor = (data) => Observable.throw('Error')
+                    dataService.updateDonor = (userServiceId, data) => throwError('Error')
+                    dataService.addDonor = (data) => throwError('Error')
                     comp.onSubmit(fakeDonors[0])
                 })
                 it("should respond to error", () => {
@@ -292,8 +291,8 @@ describe('Posting Component', () => {
             })
             describe('Scenario: Success', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (userServiceId, data) => Observable.of(fakeDonors[0])
-                    dataService.addDonor = (data) => Observable.of(fakeDonors[0])
+                    dataService.updateDonor = (userServiceId, data) => of(fakeDonors[0])
+                    dataService.addDonor = (data) => of(fakeDonors[0])
                     comp.onSubmit(fakeDonors[0])
                 })
                 it("should successfully post", () => {
@@ -304,8 +303,8 @@ describe('Posting Component', () => {
 
             describe('Scenario: Error', () => {
                 beforeEach(() => {
-                    dataService.updateDonor = (userServiceId, data) => Observable.throw('Error')
-                    dataService.addDonor = (data) => Observable.throw('Error')
+                    dataService.updateDonor = (userServiceId, data) => throwError('Error')
+                    dataService.addDonor = (data) => throwError('Error')
                     comp.onSubmit(fakeDonors[0])
                 })
                 it("should respond to error", () => {
